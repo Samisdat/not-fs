@@ -1,0 +1,11 @@
+{
+  "name": "vfs",
+  "version": "0.1.0",
+  "description": "Virtual filesystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bastian Pertz",
+  "license": "MIT"
+}
