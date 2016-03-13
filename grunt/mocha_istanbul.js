@@ -1,6 +1,6 @@
 var mocha_istanbul = {
     coverage: {
-        src: 'test/**/server.js' // a folder works nicely
+        src: 'test/tree/node.js' // a folder works nicely
     }
 };
 
