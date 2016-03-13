@@ -1,3 +1,5 @@
+'use strict';
+
 var mocha = {
     options: {
         reporter: 'spec',

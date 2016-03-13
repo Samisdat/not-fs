@@ -1,18 +1,22 @@
 /*global module */
 
+'use strict';
+
 var files = [
     'grunt/*.js',
+    'lib/tree/**.js',
+    'test/tree/**.js'
 ];
 
 var eslint = {
-    lint:{
+    lint: {
         src: files
     },
-    lintAndFix:{
-        options:{
+    lintAndFix: {
+        options: {
             fix: true
         },
-        src: files    
+        src: files
     }
 };
 
