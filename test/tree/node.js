@@ -40,6 +40,33 @@ describe('node', function() {
 
     });
 
+    it('returns it\'s full qualified name and depth', function() {
+
+        var id = uuid.v4();
+
+        var id = uuid.v4();
+        var root = new Node(id, 'root');
+        root.setRoot();
+
+        expect(root.getFqn()).to.be.false;
+
+        var id = uuid.v4();
+        var parent = new Node(id, 'parent', root);
+        expect(parent.getFqn()).to.be.equal('/parent');
+        expect(parent.getDepth()).to.be.equal(1);
+
+        var id = uuid.v4();
+        var node = new Node(id, 'child', parent);
+        
+        expect(node.getFqn()).to.be.equal('/parent/child');
+        expect(node.getDepth()).to.be.equal(2);
+
+        var id = uuid.v4();
+        var orphan = new Node(id, 'orphan');
+        expect(orphan.getFqn()).to.be.false;
+
+    });
+
     it('returns undefined parent', function() {
 
         var id = uuid.v4();
@@ -80,6 +107,7 @@ describe('node', function() {
         var node = new Node(id, 'test');
 
         expect(node.getChildren().length).to.be.equal(0);
+        expect(node.hasChild()).to.be.false;
 
         node.addChild(child);
 
@@ -87,6 +115,8 @@ describe('node', function() {
         expect(children).to.deep.equal([child]);
 
         expect(children[0].getParent()).to.deep.equal(node);
+        expect(node.hasChild('child')).to.be.true;
+        expect(node.hasChild('other')).to.be.false;
 
     });
 
