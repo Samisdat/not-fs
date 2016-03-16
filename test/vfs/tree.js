@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var Tree = require('../../lib/vfs/in-memory-file-system');
+var Tree = require('../../lib/vfs/tree');
 var File = require('../../lib/vfs/file');
 var Dir = require('../../lib/vfs/dir');
 
