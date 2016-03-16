@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 
+var Root = require('../../lib/tree/root');
 var Dir = require('../../lib/tree/dir');
 
 describe('dir', function() {
@@ -48,29 +49,27 @@ describe('dir', function() {
         expect(dir.isDir()).to.be.true;
 
     });
-/*
 
     it('returns it\'s full qualified name and depth', function() {
 
-        var root = new Node('root');
-        root.setRoot();
+        var root = new Root('root');
 
         expect(root.getFqn()).to.be.false;
 
-        var parent = new Node('parent', root);
+        var parent = new Dir('parent', root);
         expect(parent.getFqn()).to.be.equal('/parent');
         expect(parent.getDepth()).to.be.equal(1);
 
-        var node = new Node('child', parent);
+        var dir = new Dir('child', parent);
         
-        expect(node.getFqn()).to.be.equal('/parent/child');
-        expect(node.getDepth()).to.be.equal(2);
+        expect(dir.getFqn()).to.be.equal('/parent/child');
+        expect(dir.getDepth()).to.be.equal(2);
 
-        var orphan = new Node('orphan');
+        var orphan = new Dir('orphan');
         expect(orphan.getFqn()).to.be.false;
 
     });
-    */
+
     it('returns undefined parent', function() {
 
         var dir = new Dir('test');
@@ -154,7 +153,14 @@ describe('dir', function() {
         expect(dir.getChildren().length).to.be.equal(2);
         expect(dir.getChildren()).to.deep.equal([childA, childB]);
         
-        expect(dir.addChild.bind(childC)).to.throw();
+        try{
+            dir.addChild(childC);
+        }
+        catch(e){
+            expect(dir.getChildren().length).to.be.equal(2);
+            expect(dir.getChildren()).to.deep.equal([childA, childB]);
+        }
+        //expect(dir.addChild.bind(childC)).to.throw();
     });
 
 });
