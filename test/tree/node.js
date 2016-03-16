@@ -123,5 +123,23 @@ describe('node', function() {
 
     });
 
+    it('can not add two children with same name', function() {
+
+        var childA = new Node('childA');
+        var childB = new Node('childB');
+        var childC = new Node('childB');
+
+        var node = new Node('test');
+
+        node.addChild(childA);
+        node.addChild(childB);
+
+        expect(node.getChildren().length).to.be.equal(2);
+        expect(node.getChildren()).to.deep.equal([childA, childB]);
+
+        expect(node.addChild.bind(childC)).to.throw();
+
+    });
+
 });
 
