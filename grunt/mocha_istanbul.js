@@ -3,11 +3,11 @@
 var mochaIstanbul = {
     coverage: {
         src: [
-            'test/tree/node.js',
-            'test/tree/root.js',
-            'test/tree/file.js',
-            'test/tree/dir.js',
-            'test/tree/fstree.js'
+            'test/vfs/node.js',
+            'test/vfs/root.js',
+            'test/vfs/file.js',
+            'test/vfs/dir.js',
+            'test/vfs/in-memory-file-system.js'
         ]
     }
 };
