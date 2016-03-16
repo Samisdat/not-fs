@@ -2,9 +2,9 @@
 
 var expect = require('chai').expect;
 
-var Tree = require('../../lib/tree/fstree');
-var File = require('../../lib/tree/file');
-var Dir = require('../../lib/tree/dir');
+var Tree = require('../../lib/vfs/in-memory-file-system');
+var File = require('../../lib/vfs/file');
+var Dir = require('../../lib/vfs/dir');
 
 describe('tree', function() {
 
@@ -34,21 +34,21 @@ describe('tree', function() {
         expect(tree.exists('/one/')).to.be.false;
         expect(tree.isDir('/one/')).to.be.undefined;
         tree.addDir('/one');
-        expect(tree.exists('/one')).to.be.true;        
+        expect(tree.exists('/one')).to.be.true;
 
         expect(tree.exists('/one/two/')).to.be.false;
         expect(tree.exists('/one/two/three')).to.be.false;
         expect(tree.getByFqn('/one/two/three')).to.be.false;
 
         tree.addDir('/one/two/three');
-        
+
         expect(tree.exists('/one/two')).to.be.true;
         expect(tree.exists('/one/two/three')).to.be.true;
         expect(tree.getByFqn('/one/two/three')).to.be.instanceof(Dir);
         expect(tree.isDir('/one/two/three')).to.be.true;
 
         var alreadyExisting = tree.addDir('/one/two/three');
-        expect(alreadyExisting).to.be.undefined;        
+        expect(alreadyExisting).to.be.undefined;
 
     });
 
@@ -58,7 +58,7 @@ describe('tree', function() {
         var tree = new Tree();
 
         expect(tree.exists('/file.txt')).to.be.false;
-        expect(tree.isFile('/file.txt')).to.be.undefined
+        expect(tree.isFile('/file.txt')).to.be.undefined;
         tree.addFile('/file.txt');
         expect(tree.exists('/file.txt')).to.be.true;
         expect(tree.isFile('/file.txt')).to.be.true;
@@ -77,8 +77,8 @@ describe('tree', function() {
         expect(tree.isFile('/one/two/file.txt')).to.be.true;
 
         var alreadyExisting = tree.addFile('/one/two/file.txt');
-        expect(alreadyExisting).to.be.undefined;        
-        
+        expect(alreadyExisting).to.be.undefined;
+
     });
 
 });

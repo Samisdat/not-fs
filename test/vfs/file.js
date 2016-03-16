@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var File = require('../../lib/tree/file');
+var File = require('../../lib/vfs/file');
 
 describe('file', function() {
 
@@ -61,7 +61,7 @@ describe('file', function() {
         expect(parent.getDepth()).to.be.equal(1);
 
         var node = new Node('child', parent);
-        
+
         expect(node.getFqn()).to.be.equal('/parent/child');
         expect(node.getDepth()).to.be.equal(2);
 
@@ -152,7 +152,7 @@ describe('file', function() {
 
         expect(node.getChildren().length).to.be.equal(2);
         expect(node.getChildren()).to.deep.equal([childA, childB]);
-        
+
         expect(node.addChild.bind(childC)).to.throw();
     });
     */

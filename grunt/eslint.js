@@ -4,8 +4,8 @@
 
 var files = [
     'grunt/*.js',
-    'lib/tree/**.js',
-    'test/tree/**.js'
+    'lib/vfs/**.js',
+    'test/vfs/**.js'
 ];
 
 var eslint = {

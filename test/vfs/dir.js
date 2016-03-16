@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var Root = require('../../lib/tree/root');
-var Dir = require('../../lib/tree/dir');
+var Root = require('../../lib/vfs/root');
+var Dir = require('../../lib/vfs/dir');
 
 describe('dir', function() {
 
@@ -61,7 +61,7 @@ describe('dir', function() {
         expect(parent.getDepth()).to.be.equal(1);
 
         var dir = new Dir('child', parent);
-        
+
         expect(dir.getFqn()).to.be.equal('/parent/child');
         expect(dir.getDepth()).to.be.equal(2);
 
@@ -152,11 +152,11 @@ describe('dir', function() {
 
         expect(dir.getChildren().length).to.be.equal(2);
         expect(dir.getChildren()).to.deep.equal([childA, childB]);
-        
-        try{
+
+        try {
             dir.addChild(childC);
         }
-        catch(e){
+        catch (e){
             expect(dir.getChildren().length).to.be.equal(2);
             expect(dir.getChildren()).to.deep.equal([childA, childB]);
         }

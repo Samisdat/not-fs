@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var Dir = require('../../lib/tree/dir');
-var Node = require('../../lib/tree/node');
+var Dir = require('../../lib/vfs/dir');
+var Node = require('../../lib/vfs/node');
 
 describe('node', function() {
 
