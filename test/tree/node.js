@@ -33,6 +33,22 @@ describe('node', function() {
 
     });
 
+    it('isFile is undefined', function() {
+
+        var node = new Node('test');
+
+        expect(node.isFile()).to.be.undefined;
+
+    });
+
+    it('isDir is undefined', function() {
+
+        var node = new Node('test');
+
+        expect(node.isDir()).to.be.undefined;
+
+    });
+
     it('returns it\'s full qualified name and depth', function() {
 
         var root = new Node('root');
@@ -136,9 +152,8 @@ describe('node', function() {
 
         expect(node.getChildren().length).to.be.equal(2);
         expect(node.getChildren()).to.deep.equal([childA, childB]);
-
+        
         expect(node.addChild.bind(childC)).to.throw();
-
     });
 
 });
