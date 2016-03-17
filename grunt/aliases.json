@@ -17,7 +17,7 @@
   "test": {
     "description": "run tests",
     "tasks": [
-      "mochaTest"
+      "mochaTest:back"
     ]
   },
   "coverage": {

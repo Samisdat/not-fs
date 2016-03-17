@@ -81,5 +81,23 @@ describe('tree', function() {
 
     });
 
+    it('succeed in remove a dir or a file', function() {
+
+        var tree = new Tree();
+
+        tree.addFile('/one/two/file.txt');
+        expect(tree.isFile('/one/two/file.txt')).to.be.true;
+
+        tree.remove('/one/two/file.txt');
+        expect(tree.exists('/one/two/file.txt')).to.be.false;
+
+
+        tree.addDir('/one/two/three');
+        expect(tree.isDir('/one/two/three')).to.be.true;
+        tree.remove('/one/two/three');
+        expect(tree.exists('/one/two/three')).to.be.false;
+
+    });
+
 });
 

@@ -7,7 +7,7 @@ var mochaIstanbul = {
             'test/vfs/root.js',
             'test/vfs/file.js',
             'test/vfs/dir.js',
-            'test/vfs/in-memory-file-system.js'
+            'test/vfs/tree.js'
         ]
     }
 };

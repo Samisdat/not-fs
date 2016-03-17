@@ -7,13 +7,20 @@ var mocha = {
         quiet: false, // Optionally suppress output to standard out (defaults to false)
         clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
     },
-    src: [
-        'test/vfs/node.js',
-        'test/vfs/root.js',
-        'test/vfs/file.js',
-        'test/vfs/dir.js',
-        'test/vfs/in-memory-file-system.js'
-    ]
+    'back': {
+        src: [
+            'test/vfs/node.js',
+            'test/vfs/root.js',
+            'test/vfs/file.js',
+            'test/vfs/dir.js',
+            'test/vfs/tree.js'
+        ]        
+    },
+    'fs': {
+        src: [
+            'test/fs.js'
+        ]        
+    }
 };
 
 module.exports = mocha;
