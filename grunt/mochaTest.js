@@ -20,6 +20,11 @@ var mocha = {
         src: [
             'test/fs.js'
         ]        
+    },
+    'vfs': {
+        src: [
+            'test/vfs.js'
+        ]        
     }
 };
 

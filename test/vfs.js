@@ -1,25 +1,26 @@
 var Tree = require('../lib/vfs/tree');
 var tree = new Tree();
+var expect = require('chai').expect;
 
 var fs = require('../lib/vfs')(tree);
 
 'use strict';
 
-var expect = require('chai').expect;
 
-describe('fs kitchen sink', function() {
+describe('vfs kitchen sink', function() {
+
+    beforeEach(function() {
+
+        if(true === tree.exists('/tmp/vfs-test')){
+            tree.remove('/tmp/vfs-test');
+        }
+
+        tree.addDir('/tmp/vfs-test');
+        tree.addDir('/tmp/vfs-test/exist');
+        tree.addFile('/tmp/vfs-test/message.txt', 'Hello Node.js', 'utf8');
+    });
+
     describe('method fs.existsSync', function() {
-
-        beforeEach(function() {
-
-            if(true === tree.exists('/tmp/vfs-test')){
-                tree.remove('/tmp/vfs-test');
-            }
-
-            tree.addDir('/tmp/vfs-test');
-            tree.addDir('/tmp/vfs-test/exist');
-            fs.addFile('/tmp/vfs-test/message.txt', 'Hello Node.js', 'utf8');
-        });
 
         it('succeed on existing dir', function() {
 
@@ -54,6 +55,74 @@ describe('fs kitchen sink', function() {
         });
 
     });
+
+    describe('method fs.exists', function() {
+
+        it('succeed on existing dir', function(done) {
+
+            fs.exists('/tmp/vfs-test/exist', function(exist){
+                expect(exist).to.be.true;
+                done();
+            });
+
+        });
+
+        it('fail on not existing dir', function(done) {
+
+            fs.exists('/tmp/vfs-test/not-exist', function(exist){
+                expect(exist).to.be.false;
+                done();
+            });
+
+        });
+
+        it('succeed on existing file', function(done) {
+
+            fs.exists('/tmp/vfs-test/message.txt', function(exist){
+                expect(exist).to.be.true;
+                done();
+            });
+
+        });
+
+        it('fail on not existing file', function(done) {
+
+            fs.exists('/tmp/vfs-test/no-message.txt', function(exist){
+                expect(exist).to.be.false;
+                done();
+            });
+
+        });
+
+    });    
+
+    describe('method fs.mkdirSync', function() {
+
+        it('succeed when dir is not already existing', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+            expect(exist).to.be.false;
+
+            fs.mkdirSync('/tmp/vfs-test/not-exist');
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+            expect(exist).to.be.true;
+
+
+        });
+
+        it('fail when dir is already existing', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(exist).to.be.true;
+            
+            //EEXIST, file already exists '/tmp/vfs-test/exist''
+            expect(fs.mkdirSync.bind('/tmp/vfs-test/exist')).to.throw(Error);
+
+        });
+
+    });
+    
 });
 
 
