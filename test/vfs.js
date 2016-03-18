@@ -1,22 +1,24 @@
 var Tree = require('../lib/virtual-filesystem/tree');
 var tree = new Tree();
 var expect = require('chai').expect;
+var fs = require('fs');
 
-var fs = require('../lib/vfs')(tree);
+var util = require('util');
 
+var vfs = require('../lib/virtual-io');
+vfs.setTree(tree);
 'use strict';
 
 
 describe('vfs kitchen sink', function() {
 
     beforeEach(function() {
-
-        if(true === tree.exists('/tmp/vfs-test')){
+        if(true === fs.existsSync('/tmp/vfs-test')){
             tree.remove('/tmp/vfs-test');
         }
 
-        tree.addDir('/tmp/vfs-test');
-        tree.addDir('/tmp/vfs-test/exist');
+        fs.mkdirSync('/tmp/vfs-test');
+        fs.mkdirSync('/tmp/vfs-test/exist');
         tree.addFile('/tmp/vfs-test/message.txt', 'Hello Node.js', 'utf8');
     });
 
