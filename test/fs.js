@@ -142,6 +142,45 @@ describe('fs kitchen sink', function() {
 
     });
 
+    describe('method fs.mkdir', function(done) {
+
+        it('succeed when dir is not already existing', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+            expect(exist).to.be.false;
+
+            fs.mkdir('/tmp/vfs-test/not-exist', function(err){
+                if(err){
+                    done('failed');
+                    return;
+                }
+                var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+                expect(exist).to.be.true;
+                done();
+
+            });
+
+
+
+        });
+
+        it('fail when dir is already existing', function(done) {
+
+            var exist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(exist).to.be.true;
+            
+            //EEXIST, file already exists '/tmp/vfs-test/exist''
+            fs.mkdir('/tmp/vfs-test/exist', function(err){
+                if(err){
+                    done();
+                    return;
+                }
+                done('should not succeed while dir already exist');
+            })
+
+        });
+
+    });
 
 });
 

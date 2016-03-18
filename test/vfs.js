@@ -1,4 +1,4 @@
-var Tree = require('../lib/vfs/tree');
+var Tree = require('../lib/virtual-filesystem/tree');
 var tree = new Tree();
 var expect = require('chai').expect;
 

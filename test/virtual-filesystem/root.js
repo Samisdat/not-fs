@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var Root = require('../../lib/vfs/root');
-var File = require('../../lib/vfs/file');
+var Root = require('../../lib/virtual-filesystem/root');
+var File = require('../../lib/virtual-filesystem/file');
 
 describe('root', function() {
 

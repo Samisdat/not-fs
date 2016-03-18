@@ -9,6 +9,7 @@
   "author": "samisdat",
   "license": "MIT",
   "devDependencies": {
+    "caller-id": "^0.1.0",
     "chai": "^3.5.0",
     "grunt": "^0.4.5",
     "grunt-bumpup": "^0.6.3",
@@ -22,6 +23,7 @@
     "time-grunt": "^1.3.0"
   },
   "dependencies": {
-    "node-uuid": "^1.4.7"
+    "node-uuid": "^1.4.7",
+    "stack-trace": "0.0.9"
   }
 }

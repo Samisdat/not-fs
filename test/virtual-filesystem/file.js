@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var File = require('../../lib/vfs/file');
+var File = require('../../lib/virtual-filesystem/file');
 
 describe('file', function() {
 

@@ -1,5 +1,7 @@
-var fs = require('fs');
+var Tree = require('./lib/vfs/tree');
+var tree = new Tree();
 
-fs.existsSync = function(){
-    return 'super';
-};
+var chai = require('chai');
+
+var fs = require('./lib/vfs')(tree);
+
