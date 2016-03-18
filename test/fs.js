@@ -142,9 +142,9 @@ describe('fs kitchen sink', function() {
 
     });
 
-    describe('method fs.mkdir', function(done) {
+    describe('method fs.mkdir', function() {
 
-        it('succeed when dir is not already existing', function() {
+        it('succeed when dir is not already existing', function(done) {
 
             var exist = fs.existsSync('/tmp/vfs-test/not-exist');
             expect(exist).to.be.false;
