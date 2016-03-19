@@ -19,7 +19,7 @@ describe('vfs kitchen sink', function() {
 
         fs.mkdirSync('/tmp/vfs-test');
         fs.mkdirSync('/tmp/vfs-test/exist');
-        tree.addFile('/tmp/vfs-test/message.txt', 'Hello Node.js', 'utf8');
+        fs.writeFileSync('/tmp/vfs-test/message.txt', 'Hello Node.js', 'utf8');
     });
 
     describe('method fs.existsSync', function() {
@@ -124,7 +124,51 @@ describe('vfs kitchen sink', function() {
         });
 
     });
-    
+    */
+
+    describe('method fs.writeFileSync', function() {
+        
+        it('succeed on create and write new file on valid path', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/a-new-file.txt');
+            expect(exist).to.be.false;
+
+            fs.writeFileSync('/tmp/vfs-test/a-new-file.txt', 'Hello Node.js', 'utf8');
+
+            var exist = fs.existsSync('/tmp/vfs-test/a-new-file.txt');
+            expect(exist).to.be.true;
+
+            var content = fs.readFileSync('/tmp/vfs-test/a-new-file.txt', {encoding: 'utf8'});
+            expect(content).to.be.equal('Hello Node.js');
+
+        });
+
+    });
+
+    describe('method fs.readFileSync', function() {
+
+        it('fail reading an non existing file', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-a-message.txt');
+            expect(exist).to.be.false;
+
+            //     Error: ENOENT, no such file or directory '/tmp/vfs-test/not-a-message.txt'
+            expect(fs.readFileSync.bind('/tmp/vfs-test/not-a-message.txt')).to.throw(Error);
+
+        });
+        
+        it('succeed reading an existing file with encoding', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(exist).to.be.true;
+
+            var content = fs.readFileSync('/tmp/vfs-test/message.txt', {encoding: 'utf8'});
+            expect(content).to.be.equal('Hello Node.js');
+
+        });
+
+    });
+
 });
 
 

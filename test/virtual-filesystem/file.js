@@ -2,6 +2,8 @@
 
 var expect = require('chai').expect;
 
+var Root = require('../../lib/virtual-filesystem/root');
+var Dir = require('../../lib/virtual-filesystem/dir');
 var File = require('../../lib/virtual-filesystem/file');
 
 describe('file', function() {
@@ -32,7 +34,7 @@ describe('file', function() {
 
     });
 
-    it('isFile is undefined', function() {
+    it('isFile is true', function() {
 
         var file = new File('test');
 
@@ -40,14 +42,25 @@ describe('file', function() {
 
     });
 
-    it('isDir is undefined', function() {
+    it('isDir is false', function() {
 
         var file = new File('test');
 
         expect(file.isDir()).to.be.false;
 
     });
-/*
+
+    it('get/set content', function() {
+
+        var file = new File('test');
+
+        expect(file.getContent()).to.be.equal('');
+
+        file.setContent('foobar');
+
+        expect(file.getContent()).to.be.equal('foobar');
+
+    });    
 
     it('returns it\'s full qualified name and depth', function() {
 
