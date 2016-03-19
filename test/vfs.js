@@ -35,9 +35,9 @@ var rmdir = function(dir) {
 describe('vfs kitchen sink', function() {
 
     beforeEach(function() {
-        rmdir('/tmp/vfs-test');
+
         if(true === fs.existsSync('/tmp/vfs-test')){
-            tree.remove('/tmp/vfs-test');
+            rmdir('/tmp/vfs-test');
         }
 
         fs.mkdirSync('/tmp/vfs-test');
