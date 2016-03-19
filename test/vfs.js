@@ -5,14 +5,37 @@ var fs = require('fs');
 
 var util = require('util');
 
+var path = require("path");
 var vfs = require('../lib/virtual-io');
 vfs.setTree(tree);
 'use strict';
+
+var rmdir = function(dir) {
+    var list = fs.readdirSync(dir);
+
+    for(var i = 0; i < list.length; i++) {
+        var filename = path.join(dir, list[i]);
+        var stat = fs.statSync(filename);
+        
+        if(filename == "." || filename == "..") {
+            // pass these files
+        } else if(stat.isDirectory()) {
+            // rmdir recursively
+            rmdir(filename);
+        } else {
+            // rm fiilename
+            fs.unlinkSync(filename);
+        }
+    }
+    fs.rmdirSync(dir);
+
+};
 
 
 describe('vfs kitchen sink', function() {
 
     beforeEach(function() {
+        rmdir('/tmp/vfs-test');
         if(true === fs.existsSync('/tmp/vfs-test')){
             tree.remove('/tmp/vfs-test');
         }
@@ -124,7 +147,6 @@ describe('vfs kitchen sink', function() {
         });
 
     });
-    */
 
     describe('method fs.writeFileSync', function() {
         
