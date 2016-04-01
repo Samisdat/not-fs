@@ -182,6 +182,31 @@ describe('fs kitchen sink', function() {
 
     });
 
+    describe('method fs.writeFile', function() {
+        
+        it('succeed on create and write new file on valid path', function(done) {
+
+            var exist = fs.existsSync('/tmp/vfs-test/a-new-file.txt');
+            expect(exist).to.be.false;
+
+            fs.writeFile('/tmp/vfs-test/a-new-file.txt', 'Hello Node.js', function(err) {
+
+                expect(err).to.be.null;
+                
+                var exist = fs.existsSync('/tmp/vfs-test/a-new-file.txt');
+                expect(exist).to.be.true;
+
+                var content = fs.readFileSync('/tmp/vfs-test/a-new-file.txt', {encoding: 'utf8'});
+
+                expect(content).to.be.equal('Hello Node.js');
+                done();
+
+            });                        
+
+        });
+
+    });
+
     describe('method fs.writeFileSync', function() {
         
         it('succeed on create and write new file on valid path', function() {
