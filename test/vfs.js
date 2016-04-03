@@ -1,14 +1,12 @@
-var Tree = require('../lib/virtual-filesystem/tree');
-var tree = new Tree();
-var expect = require('chai').expect;
-var fs = require('fs');
-
-var util = require('util');
-
-var path = require("path");
-var vfs = require('../lib/virtual-io');
-vfs.setTree(tree);
 'use strict';
+
+var expect = require('chai').expect;
+
+var fs = require('fs');
+var util = require('util');
+var path = require('path');
+
+var vfs = require('../index');
 
 var rmdir = function(dir) {
     var list = fs.readdirSync(dir);
