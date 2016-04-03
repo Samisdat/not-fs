@@ -216,6 +216,95 @@ describe('vfs kitchen sink', function() {
 
     });
 
+    describe('method fs.renameSync', function() {
+        
+        it('succeed on file', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(orginalExist).to.be.true;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/message-renamed.txt');
+            expect(renameExist).to.be.false;
+
+            fs.renameSync('/tmp/vfs-test/message.txt', '/tmp/vfs-test/message-renamed.txt');
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(orginalExist).to.be.false;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/message-renamed.txt');
+            expect(renameExist).to.be.true;
+
+        });
+
+        it('succeed on dir', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(orginalExist).to.be.true;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/renamed');
+            expect(renameExist).to.be.false;
+
+            fs.renameSync('/tmp/vfs-test/exist', '/tmp/vfs-test/renamed');
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(orginalExist).to.be.false;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/renamed');
+            expect(renameExist).to.be.true;
+
+        });
+
+    });
+
+    describe('method fs.rename', function() {
+        
+        it('succeed on file', function(done) {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(orginalExist).to.be.true;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/message-renamed.txt');
+            expect(renameExist).to.be.false;
+
+            fs.rename('/tmp/vfs-test/message.txt', '/tmp/vfs-test/message-renamed.txt', function(){
+
+                var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+                expect(orginalExist).to.be.false;
+
+                var renameExist = fs.existsSync('/tmp/vfs-test/message-renamed.txt');
+                expect(renameExist).to.be.true;
+
+                done();
+
+            });
+
+        });
+
+        it('succeed on dir', function(done) {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(orginalExist).to.be.true;
+
+            var renameExist = fs.existsSync('/tmp/vfs-test/renamed');
+            expect(renameExist).to.be.false;
+
+            fs.rename('/tmp/vfs-test/exist', '/tmp/vfs-test/renamed', function(){
+    
+                var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+                expect(orginalExist).to.be.false;
+
+                var renameExist = fs.existsSync('/tmp/vfs-test/renamed');
+                expect(renameExist).to.be.true;
+
+                done();
+
+            });
+
+        });
+
+    });
+
+
 });
 
 
