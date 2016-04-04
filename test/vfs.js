@@ -3,10 +3,13 @@
 var expect = require('chai').expect;
 
 var fs = require('fs');
-var util = require('util');
+
 var path = require('path');
 
+var util = require('util');
+
 var vfs = require('../index');
+
 
 var rmdir = function(dir) {
     var list = fs.readdirSync(dir);
@@ -31,6 +34,16 @@ var rmdir = function(dir) {
 
 
 describe('vfs kitchen sink', function() {
+
+    before(function(){
+        vfs.swapIn(); 
+        vfs.getTree().log();
+    });
+
+    after(function(){
+        vfs.getTree().log();
+        vfs.swapOut(); 
+    });
 
     beforeEach(function() {
 
