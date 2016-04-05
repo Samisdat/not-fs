@@ -337,7 +337,65 @@ describe('fs kitchen sink', function() {
 
     });
 
-    
+    describe('statSync', function() {
+        
+        it('for a file', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(orginalExist).to.be.true;
+
+            var stats = fs.statSync('/tmp/vfs-test/message.txt');
+
+            expect(stats.dev).to.be.equal(51);
+            expect(stats.mode).to.be.equal(33188);
+            expect(stats.nlink).to.be.equal(1);
+            expect(stats.uid).to.be.equal(0);
+            expect(stats.gid).to.be.equal(0);
+            expect(stats.rdev).to.be.equal(0);
+            expect(stats.blksize).to.be.equal(4096);
+            expect(stats.ino).to.be.equal(21209);
+            expect(stats.size).to.be.equal(13);
+            expect(stats.blocks).to.be.equal(8);
+
+            expect(stats.isFile()).to.be.true;
+            expect(stats.isDirectory()).to.be.false;
+            expect(stats.isBlockDevice()).to.be.false;
+            expect(stats.isCharacterDevice()).to.be.false;
+            expect(stats.isSymbolicLink()).to.be.false;
+            expect(stats.isFIFO()).to.be.flase;
+            expect(stats.isSocket()).to.be.false;
+
+        });
+        
+        it('for a dir', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(orginalExist).to.be.true;
+
+            var stats = fs.statSync('/tmp/vfs-test/exist');
+
+            expect(stats.dev).to.be.equal(51);
+            expect(stats.mode).to.be.equal(16877);
+            expect(stats.nlink).to.be.equal(2);
+            expect(stats.uid).to.be.equal(0);
+            expect(stats.gid).to.be.equal(0);
+            expect(stats.rdev).to.be.equal(0);
+            expect(stats.blksize).to.be.equal(4096);
+            expect(stats.ino).to.be.equal(12458);
+            expect(stats.size).to.be.equal(4096);
+            expect(stats.blocks).to.be.equal(8);
+
+            expect(stats.isFile()).to.be.false;
+            expect(stats.isDirectory()).to.be.true;
+            expect(stats.isBlockDevice()).to.be.false;
+            expect(stats.isCharacterDevice()).to.be.false;
+            expect(stats.isSymbolicLink()).to.be.false;
+            expect(stats.isFIFO()).to.be.flase;
+            expect(stats.isSocket()).to.be.false;
+
+        });
+
+    });    
 
 });
 
