@@ -18,11 +18,10 @@ describe('dir', function() {
 
     });
 
-    it('returns it\'s uuid', function() {
+    it('returns it\'s inodenumber', function() {
 
         var dir = new Dir('test');
-
-        expect(dir.getUuid()).to.be.not.undefined;
+        expect(dir.getInodeNumber()).to.be.not.undefined;
 
     });
 
@@ -34,7 +33,7 @@ describe('dir', function() {
 
     });
 
-    it('isFile is undefined', function() {
+    it('isFile is false', function() {
 
         var dir = new Dir('test');
 

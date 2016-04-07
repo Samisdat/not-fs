@@ -18,11 +18,11 @@ describe('node', function() {
 
     });
 
-    it('returns it\'s uuid', function() {
+    it('returns it\'s inodenumber', function() {
 
         var node = new Node('test');
 
-        expect(node.getUuid()).to.be.not.undefined;
+        expect(node.getInodeNumber()).to.be.not.undefined;
 
     });
 

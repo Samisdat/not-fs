@@ -18,11 +18,10 @@ describe('file', function() {
         expect(file).to.be.instanceof(File);
 
     });
-    it('returns it\'s uuid', function() {
+    it('returns it\'s inodenumber', function() {
 
         var file = new File('test');
-
-        expect(file.getUuid()).to.be.not.undefined;
+        expect(file.getInodeNumber()).to.be.not.undefined;
 
     });
 

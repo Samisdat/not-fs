@@ -18,10 +18,10 @@ describe('root', function() {
 
     });
 
-    it('returns it\'s uuid', function() {
+    it('returns it\'s inodenumber', function() {
 
         var root = new Root();
-        expect(root.getUuid()).to.be.not.undefined;
+        expect(root.getInodeNumber()).to.be.not.undefined;
 
     });
 
