@@ -390,7 +390,7 @@ describe('fs kitchen sink', function() {
             expect(stats.isBlockDevice()).to.be.false;
             expect(stats.isCharacterDevice()).to.be.false;
             expect(stats.isSymbolicLink()).to.be.false;
-            expect(stats.isFIFO()).to.be.flase;
+            expect(stats.isFIFO()).to.be.false;
             expect(stats.isSocket()).to.be.false;
 
         });

@@ -51,6 +51,8 @@ describe('file', function() {
 
     it('get/set content', function() {
 
+        var root = new Root('root');
+
         var file = new File('test');
 
         expect(file.getContent()).to.be.equal('');
@@ -58,6 +60,10 @@ describe('file', function() {
         file.setContent('foobar');
 
         expect(file.getContent()).to.be.equal('foobar');
+
+        var file = new File('test', root, 'bar', {});
+
+        expect(file.getContent()).to.be.equal('bar');
 
     });    
 

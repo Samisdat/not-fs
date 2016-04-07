@@ -315,6 +315,30 @@ describe('vfs kitchen sink', function() {
 
     });
 
+    describe('statSync', function() {
+        
+        it('for a file', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/message.txt');
+            expect(orginalExist).to.be.true;
+
+            var stats = fs.statSync('/tmp/vfs-test/message.txt');
+            console.log(stats);
+
+        });
+        
+        it('for a dir', function() {
+
+            var orginalExist = fs.existsSync('/tmp/vfs-test/exist');
+            expect(orginalExist).to.be.true;
+
+            var stats = fs.statSync('/tmp/vfs-test/exist');
+            //console.log(stats);
+
+        });
+
+    });    
+
 
 });
 

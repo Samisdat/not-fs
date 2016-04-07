@@ -8,7 +8,8 @@ var mochaIstanbul = {
             'test/virtual-filesystem/file.js',
             'test/virtual-filesystem/dir.js',
             'test/virtual-filesystem/stats.js',
-            'test/virtual-filesystem/tree.js'
+            'test/virtual-filesystem/tree.js',
+            'test/virtual-filesystem/inode-number.js'
         ]
     }
 };
