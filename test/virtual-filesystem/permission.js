@@ -45,7 +45,6 @@ describe('permission', function() {
         expect(permission._normalise('771')).to.be.equal('0771');
         expect(permission._normalise('771')).to.be.equal('0771');
 
-        expect(permission._normalise.bind('999')).to.throw();
 
     });
 
