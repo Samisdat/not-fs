@@ -57,6 +57,9 @@ describe('permission', function() {
         permission.setMode('755');
         expect(permission.getMode()).to.be.equal('0755');
 
+        expect(permission._validate('a')).to.be.false;
+        expect(permission.setMode.bind('a')).to.throw(Error);
+
     });
 
     it('isReadable', function() {
