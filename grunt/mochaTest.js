@@ -14,18 +14,18 @@ var mocha = {
             'test/virtual-filesystem/file.js',
             'test/virtual-filesystem/dir.js',
             'test/virtual-filesystem/stats.js',
-            'test/virtual-filesystem/tree.js'
-        ]        
+            'test/virtual-filesystem/virtual-filesystem.js'
+        ]
     },
-    'fs': {
+    'single': {
         src: [
-            'test/fs.js'
-        ]        
+            'test/virtual-filesystem/virtual-filesystem.js'
+        ]
     },
     'vfs': {
         src: [
             'test/vfs.js'
-        ]        
+        ]
     }
 };
 
