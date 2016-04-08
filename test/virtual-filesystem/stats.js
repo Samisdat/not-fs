@@ -15,20 +15,21 @@ var statsDefault = {
 };
 
 describe('stats', function() {
+    var file = new File('test');
 
     beforeEach(function() {
     });
 
     it('can be created', function() {
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
     });
 
     it('dev', function(){
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.dev).to.be.not.undefined;
@@ -38,7 +39,7 @@ describe('stats', function() {
 
     it('rdev', function(){
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.rdev).to.be.not.undefined;
@@ -49,7 +50,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ mode: 775 }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.mode).to.be.not.undefined;
@@ -61,7 +62,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ nlink: 1 }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.nlink).to.be.not.undefined;
@@ -72,7 +73,7 @@ describe('stats', function() {
 
     it('uid', function(){
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.uid).to.be.not.undefined;
@@ -82,7 +83,7 @@ describe('stats', function() {
 
     it('uid', function(){
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.uid).to.be.not.undefined;
@@ -92,7 +93,7 @@ describe('stats', function() {
 
     it('blksize', function(){
 
-        var stats = new Stats(statsDefault);
+        var stats = new Stats(file, statsDefault);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.blksize).to.be.not.undefined;
@@ -104,7 +105,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ ino: 4 }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.ino).to.be.not.undefined;
@@ -116,7 +117,7 @@ describe('stats', function() {
         
         var statsProperties = extend({ size: 1234 }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.size).to.be.not.undefined;
@@ -128,7 +129,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ blocks: 1234 }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.blocks).to.be.not.undefined;
@@ -140,7 +141,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ atime: new Date() }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.atime).to.be.not.undefined;
@@ -152,7 +153,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ mtime: new Date() }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.mtime).to.be.not.undefined;
@@ -163,7 +164,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ ctime: new Date() }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.ctime).to.be.not.undefined;
@@ -175,7 +176,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ birthtime: new Date() }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsProperties.birthtime).to.be.not.undefined;
@@ -187,7 +188,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isFile: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isFile()).to.be.true;
@@ -198,7 +199,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isDir: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isDirectory()).to.be.true;
@@ -209,7 +210,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isBlockDevice: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isBlockDevice()).to.be.true;
@@ -220,7 +221,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isCharacterDevice: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isCharacterDevice()).to.be.true;
@@ -231,7 +232,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isSymbolicLink: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isSymbolicLink()).to.be.true;
@@ -242,7 +243,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isFIFO: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isFIFO()).to.be.true;
@@ -253,7 +254,7 @@ describe('stats', function() {
 
         var statsProperties = extend({ _isSocket: true }, statsDefault); 
         
-        var stats = new Stats(statsProperties);
+        var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
         expect(stats.isSocket()).to.be.true;
