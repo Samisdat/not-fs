@@ -2,11 +2,11 @@
 
 var expect = require('chai').expect;
 
-var innodeNumber = require('../../lib/virtual-filesystem/inode-number');
+var innodeNumber = require('../../lib/virtual-filesystem/inode-number')();
 
-describe('dir', function() {
+describe('inode-number', function() {
 
-    it('can be created', function() {
+    it('is incrementing', function() {
 
         var i = innodeNumber();
         expect(i).to.be.equal(0);
