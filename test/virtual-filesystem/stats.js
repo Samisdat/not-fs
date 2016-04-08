@@ -3,6 +3,7 @@
 var expect = require('chai').expect;
 var extend = require('util')._extend;
 
+var File = require('../../lib/virtual-filesystem/file');
 var Stats = require('../../lib/virtual-filesystem/stats');
 
 

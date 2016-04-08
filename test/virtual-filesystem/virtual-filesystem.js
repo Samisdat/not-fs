@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var Tree = require('../../lib/virtual-filesystem/tree');
+var Tree = require('../../lib/virtual-filesystem/virtual-filesystem');
 var File = require('../../lib/virtual-filesystem/file');
 var Dir = require('../../lib/virtual-filesystem/dir');
 
