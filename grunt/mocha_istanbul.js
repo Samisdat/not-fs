@@ -3,6 +3,7 @@
 var mochaIstanbul = {
     coverage: {
         src: [
+            'test/virtual-filesystem/permission.js',
             'test/virtual-filesystem/inode-number.js',
             'test/virtual-filesystem/node.js',
             'test/virtual-filesystem/root.js',
