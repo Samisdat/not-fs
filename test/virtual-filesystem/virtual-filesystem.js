@@ -90,7 +90,7 @@ describe('tree', function() {
 
         tree.remove('/one/two/file.txt');
         expect(tree.exists('/one/two/file.txt')).to.be.false;
-
+        expect(tree.remove('/one/two/file.txt')).to.be.undefined;
 
         tree.addDir('/one/two/three');
         expect(tree.isDir('/one/two/three')).to.be.true;
