@@ -22,6 +22,7 @@ describe('permission', function() {
 
         var permission = new Permission();
 
+        expect(permission._validate('0700')).to.be.true;
         expect(permission._validate('0777')).to.be.true;
         expect(permission._validate('0775')).to.be.true;
         expect(permission._validate('0774')).to.be.true;
@@ -57,8 +58,13 @@ describe('permission', function() {
         expect(permission.getMode()).to.be.equal('0755');
 
         expect(permission._validate('a')).to.be.false;
-        expect(permission.setMode.bind('a')).to.throw(Error);
-
+        try{
+            permission = new Permission('a');
+        }
+        catch(e){
+            expect(e.message).to.be.equal('a is not a valid permission');
+        }
+        
     });
 
     it('isReadable', function() {
