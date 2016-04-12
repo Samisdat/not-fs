@@ -26,6 +26,18 @@ describe('node', function() {
 
     });
 
+    it('get/set permission', function() {
+
+        var node = new Node('test');
+
+        expect(node.getPermission().getMode()).to.be.equal('0755');
+
+        var parent = new Dir('parent');
+        var node = new Node('test', parent, {mode:'0700'});        
+        expect(node.getPermission().getMode()).to.be.equal('0700');
+
+    });
+
     it('returns it\'s name', function() {
 
         var node = new Node('test');

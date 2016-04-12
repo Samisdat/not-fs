@@ -48,14 +48,13 @@ describe('stats', function() {
     });
 
     it('mode', function(){
-
-        var statsProperties = extend({ mode: 775 }, statsDefault); 
         
+        var statsProperties = extend({ mode: '0755' }, statsDefault); 
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
-        expect(statsProperties.mode).to.be.not.undefined;
-        expect(stats.mode).to.be.equal(statsProperties.mode);
+        expect(stats.mode).to.be.equal('0644');
 
     });
 

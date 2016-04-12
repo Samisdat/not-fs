@@ -25,6 +25,13 @@ describe('dir', function() {
 
     });
 
+    it('get/set permission', function() {
+
+        var dir = new Dir('test');
+        expect(dir.getPermission().getMode()).to.be.equal('0755');
+
+    });
+
     it('returns it\'s name', function() {
 
         var dir = new Dir('test');

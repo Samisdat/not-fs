@@ -25,6 +25,14 @@ describe('file', function() {
 
     });
 
+    it('get/set permission', function() {
+
+        var file = new File('test');
+
+        expect(file.getPermission().getMode()).to.be.equal('0644');
+
+    });
+
     it('returns it\'s name', function() {
 
         var file = new File('test');
