@@ -103,13 +103,13 @@ describe('stats', function() {
 
     it('ino', function(){
 
-        var statsProperties = extend({ ino: 4 }, statsDefault); 
-        
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = new Stats(file);
+        expect(stats.ino).to.be.equal(file.getInodeNumber());
 
-        expect(statsProperties.ino).to.be.not.undefined;
-        expect(stats.ino).to.be.equal(statsProperties.ino);
+        file = new File('test');
+                
+        var stats = new Stats(file);
+        expect(stats.ino).to.be.equal(file.getInodeNumber());
 
     });
 
