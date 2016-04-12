@@ -67,6 +67,17 @@ describe('permission', function() {
         
     });
 
+    it('getPart', function() {
+
+        var permission = new Permission('0764');
+        expect(permission.getMode()).to.be.equal('0764');
+
+        expect(permission._getPart(true, false)).to.be.equal('7');
+        expect(permission._getPart(false, true)).to.be.equal('6');
+        expect(permission._getPart(false, false)).to.be.equal('4');
+
+    });
+
     it('isReadable', function() {
 
         var permission = new Permission();
