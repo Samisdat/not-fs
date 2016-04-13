@@ -21,12 +21,17 @@ var mocha = {
     },
     'single': {
         src: [
-            'test/virtual-filesystem/virtual-filesystem.js'
+            'test/virtual-filesystem/permission.js'
         ]
     },
     'vfs': {
         src: [
             'test/vfs.js'
+        ]
+    },
+    'fs': {
+        src: [
+            'test/fs.js'
         ]
     }
 };
