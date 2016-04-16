@@ -346,14 +346,16 @@ describe('fs kitchen sink', function() {
 
             var stats = fs.statSync('/tmp/vfs-test/message.txt');
 
-            expect(stats.dev).to.be.equal(51);
+            expect(parseInt(stats.dev, 10) === stats.dev).to.be.true;
+            expect(stats.dev).to.be.least(stats.dev);
             expect(stats.mode).to.be.equal(33188);
             expect(stats.nlink).to.be.equal(1);
             expect(stats.uid).to.be.equal(0);
             expect(stats.gid).to.be.equal(0);
             expect(stats.rdev).to.be.equal(0);
             expect(stats.blksize).to.be.equal(4096);
-            expect(stats.ino).to.be.equal(21209);
+            expect(parseInt(stats.ino, 10) === stats.ino).to.be.true;
+            expect(stats.ino).to.be.least(stats.dev);
             expect(stats.size).to.be.equal(13);
             expect(stats.blocks).to.be.equal(8);
 
@@ -374,14 +376,16 @@ describe('fs kitchen sink', function() {
 
             var stats = fs.statSync('/tmp/vfs-test/exist');
 
-            expect(stats.dev).to.be.equal(51);
+            expect(parseInt(stats.dev, 10) === stats.dev).to.be.true;
+            expect(stats.dev).to.be.least(stats.dev);
             expect(stats.mode).to.be.equal(16877);
             expect(stats.nlink).to.be.equal(2);
             expect(stats.uid).to.be.equal(0);
             expect(stats.gid).to.be.equal(0);
             expect(stats.rdev).to.be.equal(0);
             expect(stats.blksize).to.be.equal(4096);
-            expect(stats.ino).to.be.equal(12458);
+            expect(parseInt(stats.ino, 10) === stats.ino).to.be.true;
+            expect(stats.ino).to.be.least(stats.dev);
             expect(stats.size).to.be.equal(4096);
             expect(stats.blocks).to.be.equal(8);
 
