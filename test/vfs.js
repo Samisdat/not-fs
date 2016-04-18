@@ -159,6 +159,78 @@ describe('vfs kitchen sink', function() {
 
     });
 
+    describe('method fs.readdirSync', function() {
+
+        it('succeed when dir is existing', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/');
+            expect(exist).to.be.true;
+
+            var dir = fs.readdirSync('/tmp/vfs-test/');
+
+            expect(dir).to.deep.equal([ 'exist', 'message.txt' ]);
+
+        });
+
+        it('fail when dir is not existing', function() {
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+            expect(exist).to.be.false;
+            
+            var errorMessage = '';
+
+            try{
+                var dir = fs.readdirSync('/tmp/vfs-test/not-exist');
+            }
+            catch(e){
+                errorMessage = e.message
+            }            
+
+            expect(errorMessage).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/vfs-test/not-exist\'');
+
+        });
+
+    });
+
+    describe('method fs.readdir', function() {
+
+        it('succeed when dir is existing', function(done) {
+
+            var exist = fs.existsSync('/tmp/vfs-test/');
+            expect(exist).to.be.true;
+
+            fs.readdir('/tmp/vfs-test/', function(err, files){
+                if(err){
+                    done('failed');
+                    return;
+                }
+                expect(files).to.deep.equal([ 'exist', 'message.txt' ]);
+                done();
+
+            });
+
+        });
+
+        it('fail when dir is not existing', function(done) {
+
+            var exist = fs.existsSync('/tmp/vfs-test/not-exist');
+            expect(exist).to.be.false;
+            
+            //EEXIST, file already exists '/tmp/vfs-test/exist''
+            fs.readdir('/tmp/vfs-test/not-exist', function(err, files){
+
+                if(err){
+                    expect(err.message).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/vfs-test/not-exist\'');
+                    done();
+                    return;
+                }
+                done('should not succeed while dir already exist');
+            })
+
+        });
+
+    });
+
     describe('method fs.writeFile', function() {
         
         it('succeed on create and write new file on valid path', function(done) {
