@@ -9,19 +9,19 @@ var mocha = {
     },
     'back': {
         src: [
-            'test/not-fs/permission.js',
-            'test/not-fs/inode-number.js',            
-            'test/not-fs/node.js',
-            'test/not-fs/root.js',
-            'test/not-fs/file.js',
-            'test/not-fs/dir.js',
-            'test/not-fs/stats.js',
-            'test/not-fs/virtual-filesystem.js'
+            'test/unreal/permission.js',
+            'test/unreal/inode-number.js',            
+            'test/unreal/node.js',
+            'test/unreal/root.js',
+            'test/unreal/file.js',
+            'test/unreal/dir.js',
+            'test/unreal/stats.js',
+            'test/unreal/virtual-filesystem.js'
         ]
     },
     'single': {
         src: [
-            'test/virtual-filesystem/permission.js'
+            'test/unreal/permission.js'
         ]
     },
     'unreal': {
