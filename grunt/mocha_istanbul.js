@@ -3,14 +3,14 @@
 var mochaIstanbul = {
     coverage: {
         src: [
-            'test/virtual-filesystem/permission.js',
-            'test/virtual-filesystem/inode-number.js',
-            'test/virtual-filesystem/node.js',
-            'test/virtual-filesystem/root.js',
-            'test/virtual-filesystem/file.js',
-            'test/virtual-filesystem/dir.js',
-            'test/virtual-filesystem/stats.js',
-            'test/virtual-filesystem/virtual-filesystem.js',
+            'test/not-fs/permission.js',
+            'test/not-fs/inode-number.js',
+            'test/not-fs/node.js',
+            'test/not-fs/root.js',
+            'test/not-fs/file.js',
+            'test/not-fs/dir.js',
+            'test/not-fs/stats.js',
+            'test/not-fs/virtual-filesystem.js',
         ]
     }
 };

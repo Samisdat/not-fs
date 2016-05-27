@@ -8,7 +8,7 @@ var path = require('path');
 
 var util = require('util');
 
-var vfs = require('../index');
+var vfs = require('../../index');
 
 
 var rmdir = function(dir) {
