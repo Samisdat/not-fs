@@ -73,7 +73,7 @@ describe('file', function() {
 
         expect(file.getContent()).to.be.equal('bar');
 
-    });    
+    });
 
     it('returns it\'s full qualified name and depth', function() {
 

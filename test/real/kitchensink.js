@@ -3,20 +3,20 @@
 var expect = require('chai').expect;
 
 var fs = require('fs');
-var path = require("path");
+var path = require('path');
 
 /**
  * https://gist.github.com/tkihira/2367067
  */
 var rmdir = function(dir) {
     var list = fs.readdirSync(dir);
-    for(var i = 0; i < list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var filename = path.join(dir, list[i]);
         var stat = fs.statSync(filename);
-        
-        if(filename == "." || filename == "..") {
+
+        if ('.' === filename || '..' === filename) {
             // pass these files
-        } else if(stat.isDirectory()) {
+        } else if (stat.isDirectory()) {
             // rmdir recursively
             rmdir(filename);
         } else {
@@ -30,7 +30,7 @@ var rmdir = function(dir) {
 describe('fs kitchen sink', function() {
 
     beforeEach(function() {
-        if(true === fs.existsSync('/tmp/real-test')){
+        if (true === fs.existsSync('/tmp/real-test')){
             rmdir('/tmp/real-test');
         }
 
@@ -134,7 +134,7 @@ describe('fs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/real-test/exist');
             expect(exist).to.be.true;
-            
+
             //EEXIST, file already exists '/tmp/real-test/exist''
             expect(fs.mkdirSync.bind('/tmp/real-test/exist')).to.throw(Error);
 
@@ -146,16 +146,16 @@ describe('fs kitchen sink', function() {
 
         it('succeed when dir is not already existing', function(done) {
 
-            var exist = fs.existsSync('/tmp/real-test/not-exist');
-            expect(exist).to.be.false;
+            var existBefore = fs.existsSync('/tmp/real-test/not-exist');
+            expect(existBefore).to.be.false;
 
             fs.mkdir('/tmp/real-test/not-exist', function(err){
-                if(err){
+                if (err){
                     done('failed');
                     return;
                 }
-                var exist = fs.existsSync('/tmp/real-test/not-exist');
-                expect(exist).to.be.true;
+                var existAfter = fs.existsSync('/tmp/real-test/not-exist');
+                expect(existAfter).to.be.true;
                 done();
 
             });
@@ -168,15 +168,15 @@ describe('fs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/real-test/exist');
             expect(exist).to.be.true;
-            
+
             //EEXIST, file already exists '/tmp/real-test/exist''
             fs.mkdir('/tmp/real-test/exist', function(err){
-                if(err){
+                if (err){
                     done();
                     return;
                 }
                 done('should not succeed while dir already exist');
-            })
+            });
 
         });
 
@@ -199,15 +199,15 @@ describe('fs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/real-test/not-exist');
             expect(exist).to.be.false;
-            
+
             var errorMessage = '';
 
-            try{
-                var dir = fs.readdirSync('/tmp/real-test/not-exist');
+            try {
+                fs.readdirSync('/tmp/real-test/not-exist');
             }
-            catch(e){
-                errorMessage = e.message
-            }            
+            catch (e){
+                errorMessage = e.message;
+            }
 
             expect(errorMessage).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/real-test/not-exist\'');
 
@@ -223,7 +223,7 @@ describe('fs kitchen sink', function() {
             expect(exist).to.be.true;
 
             fs.readdir('/tmp/real-test/', function(err, files){
-                if(err){
+                if (err){
                     done('failed');
                     return;
                 }
@@ -240,17 +240,17 @@ describe('fs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/real-test/not-exist');
             expect(exist).to.be.false;
-            
-            //EEXIST, file already exists '/tmp/real-test/exist''
-            fs.readdir('/tmp/real-test/not-exist', function(err, files){
 
-                if(err){
+            //EEXIST, file already exists '/tmp/real-test/exist''
+            fs.readdir('/tmp/real-test/not-exist', function(err){
+
+                if (err){
                     expect(err.message).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/real-test/not-exist\'');
                     done();
                     return;
                 }
                 done('should not succeed while dir already exist');
-            })
+            });
 
         });
 
@@ -258,32 +258,32 @@ describe('fs kitchen sink', function() {
 
 
     describe('method fs.writeFile', function() {
-        
+
         it('succeed on create and write new file on valid path', function(done) {
 
-            var exist = fs.existsSync('/tmp/real-test/a-new-file.txt');
-            expect(exist).to.be.false;
+            var existBefore = fs.existsSync('/tmp/real-test/a-new-file.txt');
+            expect(existBefore).to.be.false;
 
             fs.writeFile('/tmp/real-test/a-new-file.txt', 'Hello Node.js', function(err) {
 
                 expect(err).to.be.null;
-                
-                var exist = fs.existsSync('/tmp/real-test/a-new-file.txt');
-                expect(exist).to.be.true;
+
+                var existAfter = fs.existsSync('/tmp/real-test/a-new-file.txt');
+                expect(existAfter).to.be.true;
 
                 var content = fs.readFileSync('/tmp/real-test/a-new-file.txt', {encoding: 'utf8'});
 
                 expect(content).to.be.equal('Hello Node.js');
                 done();
 
-            });                        
+            });
 
         });
 
     });
 
     describe('method fs.writeFileSync', function() {
-        
+
         it('succeed on create and write new file on valid path', function() {
 
             var exist = fs.existsSync('/tmp/real-test/a-new-file.txt');
@@ -302,7 +302,7 @@ describe('fs kitchen sink', function() {
     });
 
     describe('method fs.readFileSync', function() {
-        
+
         it('fail reading an non existing file', function() {
 
             var exist = fs.existsSync('/tmp/real-test/not-a-message.txt');
@@ -326,7 +326,7 @@ describe('fs kitchen sink', function() {
     });
 
     describe('method fs.renameSync', function() {
-        
+
         it('succeed on file', function() {
 
             var orginalExist = fs.existsSync('/tmp/real-test/message.txt');
@@ -366,23 +366,23 @@ describe('fs kitchen sink', function() {
     });
 
     describe('method fs.rename', function() {
-        
+
         it('succeed on file', function(done) {
 
-            var orginalExist = fs.existsSync('/tmp/real-test/message.txt');
-            expect(orginalExist).to.be.true;
+            var orginalExistBefore = fs.existsSync('/tmp/real-test/message.txt');
+            expect(orginalExistBefore).to.be.true;
 
-            var renameExist = fs.existsSync('/tmp/real-test/message-renamed.txt');
-            expect(renameExist).to.be.false;
+            var renameExistBefore = fs.existsSync('/tmp/real-test/message-renamed.txt');
+            expect(renameExistBefore).to.be.false;
 
             fs.rename('/tmp/real-test/message.txt', '/tmp/real-test/message-renamed.txt', function(){
-                var orginalExist = fs.existsSync('/tmp/real-test/message.txt');
-                expect(orginalExist).to.be.false;
+                var orginalExistAfter = fs.existsSync('/tmp/real-test/message.txt');
+                expect(orginalExistAfter).to.be.false;
 
-                var renameExist = fs.existsSync('/tmp/real-test/message-renamed.txt');
-                expect(renameExist).to.be.true;
+                var renameExistAfter = fs.existsSync('/tmp/real-test/message-renamed.txt');
+                expect(renameExistAfter).to.be.true;
 
-                done();                
+                done();
             });
 
 
@@ -390,19 +390,19 @@ describe('fs kitchen sink', function() {
 
         it('succeed on dir', function(done) {
 
-            var orginalExist = fs.existsSync('/tmp/real-test/exist');
-            expect(orginalExist).to.be.true;
+            var orginalExistBefore = fs.existsSync('/tmp/real-test/exist');
+            expect(orginalExistBefore).to.be.true;
 
-            var renameExist = fs.existsSync('/tmp/real-test/renamed');
-            expect(renameExist).to.be.false;
+            var renameExistBefore = fs.existsSync('/tmp/real-test/renamed');
+            expect(renameExistBefore).to.be.false;
 
             fs.rename('/tmp/real-test/exist', '/tmp/real-test/renamed', function(){
 
-                var orginalExist = fs.existsSync('/tmp/real-test/exist');
-                expect(orginalExist).to.be.false;
+                var orginalExistAfter = fs.existsSync('/tmp/real-test/exist');
+                expect(orginalExistAfter).to.be.false;
 
-                var renameExist = fs.existsSync('/tmp/real-test/renamed');
-                expect(renameExist).to.be.true;
+                var renameExistAfter = fs.existsSync('/tmp/real-test/renamed');
+                expect(renameExistAfter).to.be.true;
 
                 done();
             });
@@ -413,7 +413,7 @@ describe('fs kitchen sink', function() {
     });
 
     describe('statSync', function() {
-        
+
         it('for a file', function() {
 
             var orginalExist = fs.existsSync('/tmp/real-test/message.txt');
@@ -443,7 +443,7 @@ describe('fs kitchen sink', function() {
             expect(stats.isSocket()).to.be.false;
 
         });
-        
+
         it('for a dir', function() {
 
             var orginalExist = fs.existsSync('/tmp/real-test/exist');
@@ -474,7 +474,7 @@ describe('fs kitchen sink', function() {
 
         });
 
-    });    
+    });
 
 });
 

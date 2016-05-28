@@ -6,21 +6,21 @@ var fs = require('fs');
 
 var path = require('path');
 
-var util = require('util');
-
 var unrealFs = require('../../index');
 
-
+/**
+ * @TODO replace by rmdir module
+ */
 var rmdir = function(dir) {
     var list = fs.readdirSync(dir);
 
-    for(var i = 0; i < list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var filename = path.join(dir, list[i]);
         var stat = fs.statSync(filename);
-        
-        if(filename == "." || filename == "..") {
+
+        if ('.' === filename || '..' === filename) {
             // pass these files
-        } else if(stat.isDirectory()) {
+        } else if (stat.isDirectory()) {
             // rmdir recursively
             rmdir(filename);
         } else {
@@ -36,18 +36,18 @@ var rmdir = function(dir) {
 describe('unrealFs kitchen sink', function() {
 
     before(function(){
-        unrealFs.swapIn(); 
+        unrealFs.swapIn();
         unrealFs.getTree().log();
     });
 
     after(function(){
         unrealFs.getTree().log();
-        unrealFs.swapOut(); 
+        unrealFs.swapOut();
     });
 
     beforeEach(function() {
 
-        if(true === fs.existsSync('/tmp/unreal-test')){
+        if (true === fs.existsSync('/tmp/unreal-test')){
             rmdir('/tmp/unreal-test');
         }
 
@@ -130,7 +130,7 @@ describe('unrealFs kitchen sink', function() {
 
         });
 
-    });    
+    });
 
     describe('method fs.mkdirSync', function() {
 
@@ -151,7 +151,7 @@ describe('unrealFs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/unreal-test/exist');
             expect(exist).to.be.true;
-            
+
             //EEXIST, file already exists '/tmp/unreal-test/exist''
             expect(fs.mkdirSync.bind('/tmp/unreal-test/exist')).to.throw(Error);
 
@@ -176,15 +176,15 @@ describe('unrealFs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/unreal-test/not-exist');
             expect(exist).to.be.false;
-            
+
             var errorMessage = '';
 
-            try{
-                var dir = fs.readdirSync('/tmp/unreal-test/not-exist');
+            try {
+                fs.readdirSync('/tmp/unreal-test/not-exist');
             }
-            catch(e){
-                errorMessage = e.message
-            }            
+            catch (e){
+                errorMessage = e.message;
+            }
 
             expect(errorMessage).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/unreal-test/not-exist\'');
 
@@ -200,7 +200,7 @@ describe('unrealFs kitchen sink', function() {
             expect(exist).to.be.true;
 
             fs.readdir('/tmp/unreal-test/', function(err, files){
-                if(err){
+                if (err){
                     done('failed');
                     return;
                 }
@@ -215,49 +215,49 @@ describe('unrealFs kitchen sink', function() {
 
             var exist = fs.existsSync('/tmp/unreal-test/not-exist');
             expect(exist).to.be.false;
-            
-            //EEXIST, file already exists '/tmp/unreal-test/exist''
-            fs.readdir('/tmp/unreal-test/not-exist', function(err, files){
 
-                if(err){
+            //EEXIST, file already exists '/tmp/unreal-test/exist''
+            fs.readdir('/tmp/unreal-test/not-exist', function(err){
+
+                if (err){
                     expect(err.message).to.be.equal('ENOENT: no such file or directory, scandir \'/tmp/unreal-test/not-exist\'');
                     done();
                     return;
                 }
                 done('should not succeed while dir already exist');
-            })
+            });
 
         });
 
     });
 
     describe('method fs.writeFile', function() {
-        
+
         it('succeed on create and write new file on valid path', function(done) {
 
-            var exist = fs.existsSync('/tmp/unreal-test/a-new-file.txt');
-            expect(exist).to.be.false;
+            var existBefore = fs.existsSync('/tmp/unreal-test/a-new-file.txt');
+            expect(existBefore).to.be.false;
 
             fs.writeFile('/tmp/unreal-test/a-new-file.txt', 'Hello Node.js', {encoding: 'utf8'}, function(err) {
 
                 expect(err).to.be.null;
-                
-                var exist = fs.existsSync('/tmp/unreal-test/a-new-file.txt');
-                expect(exist).to.be.true;
+
+                var existAfter = fs.existsSync('/tmp/unreal-test/a-new-file.txt');
+                expect(existAfter).to.be.true;
 
                 var content = fs.readFileSync('/tmp/unreal-test/a-new-file.txt', {encoding: 'utf8'});
-
+                console.log('content', content, 'content');
                 expect(content).to.be.equal('Hello Node.js');
                 done();
 
-            });                        
+            });
 
         });
 
     });
 
     describe('method fs.writeFileSync', function() {
-        
+
         it('succeed on create and write new file on valid path', function() {
 
             var exist = fs.existsSync('/tmp/unreal-test/a-new-file.txt');
@@ -286,7 +286,7 @@ describe('unrealFs kitchen sink', function() {
             expect(fs.readFileSync.bind('/tmp/unreal-test/not-a-message.txt')).to.throw(Error);
 
         });
-        
+
         it('succeed reading an existing file with encoding', function() {
 
             var exist = fs.existsSync('/tmp/unreal-test/message.txt');
@@ -300,7 +300,7 @@ describe('unrealFs kitchen sink', function() {
     });
 
     describe('method fs.renameSync', function() {
-        
+
         it('succeed on file', function() {
 
             var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
@@ -340,22 +340,22 @@ describe('unrealFs kitchen sink', function() {
     });
 
     describe('method fs.rename', function() {
-        
+
         it('succeed on file', function(done) {
 
-            var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
-            expect(orginalExist).to.be.true;
+            var orginalExistBefore = fs.existsSync('/tmp/unreal-test/message.txt');
+            expect(orginalExistBefore).to.be.true;
 
-            var renameExist = fs.existsSync('/tmp/unreal-test/message-renamed.txt');
-            expect(renameExist).to.be.false;
+            var renameExistBefore = fs.existsSync('/tmp/unreal-test/message-renamed.txt');
+            expect(renameExistBefore).to.be.false;
 
             fs.rename('/tmp/unreal-test/message.txt', '/tmp/unreal-test/message-renamed.txt', function(){
 
-                var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
-                expect(orginalExist).to.be.false;
+                var orginalExistAfter = fs.existsSync('/tmp/unreal-test/message.txt');
+                expect(orginalExistAfter).to.be.false;
 
-                var renameExist = fs.existsSync('/tmp/unreal-test/message-renamed.txt');
-                expect(renameExist).to.be.true;
+                var renameExistAfter = fs.existsSync('/tmp/unreal-test/message-renamed.txt');
+                expect(renameExistAfter).to.be.true;
 
                 done();
 
@@ -365,19 +365,19 @@ describe('unrealFs kitchen sink', function() {
 
         it('succeed on dir', function(done) {
 
-            var orginalExist = fs.existsSync('/tmp/unreal-test/exist');
-            expect(orginalExist).to.be.true;
+            var orginalExistBefore = fs.existsSync('/tmp/unreal-test/exist');
+            expect(orginalExistBefore).to.be.true;
 
-            var renameExist = fs.existsSync('/tmp/unreal-test/renamed');
-            expect(renameExist).to.be.false;
+            var renameExistBefore = fs.existsSync('/tmp/unreal-test/renamed');
+            expect(renameExistBefore).to.be.false;
 
             fs.rename('/tmp/unreal-test/exist', '/tmp/unreal-test/renamed', function(){
-    
-                var orginalExist = fs.existsSync('/tmp/unreal-test/exist');
-                expect(orginalExist).to.be.false;
 
-                var renameExist = fs.existsSync('/tmp/unreal-test/renamed');
-                expect(renameExist).to.be.true;
+                var orginalExistAfter = fs.existsSync('/tmp/unreal-test/exist');
+                expect(orginalExistAfter).to.be.false;
+
+                var renameExistAfter = fs.existsSync('/tmp/unreal-test/renamed');
+                expect(renameExistAfter).to.be.true;
 
                 done();
 
@@ -387,8 +387,8 @@ describe('unrealFs kitchen sink', function() {
 
     });
 
-    describe('statSync', function() {
-        
+    describe.skip('statSync', function() {
+
         it('for a file', function() {
 
             var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
@@ -398,18 +398,18 @@ describe('unrealFs kitchen sink', function() {
             console.log(stats);
 
         });
-        
+
         it('for a dir', function() {
 
             var orginalExist = fs.existsSync('/tmp/unreal-test/exist');
             expect(orginalExist).to.be.true;
 
             var stats = fs.statSync('/tmp/unreal-test/exist');
-            //console.log(stats);
+            console.log(stats);
 
         });
 
-    });    
+    });
 
 
 });

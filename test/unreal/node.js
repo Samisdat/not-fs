@@ -33,7 +33,7 @@ describe('node', function() {
         expect(node.getPermission().getMode()).to.be.equal('0755');
 
         var parent = new Dir('parent');
-        var node = new Node('test', parent, {mode:'0700'});        
+        var node = new Node('test', parent, {mode: '0700'});
         expect(node.getPermission().getMode()).to.be.equal('0700');
 
     });

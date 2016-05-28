@@ -41,7 +41,7 @@ describe('permission', function() {
     it('normalise', function() {
 
         var permission = new Permission();
-        
+
         expect(permission._normalise('0770')).to.be.equal('0770');
         expect(permission._normalise('771')).to.be.equal('0771');
         expect(permission._normalise('771')).to.be.equal('0771');
@@ -58,13 +58,13 @@ describe('permission', function() {
         expect(permission.getMode()).to.be.equal('0755');
 
         expect(permission._validate('a')).to.be.false;
-        try{
+        try {
             permission = new Permission('a');
         }
-        catch(e){
+        catch (e){
             expect(e.message).to.be.equal('a is not a valid permission');
         }
-        
+
     });
 
     it('getPart', function() {
@@ -83,80 +83,80 @@ describe('permission', function() {
         var permission = new Permission();
 
         // user
-        permission.setMode('0700')
-        expect(permission.isReadable(true, false)).to.be.true;
-        
-        permission.setMode('0600')
+        permission.setMode('0700');
         expect(permission.isReadable(true, false)).to.be.true;
 
-        permission.setMode('0500')
+        permission.setMode('0600');
         expect(permission.isReadable(true, false)).to.be.true;
 
-        permission.setMode('0400')
+        permission.setMode('0500');
         expect(permission.isReadable(true, false)).to.be.true;
 
-        permission.setMode('0300')
+        permission.setMode('0400');
+        expect(permission.isReadable(true, false)).to.be.true;
+
+        permission.setMode('0300');
         expect(permission.isReadable(true, false)).to.be.false;
 
-        permission.setMode('0200')
+        permission.setMode('0200');
         expect(permission.isReadable(true, false)).to.be.false;
 
-        permission.setMode('0100')
+        permission.setMode('0100');
         expect(permission.isReadable(true, false)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isReadable(true, false)).to.be.false;
 
         // group
-        permission.setMode('0070')
-        expect(permission.isReadable(false, true)).to.be.true;
-        
-        permission.setMode('0060')
+        permission.setMode('0070');
         expect(permission.isReadable(false, true)).to.be.true;
 
-        permission.setMode('0050')
+        permission.setMode('0060');
         expect(permission.isReadable(false, true)).to.be.true;
 
-        permission.setMode('0040')
+        permission.setMode('0050');
         expect(permission.isReadable(false, true)).to.be.true;
 
-        permission.setMode('0030')
+        permission.setMode('0040');
+        expect(permission.isReadable(false, true)).to.be.true;
+
+        permission.setMode('0030');
         expect(permission.isReadable(false, true)).to.be.false;
 
-        permission.setMode('0020')
+        permission.setMode('0020');
         expect(permission.isReadable(false, true)).to.be.false;
 
-        permission.setMode('0010')
+        permission.setMode('0010');
         expect(permission.isReadable(false, true)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isReadable(false, true)).to.be.false;
 
         // other
-        permission.setMode('0007')
-        expect(permission.isReadable(false, false)).to.be.true;
-        
-        permission.setMode('0006')
+        permission.setMode('0007');
         expect(permission.isReadable(false, false)).to.be.true;
 
-        permission.setMode('0005')
+        permission.setMode('0006');
         expect(permission.isReadable(false, false)).to.be.true;
 
-        permission.setMode('0004')
+        permission.setMode('0005');
         expect(permission.isReadable(false, false)).to.be.true;
 
-        permission.setMode('0003')
+        permission.setMode('0004');
+        expect(permission.isReadable(false, false)).to.be.true;
+
+        permission.setMode('0003');
         expect(permission.isReadable(false, false)).to.be.false;
 
-        permission.setMode('0002')
+        permission.setMode('0002');
         expect(permission.isReadable(false, false)).to.be.false;
 
-        permission.setMode('0001')
+        permission.setMode('0001');
         expect(permission.isReadable(false, false)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isReadable(false, false)).to.be.false;
-        
+
     });
 
     it('isWriteable', function() {
@@ -164,161 +164,161 @@ describe('permission', function() {
         var permission = new Permission();
 
         // user
-        permission.setMode('0700')
-        expect(permission.isWriteable(true, false)).to.be.true;
-        
-        permission.setMode('0600')
+        permission.setMode('0700');
         expect(permission.isWriteable(true, false)).to.be.true;
 
-        permission.setMode('0500')
+        permission.setMode('0600');
+        expect(permission.isWriteable(true, false)).to.be.true;
+
+        permission.setMode('0500');
         expect(permission.isWriteable(true, false)).to.be.false;
 
-        permission.setMode('0400')
+        permission.setMode('0400');
         expect(permission.isWriteable(true, false)).to.be.false;
 
-        permission.setMode('0300')
+        permission.setMode('0300');
         expect(permission.isWriteable(true, false)).to.be.true;
 
-        permission.setMode('0200')
+        permission.setMode('0200');
         expect(permission.isWriteable(true, false)).to.be.true;
 
-        permission.setMode('0100')
+        permission.setMode('0100');
         expect(permission.isWriteable(true, false)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isWriteable(true, false)).to.be.false;
 
         // group
-        permission.setMode('0070')
-        expect(permission.isWriteable(false, true)).to.be.true;
-        
-        permission.setMode('0060')
+        permission.setMode('0070');
         expect(permission.isWriteable(false, true)).to.be.true;
 
-        permission.setMode('0050')
+        permission.setMode('0060');
+        expect(permission.isWriteable(false, true)).to.be.true;
+
+        permission.setMode('0050');
         expect(permission.isWriteable(false, true)).to.be.false;
 
-        permission.setMode('0040')
+        permission.setMode('0040');
         expect(permission.isWriteable(false, true)).to.be.false;
 
-        permission.setMode('0030')
+        permission.setMode('0030');
         expect(permission.isWriteable(false, true)).to.be.true;
 
-        permission.setMode('0020')
+        permission.setMode('0020');
         expect(permission.isWriteable(false, true)).to.be.true;
 
-        permission.setMode('0010')
+        permission.setMode('0010');
         expect(permission.isWriteable(false, true)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isWriteable(false, true)).to.be.false;
 
         // other
-        permission.setMode('0007')
-        expect(permission.isWriteable(false, false)).to.be.true;
-        
-        permission.setMode('0006')
+        permission.setMode('0007');
         expect(permission.isWriteable(false, false)).to.be.true;
 
-        permission.setMode('0005')
-        expect(permission.isWriteable(false, false)).to.be.false;
-
-        permission.setMode('0004')
-        expect(permission.isWriteable(false, false)).to.be.false;
-
-        permission.setMode('0003')
+        permission.setMode('0006');
         expect(permission.isWriteable(false, false)).to.be.true;
 
-        permission.setMode('0002')
+        permission.setMode('0005');
+        expect(permission.isWriteable(false, false)).to.be.false;
+
+        permission.setMode('0004');
+        expect(permission.isWriteable(false, false)).to.be.false;
+
+        permission.setMode('0003');
         expect(permission.isWriteable(false, false)).to.be.true;
 
-        permission.setMode('0001')
+        permission.setMode('0002');
+        expect(permission.isWriteable(false, false)).to.be.true;
+
+        permission.setMode('0001');
         expect(permission.isWriteable(false, false)).to.be.false;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isWriteable(false, false)).to.be.false;
-        
+
     });
-    
+
     it('isExecuteable', function() {
 
         var permission = new Permission();
 
         // user
-        permission.setMode('0700')
+        permission.setMode('0700');
         expect(permission.isExecuteable(true, false)).to.be.true;
-        
-        permission.setMode('0600')
+
+        permission.setMode('0600');
         expect(permission.isExecuteable(true, false)).to.be.false;
 
-        permission.setMode('0500')
+        permission.setMode('0500');
         expect(permission.isExecuteable(true, false)).to.be.true;
 
-        permission.setMode('0400')
+        permission.setMode('0400');
         expect(permission.isExecuteable(true, false)).to.be.false;
 
-        permission.setMode('0300')
+        permission.setMode('0300');
         expect(permission.isExecuteable(true, false)).to.be.true;
 
-        permission.setMode('0200')
+        permission.setMode('0200');
         expect(permission.isExecuteable(true, false)).to.be.false;
 
-        permission.setMode('0100')
+        permission.setMode('0100');
         expect(permission.isExecuteable(true, false)).to.be.true;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isExecuteable(true, false)).to.be.false;
 
         // group
-        permission.setMode('0070')
+        permission.setMode('0070');
         expect(permission.isExecuteable(false, true)).to.be.true;
-        
-        permission.setMode('0060')
+
+        permission.setMode('0060');
         expect(permission.isExecuteable(false, true)).to.be.false;
 
-        permission.setMode('0050')
+        permission.setMode('0050');
         expect(permission.isExecuteable(false, true)).to.be.true;
 
-        permission.setMode('0040')
+        permission.setMode('0040');
         expect(permission.isExecuteable(false, true)).to.be.false;
 
-        permission.setMode('0030')
+        permission.setMode('0030');
         expect(permission.isExecuteable(false, true)).to.be.true;
 
-        permission.setMode('0020')
+        permission.setMode('0020');
         expect(permission.isExecuteable(false, true)).to.be.false;
 
-        permission.setMode('0010')
+        permission.setMode('0010');
         expect(permission.isExecuteable(false, true)).to.be.true;
 
-        permission.setMode('0000')
+        permission.setMode('0000');
         expect(permission.isExecuteable(false, true)).to.be.false;
 
         // other
-        permission.setMode('0007')
-        expect(permission.isExecuteable(false, false)).to.be.true;
-        
-        permission.setMode('0006')
-        expect(permission.isExecuteable(false, false)).to.be.false;
-
-        permission.setMode('0005')
+        permission.setMode('0007');
         expect(permission.isExecuteable(false, false)).to.be.true;
 
-        permission.setMode('0004')
+        permission.setMode('0006');
         expect(permission.isExecuteable(false, false)).to.be.false;
 
-        permission.setMode('0003')
+        permission.setMode('0005');
         expect(permission.isExecuteable(false, false)).to.be.true;
 
-        permission.setMode('0002')
+        permission.setMode('0004');
         expect(permission.isExecuteable(false, false)).to.be.false;
 
-        permission.setMode('0001')
+        permission.setMode('0003');
         expect(permission.isExecuteable(false, false)).to.be.true;
 
-        permission.setMode('0000')
+        permission.setMode('0002');
         expect(permission.isExecuteable(false, false)).to.be.false;
-        
+
+        permission.setMode('0001');
+        expect(permission.isExecuteable(false, false)).to.be.true;
+
+        permission.setMode('0000');
+        expect(permission.isExecuteable(false, false)).to.be.false;
+
     });
 
 

@@ -7,11 +7,11 @@ var File = require('../../lib/unreal-filesystem/file');
 var Stats = require('../../lib/unreal-filesystem/stats');
 
 var statsDefault = {
-  dev: 51,
-  uid: process.getuid(),
-  gid: process.getgid(),
-  rdev: 0,
-  blksize: 4096
+    dev: 51,
+    uid: process.getuid(),
+    gid: process.getgid(),
+    rdev: 0,
+    blksize: 4096
 };
 
 describe('stats', function() {
@@ -47,8 +47,8 @@ describe('stats', function() {
     });
 
     it('mode', function(){
-        
-        var statsProperties = extend({ mode: '0755' }, statsDefault); 
+
+        var statsProperties = extend({ mode: '0755' }, statsDefault);
 
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
@@ -59,8 +59,8 @@ describe('stats', function() {
 
     it('nlink', function(){
 
-        var statsProperties = extend({ nlink: 1 }, statsDefault); 
-        
+        var statsProperties = extend({ nlink: 1 }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -86,7 +86,7 @@ describe('stats', function() {
         expect(stats).to.be.instanceof(Stats);
 
         expect(statsDefault.uid).to.be.not.undefined;
-        expect(stats.uid).to.be.equal(statsDefault.uid);        
+        expect(stats.uid).to.be.equal(statsDefault.uid);
 
     });
 
@@ -106,16 +106,16 @@ describe('stats', function() {
         expect(stats.ino).to.be.equal(file.getInodeNumber());
 
         file = new File('test');
-                
+
         var stats = new Stats(file);
         expect(stats.ino).to.be.equal(file.getInodeNumber());
 
     });
 
     it('size', function(){
-        
-        var statsProperties = extend({ size: 1234 }, statsDefault); 
-        
+
+        var statsProperties = extend({ size: 1234 }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -126,8 +126,8 @@ describe('stats', function() {
 
     it('blocks', function(){
 
-        var statsProperties = extend({ blocks: 1234 }, statsDefault); 
-        
+        var statsProperties = extend({ blocks: 1234 }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -138,8 +138,8 @@ describe('stats', function() {
 
     it('atime', function(){
 
-        var statsProperties = extend({ atime: new Date() }, statsDefault); 
-        
+        var statsProperties = extend({ atime: new Date() }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -150,8 +150,8 @@ describe('stats', function() {
 
     it('mtime', function(){
 
-        var statsProperties = extend({ mtime: new Date() }, statsDefault); 
-        
+        var statsProperties = extend({ mtime: new Date() }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -161,8 +161,8 @@ describe('stats', function() {
     });
     it('ctime', function(){
 
-        var statsProperties = extend({ ctime: new Date() }, statsDefault); 
-        
+        var statsProperties = extend({ ctime: new Date() }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -173,8 +173,8 @@ describe('stats', function() {
 
     it('birthtime', function(){
 
-        var statsProperties = extend({ birthtime: new Date() }, statsDefault); 
-        
+        var statsProperties = extend({ birthtime: new Date() }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -185,8 +185,8 @@ describe('stats', function() {
 
     it('correct flags for file', function() {
 
-        var statsProperties = extend({ _isFile: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isFile: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -196,8 +196,8 @@ describe('stats', function() {
 
     it('correct flags for dir', function() {
 
-        var statsProperties = extend({ _isDir: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isDir: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -207,8 +207,8 @@ describe('stats', function() {
 
     it('isBlockDevice', function(){
 
-        var statsProperties = extend({ _isBlockDevice: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isBlockDevice: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -218,8 +218,8 @@ describe('stats', function() {
 
     it('isCharacterDevice', function(){
 
-        var statsProperties = extend({ _isCharacterDevice: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isCharacterDevice: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -229,8 +229,8 @@ describe('stats', function() {
 
     it('isSymbolicLink', function(){
 
-        var statsProperties = extend({ _isSymbolicLink: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isSymbolicLink: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -240,8 +240,8 @@ describe('stats', function() {
 
     it('isFIFO', function(){
 
-        var statsProperties = extend({ _isFIFO: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isFIFO: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
@@ -251,8 +251,8 @@ describe('stats', function() {
 
     it('isSocket', function(){
 
-        var statsProperties = extend({ _isSocket: true }, statsDefault); 
-        
+        var statsProperties = extend({ _isSocket: true }, statsDefault);
+
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
