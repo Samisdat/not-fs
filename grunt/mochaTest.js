@@ -16,7 +16,7 @@ var mocha = {
             'test/unreal/file.js',
             'test/unreal/dir.js',
             'test/unreal/stats.js',
-            'test/unreal/virtual-filesystem.js'
+            'test/unreal/filesystem.js'
         ]
     },
     'single': {

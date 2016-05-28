@@ -1,5 +1,5 @@
 {
-  "name": "not-fs",
+  "name": "unreal-fs",
   "version": "0.0.1",
   "description": "virtual file system - not ready for productive usage",
   "main": "index.js",

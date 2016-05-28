@@ -3,8 +3,8 @@
 var expect = require('chai').expect;
 var extend = require('util')._extend;
 
-var File = require('../../lib/virtual-filesystem/file');
-var Stats = require('../../lib/virtual-filesystem/stats');
+var File = require('../../lib/unreal-filesystem/file');
+var Stats = require('../../lib/unreal-filesystem/stats');
 
 var statsDefault = {
   dev: 51,

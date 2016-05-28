@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var innodeNumber = require('../../lib/virtual-filesystem/inode-number')();
+var innodeNumber = require('../../lib/unreal-filesystem/inode-number')();
 
 describe('inode-number', function() {
 

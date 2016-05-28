@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var Root = require('../../lib/virtual-filesystem/root');
-var File = require('../../lib/virtual-filesystem/file');
+var Root = require('../../lib/unreal-filesystem/root');
+var File = require('../../lib/unreal-filesystem/file');
 
 describe('root', function() {
 
@@ -28,7 +28,7 @@ describe('root', function() {
     it('returns it\'s name', function() {
 
         var root = new Root('test');
-        expect(root.getName()).to.be.equal('vfs-root');
+        expect(root.getName()).to.be.equal('unreal-root');
 
     });
 

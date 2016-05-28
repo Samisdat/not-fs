@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var Permission = require('../../lib/virtual-filesystem/permission');
+var Permission = require('../../lib/unreal-filesystem/permission');
 
 describe('permission', function() {
 

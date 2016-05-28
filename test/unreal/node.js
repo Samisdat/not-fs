@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var Dir = require('../../lib/virtual-filesystem/dir');
-var Node = require('../../lib/virtual-filesystem/node');
+var Dir = require('../../lib/unreal-filesystem/dir');
+var Node = require('../../lib/unreal-filesystem/node');
 
 describe('node', function() {
 
