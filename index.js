@@ -1,4 +1,4 @@
-var Tree = require('./lib/virtual-filesystem/virtual-filesystem');
+var Tree = require('./lib/unreal-filesystem/filesystem');
 var tree = new Tree();
 
 var notFs = require('./lib/unreal');
