@@ -19,9 +19,9 @@ var mocha = {
             'test/unreal/filesystem.js'
         ]
     },
-    'single': {
+    'tree': {
         src: [
-            'test/unreal/permission.js'
+            'test/unreal/tree.js'
         ]
     },
     'unreal': {
