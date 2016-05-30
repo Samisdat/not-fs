@@ -15,9 +15,12 @@ describe('tree', function() {
 
         expect(tree).to.be.instanceof(Tree);        
 
+        tree.addDir('/foo/');
+
+        tree.log();
     });
 
-    it('has incrementing inodeNumber', function() {
+    it.skip('has incrementing inodeNumber', function() {
 
         var tree = new Tree();
 
