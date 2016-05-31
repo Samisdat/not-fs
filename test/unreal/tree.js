@@ -76,5 +76,22 @@ describe('tree', function() {
 
     });
 
+    it('can remove file', function() {
+
+        var tree = new Tree();
+
+        tree.addFile('/foo/bar.txt', 'foobar');
+        tree.addFile('/foo/baz.txt', 'foobar');
+
+        expect(tree.exists('/foo/bar.txt')).to.be.true;
+        expect(tree.exists('/foo/baz.txt')).to.be.true;
+
+        tree.removeFile('/foo/bar.txt');        
+
+        expect(tree.exists('/foo/bar.txt')).to.be.false;
+        expect(tree.exists('/foo/baz.txt')).to.be.true;
+
+    });
+
 });
 
