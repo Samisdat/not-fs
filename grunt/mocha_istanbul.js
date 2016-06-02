@@ -17,7 +17,12 @@ var mochaIstanbul = {
         src: [
             'test/unreal/tree.js'
         ]
-    }
+    },
+    node: {
+        src: [
+            'test/unreal/node.js'
+        ]
+    }    
 };
 
 module.exports = mochaIstanbul;

@@ -12,7 +12,7 @@ describe('node', function() {
 
     it('can be created', function() {
 
-        var node = new Node('test');
+        var node = new Node(1, 'test', 0);
 
         expect(node).to.be.instanceof(Node);
 
@@ -20,29 +20,56 @@ describe('node', function() {
 
     it('returns it\'s inodenumber', function() {
 
-        var node = new Node('test');
+        var node = new Node(1, 'test', 0);
 
-        expect(node.getInodeNumber()).to.be.not.undefined;
+        expect(node.getInodeNumber()).to.be.equal(1);
 
     });
 
-    it('get/set permission', function() {
+    it('get  parent', function() {
 
-        var node = new Node('test');
+        var node = new Node(1, 'test', 0);
 
-        expect(node.getPermission().getMode()).to.be.equal('0755');
+        expect(node.getParent()).to.be.equal(0);
 
-        var parent = new Dir('parent');
-        var node = new Node('test', parent, {mode: '0700'});
-        expect(node.getPermission().getMode()).to.be.equal('0700');
+    });
+
+    it('set  parent', function() {
+
+        var node = new Node(1, 'test', 0);
+
+        expect(node.getParent()).to.be.equal(0);
+
+        node.setParent(1);
+
+        expect(node.getParent()).to.be.equal(1);
 
     });
 
     it('returns it\'s name', function() {
 
-        var node = new Node('test');
+        var node = new Node(1, 'test', 0);
 
         expect(node.getName()).to.be.equal('test');
+
+    });
+
+    it('get/set permission', function() {
+
+        var node = new Node(1, 'test', 0);
+
+        expect(node.getPermission().getMode()).to.be.equal('0755');
+
+        node.setPermission('0777')
+        expect(node.getPermission().getMode()).to.be.equal('0777');
+
+    });
+
+    it('isRoot is false', function() {
+
+        var node = new Node(1, 'test', 0);
+
+        expect(node.isRoot()).to.be.false;
 
     });
 
@@ -59,32 +86,6 @@ describe('node', function() {
         var node = new Node('test');
 
         expect(node.isDir()).to.be.undefined;
-
-    });
-
-    it('returns undefined parent', function() {
-
-        var node = new Node('test');
-
-        expect(node.getParent()).to.be.undefined;
-
-    });
-
-    it('returns it\'s parent', function() {
-
-        var parent = new Dir('parent');
-
-        var node = new Node('test', parent);
-
-        expect(node.getParent()).to.deep.equal(parent);
-
-        var node = new Node('test');
-
-        expect(node.getParent()).to.be.undefined;
-
-        node.setParent(parent);
-
-        expect(node.getParent()).to.deep.equal(parent);
 
     });
 

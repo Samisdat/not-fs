@@ -24,6 +24,11 @@ var mocha = {
             'test/unreal/tree.js'
         ]
     },
+    'node': {
+        src: [
+            'test/unreal/node.js'
+        ]
+    },
     'unreal': {
         src: [
             'test/unreal/kitchensink.js'
