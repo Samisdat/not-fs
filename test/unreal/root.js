@@ -7,72 +7,51 @@ var File = require('../../lib/unreal-filesystem/file');
 
 describe('root', function() {
 
+    var root;
+
     beforeEach(function() {
+        root = new Root(0);
     });
 
     it('can be created', function() {
-
-        var root = new Root();
 
         expect(root).to.be.instanceof(Root);
 
     });
 
-    it('returns it\'s inodenumber', function() {
+    it('get it\'s inodenumber', function() {
 
-        var root = new Root();
-        expect(root.getInodeNumber()).to.be.not.undefined;
+        expect(root.getInodeNumber()).to.be.equal(0);
 
     });
 
     it('returns it\'s name', function() {
 
-        var root = new Root('test');
-        expect(root.getName()).to.be.equal('unreal-root');
+        expect(root.getName()).to.be.equal('/');
 
     });
 
     it('isRoot is true', function() {
 
-        var root = new Root();
+        expect(root.isRoot()).to.be.true;
+
+    });
+
+    it('isDir is true', function() {
 
         expect(root.isRoot()).to.be.true;
 
     });
 
-    it('fqn is false', function() {
+    it('isFile is false', function() {
 
-        var root = new Root();
-
-        expect(root.getFqn()).to.be.false;
+        expect(root.isFile()).to.be.false;
 
     });
 
     it('returns undefined parent', function() {
 
-        var root = new Root();
-
         expect(root.getParent()).to.be.undefined;
-
-    });
-
-    it('add a child', function() {
-
-        var child = new File('child');
-
-        var root = new Root();
-
-        expect(root.getChildren().length).to.be.equal(0);
-        expect(root.hasChild()).to.be.false;
-
-        root.addChild(child);
-
-        var children = root.getChildren();
-        expect(children).to.deep.equal([child]);
-
-        expect(children[0].getParent()).to.deep.equal(root);
-        expect(root.hasChild('child')).to.be.true;
-        expect(root.hasChild('other')).to.be.false;
 
     });
 

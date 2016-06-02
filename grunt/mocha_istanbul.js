@@ -22,6 +22,21 @@ var mochaIstanbul = {
         src: [
             'test/unreal/node.js'
         ]
+    },
+    dir: {
+        src: [
+            'test/unreal/dir.js'
+        ]
+    },    
+    file: {
+        src: [
+            'test/unreal/file.js'
+        ]
+    },    
+    root: {
+        src: [
+            'test/unreal/root.js'
+        ]
     }    
 };
 
