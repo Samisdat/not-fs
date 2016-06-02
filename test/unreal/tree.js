@@ -100,6 +100,21 @@ describe('tree', function() {
 
     });
 
+    it('is dir', function() {
+
+        var tree = new Tree();
+
+        tree.addDir('/foo', true);
+        tree.addFile('/foo/bar.txt', '');
+        
+        expect(tree.exists('/foo')).to.be.true;
+        expect(tree.exists('/foo/bar.txt')).to.be.true;
+        
+        expect(tree.isDir('/foo')).to.be.true;
+        expect(tree.isDir('/foo/bar.txt')).to.be.false;
+
+    });
+
     it('can add file', function() {
 
         var tree = new Tree();
@@ -128,6 +143,21 @@ describe('tree', function() {
         expect(tree.exists('/foo/baz.txt')).to.be.true;
 
     });
+
+    it('is dir', function() {
+
+        var tree = new Tree();
+
+        tree.addDir('/foo', true);
+        tree.addFile('/foo/bar.txt', '');
+        
+        expect(tree.exists('/foo')).to.be.true;
+        expect(tree.exists('/foo/bar.txt')).to.be.true;
+        
+        expect(tree.isFile('/foo')).to.be.false;
+        expect(tree.isFile('/foo/bar.txt')).to.be.true;
+
+    });    
 
 });
 
