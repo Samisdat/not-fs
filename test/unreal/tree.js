@@ -64,6 +64,42 @@ describe('tree', function() {
 
     });
 
+    it('can remove dir', function() {
+
+        var tree = new Tree();
+
+        tree.addDir('/foo/bar', true);
+        
+        expect(tree.exists('/foo/bar')).to.be.true;
+
+        tree.removeDir('/foo/bar');
+
+        expect(tree.exists('/foo/bar')).to.be.false;
+
+    });
+
+    it('can remove dir with its children', function() {
+
+        var tree = new Tree();
+
+        tree.addDir('/foo/bar', true);
+        tree.addDir('/foo/baz', true);
+        tree.addFile('/foo/bar.txt', '');
+        
+        expect(tree.exists('/foo')).to.be.true;
+        expect(tree.exists('/foo/bar')).to.be.true;
+        expect(tree.exists('/foo/baz')).to.be.true;
+        expect(tree.exists('/foo/bar.txt')).to.be.true;
+        
+        tree.removeDir('/foo');
+
+        expect(tree.exists('/foo')).to.be.false;
+        expect(tree.exists('/foo/bar')).to.be.false;
+        expect(tree.exists('/foo/baz')).to.be.false;
+        expect(tree.exists('/foo/bar.txt')).to.be.false;
+
+    });
+
     it('can add file', function() {
 
         var tree = new Tree();
