@@ -1,8 +1,8 @@
-var Tree = require('./lib/unreal-filesystem/filesystem');
+var Tree = require('./lib/unreal-filesystem/tree');
 var tree = new Tree();
 
-var notFs = require('./lib/unreal');
-notFs.setTree(tree);
+var unrealFs = require('./lib/unreal');
+unrealFs.setTree(tree);
 
-module.exports = notFs;
+module.exports = unrealFs;
 

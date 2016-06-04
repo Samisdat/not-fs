@@ -6,7 +6,7 @@ var Tree = require('../../lib/unreal-filesystem/filesystem');
 var File = require('../../lib/unreal-filesystem/file');
 var Dir = require('../../lib/unreal-filesystem/dir');
 
-describe('tree', function() {
+describe.skip('tree', function() {
 
     it('can be created', function() {
 
