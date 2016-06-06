@@ -84,6 +84,8 @@ describe('tree', function() {
 
         expect(tree.tree).to.be.deep.equal({0:[]});
         expect(tree.parent).to.be.deep.equal({});
+        //@TODO test for leafs
+
         tree.addDir('/foo/bar', true);
         tree.addDir('/foo/deeper/bar', true);
         tree.addFile('/foo/bar.txt', '');
@@ -109,6 +111,8 @@ describe('tree', function() {
 
         expect(tree.tree).to.be.deep.equal({0:[]});
         expect(tree.parent).to.be.deep.equal({});
+
+
     });
 
     it('is dir', function() {
@@ -155,7 +159,7 @@ describe('tree', function() {
 
     });
 
-    it('is dir', function() {
+    it('is file', function() {
 
         var tree = new Tree();
 
