@@ -2,7 +2,6 @@
 
 var expect = require('chai').expect;
 
-var Dir = require('../../lib/unreal-filesystem/dir');
 var Node = require('../../lib/unreal-filesystem/node');
 
 describe('node', function() {
@@ -51,7 +50,7 @@ describe('node', function() {
 
         expect(node.getPermission().getMode()).to.be.equal('0755');
 
-        node.setPermission('0777')
+        node.setPermission('0777');
         expect(node.getPermission().getMode()).to.be.equal('0777');
 
     });

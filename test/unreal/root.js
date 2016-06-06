@@ -3,7 +3,6 @@
 var expect = require('chai').expect;
 
 var Root = require('../../lib/unreal-filesystem/root');
-var File = require('../../lib/unreal-filesystem/file');
 
 describe('root', function() {
 

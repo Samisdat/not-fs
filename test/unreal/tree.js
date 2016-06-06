@@ -29,7 +29,7 @@ describe('tree', function() {
 
         //@TODO relative path
         expect(function(){
-            tree.resolveDir('./relative')
+            tree.resolveDir('./relative');
         }).to.throw('Only absolute path supported');
 
     });
@@ -43,7 +43,7 @@ describe('tree', function() {
         tree.addDir('/foo', true);
 
         expect(tree.getLastInodeNumber()).to.be.equal(1);
-        
+
         tree.addDir('/foo/bar', true);
 
         expect(tree.getLastInodeNumber()).to.be.equal(2);
@@ -58,7 +58,7 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar')).to.be.false;
 
         tree.addDir('/foo/bar', true);
-        
+
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar')).to.be.true;
 
@@ -69,7 +69,7 @@ describe('tree', function() {
         var tree = new Tree();
 
         tree.addDir('/foo/bar', true);
-        
+
         expect(tree.exists('/foo/bar')).to.be.true;
 
         tree.removeDir('/foo/bar');
@@ -82,7 +82,7 @@ describe('tree', function() {
 
         var tree = new Tree();
 
-        expect(tree.tree).to.be.deep.equal({0:[]});
+        expect(tree.tree).to.be.deep.equal({0: []});
         expect(tree.parent).to.be.deep.equal({});
         //@TODO test for leafs
 
@@ -90,7 +90,7 @@ describe('tree', function() {
         tree.addDir('/foo/deeper/bar', true);
         tree.addFile('/foo/bar.txt', '');
         tree.addFile('/foo/deeper/bar.txt', '');
-        
+
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar')).to.be.true;
         expect(tree.exists('/foo/deeper/bar')).to.be.true;
@@ -109,7 +109,7 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar.txt')).to.be.false;
         expect(tree.exists('/foo/deeper/bar.txt')).to.be.false;
 
-        expect(tree.tree).to.be.deep.equal({0:[]});
+        expect(tree.tree).to.be.deep.equal({0: []});
         expect(tree.parent).to.be.deep.equal({});
 
 
@@ -121,10 +121,10 @@ describe('tree', function() {
 
         tree.addDir('/foo', true);
         tree.addFile('/foo/bar.txt', '');
-        
+
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar.txt')).to.be.true;
-        
+
         expect(tree.isDir('/foo')).to.be.true;
         expect(tree.isDir('/foo/bar.txt')).to.be.false;
 
@@ -152,7 +152,7 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar.txt')).to.be.true;
         expect(tree.exists('/foo/baz.txt')).to.be.true;
 
-        tree.removeFile('/foo/bar.txt');        
+        tree.removeFile('/foo/bar.txt');
 
         expect(tree.exists('/foo/bar.txt')).to.be.false;
         expect(tree.exists('/foo/baz.txt')).to.be.true;
@@ -165,14 +165,14 @@ describe('tree', function() {
 
         tree.addDir('/foo', true);
         tree.addFile('/foo/bar.txt', '');
-        
+
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar.txt')).to.be.true;
-        
+
         expect(tree.isFile('/foo')).to.be.false;
         expect(tree.isFile('/foo/bar.txt')).to.be.true;
 
-    });    
+    });
 
 });
 

@@ -2,7 +2,6 @@
 
 var expect = require('chai').expect;
 
-var Root = require('../../lib/unreal-filesystem/root');
 var Dir = require('../../lib/unreal-filesystem/dir');
 
 describe('dir', function() {
@@ -41,7 +40,7 @@ describe('dir', function() {
 
         expect(dir.getPermission().getMode()).to.be.equal('0755');
 
-        dir.setPermission('0777')
+        dir.setPermission('0777');
         expect(dir.getPermission().getMode()).to.be.equal('0777');
 
     });
