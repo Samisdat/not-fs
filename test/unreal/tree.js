@@ -82,22 +82,33 @@ describe('tree', function() {
 
         var tree = new Tree();
 
+        expect(tree.tree).to.be.deep.equal({0:[]});
+        expect(tree.parent).to.be.deep.equal({});
         tree.addDir('/foo/bar', true);
-        tree.addDir('/foo/baz', true);
+        tree.addDir('/foo/deeper/bar', true);
         tree.addFile('/foo/bar.txt', '');
+        tree.addFile('/foo/deeper/bar.txt', '');
         
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar')).to.be.true;
-        expect(tree.exists('/foo/baz')).to.be.true;
+        expect(tree.exists('/foo/deeper/bar')).to.be.true;
         expect(tree.exists('/foo/bar.txt')).to.be.true;
-        
+        expect(tree.exists('/foo/deeper/bar.txt')).to.be.true;
+
+        expect(tree.tree).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
+        expect(tree.parent).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
+
         tree.removeDir('/foo');
 
         expect(tree.exists('/foo')).to.be.false;
         expect(tree.exists('/foo/bar')).to.be.false;
         expect(tree.exists('/foo/baz')).to.be.false;
+        expect(tree.exists('/foo/deeper/bar')).to.be.false;
         expect(tree.exists('/foo/bar.txt')).to.be.false;
+        expect(tree.exists('/foo/deeper/bar.txt')).to.be.false;
 
+        expect(tree.tree).to.be.deep.equal({0:[]});
+        expect(tree.parent).to.be.deep.equal({});
     });
 
     it('is dir', function() {
