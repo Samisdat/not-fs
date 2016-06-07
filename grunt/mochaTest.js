@@ -9,43 +9,43 @@ var mocha = {
     },
     'back': {
         src: [
-            'test/unreal/permission.js',
-            'test/unreal/node.js',
-            'test/unreal/root.js',
-            'test/unreal/file.js',
-            'test/unreal/dir.js',
-            'test/unreal/stats.js',
-            'test/unreal/tree.js'
+            'test/lib/permission.js',
+            'test/lib/node.js',
+            'test/lib/root.js',
+            'test/lib/file.js',
+            'test/lib/dir.js',
+            'test/lib/stats.js',
+            'test/lib/tree.js'
         ]
     },
     'tree': {
         src: [
-            'test/unreal/tree.js'
+            'test/lib/tree.js'
         ]
     },
     'node': {
         src: [
-            'test/unreal/node.js'
+            'test/lib/node.js'
         ]
     },
     'dir': {
         src: [
-            'test/unreal/dir.js'
+            'test/lib/dir.js'
         ]
     },
     'file': {
         src: [
-            'test/unreal/file.js'
+            'test/lib/file.js'
         ]
     },
     'root': {
         src: [
-            'test/unreal/root.js'
+            'test/lib/root.js'
         ]
     },
-    'unreal': {
+    'lib': {
         src: [
-            'test/unreal/kitchensink.js'
+            'test/lib/kitchensink.js'
         ]
     },
     'real': {
