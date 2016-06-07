@@ -65,6 +65,10 @@ describe('file', function() {
 
         expect(file.getContent()).to.be.equal('foobar');
 
+        file.setContent();
+
+        expect(file.getContent()).to.be.equal('');
+
     });
 
 });

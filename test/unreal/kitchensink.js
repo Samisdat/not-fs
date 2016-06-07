@@ -312,7 +312,7 @@ describe('unrealFs kitchen sink', function() {
 
     describe('method fs.renameSync', function() {
 
-        it('succeed on file', function() {
+        it('succeed on renaming file within same dir', function() {
             var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
             expect(orginalExist).to.be.true;
 
@@ -325,6 +325,23 @@ describe('unrealFs kitchen sink', function() {
             expect(orginalExist).to.be.false;
 
             var renameExist = fs.existsSync('/tmp/unreal-test/message-renamed.txt');
+            expect(renameExist).to.be.true;
+
+        });
+
+        it('succeed on renaming file within same dir', function() {
+            var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
+            expect(orginalExist).to.be.true;
+
+            var renameExist = fs.existsSync('/tmp/some-other-dir/message-renamed.txt');
+            expect(renameExist).to.be.false;
+
+            fs.renameSync('/tmp/unreal-test/message.txt', '/tmp/some-other-dir/message-renamed.txt');
+
+            var orginalExist = fs.existsSync('/tmp/unreal-test/message.txt');
+            expect(orginalExist).to.be.false;
+
+            var renameExist = fs.existsSync('/tmp/some-other-dir/message-renamed.txt');
             expect(renameExist).to.be.true;
 
         });
