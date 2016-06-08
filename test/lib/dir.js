@@ -9,7 +9,7 @@ describe('dir', function() {
     var dir;
 
     beforeEach(function() {
-        dir = new Dir(1, 'test', 0);
+        dir = new Dir(1, 'test');
     });
 
     it('can be created', function() {
@@ -24,15 +24,12 @@ describe('dir', function() {
 
     });
 
-    it('get it\'s name', function() {
+    it('get/set it\'s name', function() {
 
         expect(dir.getName()).to.be.equal('test');
 
-    });
-
-    it('get it\'s parent', function() {
-
-        expect(dir.getParent()).to.be.equal(0);
+        dir.setName('foobar');
+        expect(dir.getName()).to.be.equal('foobar');
 
     });
 

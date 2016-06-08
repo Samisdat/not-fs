@@ -9,7 +9,7 @@ describe('file', function() {
     var file;
 
     beforeEach(function() {
-        file = new File(1, 'test', 0);
+        file = new File(1, 'test');
     });
 
     it('can be created', function() {
@@ -33,9 +33,12 @@ describe('file', function() {
 
     });
 
-    it('get it\'s name', function() {
+    it('get/set it\'s name', function() {
 
         expect(file.getName()).to.be.equal('test');
+
+        file.setName('foobar');
+        expect(file.getName()).to.be.equal('foobar');
 
     });
 

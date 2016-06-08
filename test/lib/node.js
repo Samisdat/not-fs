@@ -9,7 +9,7 @@ describe('node', function() {
     var node;
 
     beforeEach(function() {
-        node = new Node(1, 'test', 0);
+        node = new Node(1, 'test');
     });
 
     it('is instanceof Node', function() {
@@ -24,25 +24,12 @@ describe('node', function() {
 
     });
 
-    it('get parent', function() {
-
-        expect(node.getParent()).to.be.equal(0);
-
-    });
-
-    it('set parent', function() {
-
-        expect(node.getParent()).to.be.equal(0);
-
-        node.setParent(1);
-
-        expect(node.getParent()).to.be.equal(1);
-
-    });
-
     it('get it\'s name', function() {
 
         expect(node.getName()).to.be.equal('test');
+
+        node.setName('foobar');
+        expect(node.getName()).to.be.equal('foobar');
 
     });
 

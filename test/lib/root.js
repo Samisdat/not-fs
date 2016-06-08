@@ -24,8 +24,11 @@ describe('root', function() {
 
     });
 
-    it('returns it\'s name', function() {
+    it('get/set it\'s name', function() {
 
+        expect(root.getName()).to.be.equal('/');
+
+        root.setName('foobar');
         expect(root.getName()).to.be.equal('/');
 
     });
@@ -45,12 +48,6 @@ describe('root', function() {
     it('isFile is false', function() {
 
         expect(root.isFile()).to.be.false;
-
-    });
-
-    it('returns undefined parent', function() {
-
-        expect(root.getParent()).to.be.undefined;
 
     });
 
