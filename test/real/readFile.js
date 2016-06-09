@@ -44,5 +44,30 @@ describe('fs.readFileSync & fs.readFile', function() {
 
     });
 
+    describe('async', function() {
+
+        it('fail reading an non existing file', function(done) {
+
+            var exist = fs.readFile('/tmp/unreal-fs/not-a-message.txt', {encoding: 'utf8'}, function(err, data){
+                console.log(err.message)
+                expect(err).to.match(/^Error: ENOENT: no such file or directory/);
+                expect(data).to.be.undefined;
+                done();
+            });
+
+        });
+
+        it('succeed reading an existing file with encoding', function(done) {
+
+            var exist = fs.readFile('/tmp/unreal-fs/message.txt', {encoding: 'utf8'}, function(err, data){
+                expect(err).to.be.null;
+                expect(data).to.be.equal('Hello Node.js');
+                done();
+            });
+
+        });
+
+    });
+
 });
 
