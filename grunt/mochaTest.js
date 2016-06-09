@@ -43,16 +43,29 @@ var mocha = {
             'test/lib/root.js'
         ]
     },
-    'lib': {
+    'fs': {
         src: [
-            'test/lib/kitchensink.js'
+            'test/real/exists.js',
+            'test/real/mkdir.js',
+            'test/real/readdir.js',
+            'test/real/readFile.js',
+            'test/real/rename.js',
+            'test/real/stat.js',
+            'test/real/writeFile.js'
         ]
     },
-    'real': {
+    'unreal-fs': {
         src: [
-            'test/real/kitchensink.js'
+            'test/real/exists.js',
+            'test/real/mkdir.js',
+            'test/real/readdir.js',
+            'test/real/readFile.js',
+            'test/real/rename.js',
+            'test/real/stat.js',
+            'test/real/writeFile.js'
         ]
     }
+
 };
 
 module.exports = mocha;

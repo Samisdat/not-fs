@@ -9,7 +9,15 @@ var mochaIstanbul = {
             'test/lib/node.js',
             'test/lib/permission.js',
             'test/lib/root.js',
-            'test/lib/stats.js'
+            'test/lib/stats.js',
+
+            'test/real/exists.js',
+            'test/real/mkdir.js',
+            'test/real/readdir.js',
+            'test/real/readFile.js',
+            'test/real/rename.js',
+            'test/real/stat.js',
+            'test/real/writeFile.js'
         ]
     },
     tree: {
