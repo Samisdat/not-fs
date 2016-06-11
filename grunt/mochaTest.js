@@ -9,6 +9,7 @@ var mocha = {
     },
     'back': {
         src: [
+            'test/lib/options.js',
             'test/lib/permission.js',
             'test/lib/node.js',
             'test/lib/root.js',
@@ -41,6 +42,11 @@ var mocha = {
     'root': {
         src: [
             'test/lib/root.js'
+        ]
+    },
+    'opt': {
+        src: [
+            'test/lib/options.js'
         ]
     },
     'fs': {

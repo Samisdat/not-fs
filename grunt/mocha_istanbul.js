@@ -3,6 +3,7 @@
 var mochaIstanbul = {
     coverage: {
         src: [
+            'test/lib/options.js',
             'test/lib/dir.js',
             'test/lib/file.js',
             'test/lib/tree.js',
