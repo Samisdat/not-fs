@@ -54,9 +54,39 @@ describe('node', function() {
 
     });
 
-    it('isDir is undefined', function() {
+    it('isDirectory is undefined', function() {
 
-        expect(node.isDir()).to.be.undefined;
+        expect(node.isDirectory()).to.be.undefined;
+
+    });
+
+    it('isBlockDevice is false', function() {
+
+        expect(node.isBlockDevice()).to.be.false;
+
+    });
+
+    it('isCharacterDevice is false', function() {
+
+        expect(node.isCharacterDevice()).to.be.false;
+
+    });
+
+    it('isSymbolicLink is false', function() {
+
+        expect(node.isSymbolicLink()).to.be.false;
+
+    });
+
+    it('isFIFO is false', function() {
+
+        expect(node.isFIFO()).to.be.false;
+
+    });
+
+    it('isSocket is false', function() {
+
+        expect(node.isSocket()).to.be.false;
 
     });
 
