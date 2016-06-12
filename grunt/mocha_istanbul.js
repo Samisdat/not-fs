@@ -18,7 +18,10 @@ var mochaIstanbul = {
             'test/real/readFile.js',
             'test/real/rename.js',
             'test/real/stat.js',
-            'test/real/writeFile.js'
+            'test/real/writeFile.js',
+
+            'test/lib/stats-crock.js'
+            
         ]
     },
     tree: {

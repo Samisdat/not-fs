@@ -49,6 +49,11 @@ var mocha = {
             'test/lib/options.js'
         ]
     },
+    'statsCrock': {
+        src: [
+            'test/lib/stats-crock.js'
+        ]
+    },
     'fs': {
         src: [
             'test/real/exists.js',
@@ -69,6 +74,11 @@ var mocha = {
             'test/real/rename.js',
             'test/real/stat.js',
             'test/real/writeFile.js'
+        ]
+    },
+    'dev': {
+        src: [
+            'test/real/readFile.js'            
         ]
     }
 
