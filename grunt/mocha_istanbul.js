@@ -4,13 +4,13 @@ var mochaIstanbul = {
     coverage: {
         src: [
             'test/lib/options.js',
+            'test/lib/stats.js',
             'test/lib/dir.js',
             'test/lib/file.js',
             'test/lib/tree.js',
             'test/lib/node.js',
             'test/lib/permission.js',
             'test/lib/root.js',
-            'test/lib/stats.js',
 
             'test/real/exists.js',
             'test/real/mkdir.js',
@@ -19,8 +19,6 @@ var mochaIstanbul = {
             'test/real/rename.js',
             'test/real/stat.js',
             'test/real/writeFile.js',
-
-            'test/lib/stats-crock.js'
             
         ]
     },
@@ -51,7 +49,7 @@ var mochaIstanbul = {
     },
     stats: {
         src: [
-            'test/lib/stats-crock.js'
+            'test/lib/stats.js'
         ]
     }
 };

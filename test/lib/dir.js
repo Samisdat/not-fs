@@ -54,9 +54,9 @@ describe('dir', function() {
 
     });
 
-    it('isDir is true', function() {
+    it('isDirectory is true', function() {
 
-        expect(dir.isDir()).to.be.true;
+        expect(dir.isDirectory()).to.be.true;
 
     });
 

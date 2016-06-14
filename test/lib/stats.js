@@ -1,262 +1,265 @@
 'use strict';
 
 var expect = require('chai').expect;
-var extend = require('util')._extend;
+var util = require('util');
 
+var Dir = require('../../lib/unreal-filesystem/dir');
 var File = require('../../lib/unreal-filesystem/file');
-var Stats = require('../../lib/unreal-filesystem/stats');
 
-var statsDefault = {
-    dev: 51,
-    uid: process.getuid(),
-    gid: process.getgid(),
-    rdev: 0,
-    blksize: 4096
-};
+var statsGenerator = require('../../lib/unreal-filesystem/stats');
+
+var options = require('../../lib/unreal-filesystem/options');
 
 describe('stats', function() {
-    var file = new File('test');
 
-    beforeEach(function() {
+    var dir;
+    var file;
+    
+    beforeEach(function(){
+        dir = new Dir(1, 'test');
+        file = new File(2, 'test');
     });
 
     it('can be created', function() {
 
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = file.getStats();;
+
+        expect(stats).to.have.property('dev');
+        expect(stats).to.have.property('mode');
+        expect(stats).to.have.property('nlink');
+        expect(stats).to.have.property('uid');
+        expect(stats).to.have.property('gid');
+        expect(stats).to.have.property('rdev');
+        expect(stats).to.have.property('blksize');
+        expect(stats).to.have.property('ino');
+        expect(stats).to.have.property('size');
+        expect(stats).to.have.property('blocks');
+        expect(stats).to.have.property('atime');
+        expect(stats).to.have.property('mtime');
+        expect(stats).to.have.property('ctime');
+        expect(stats).to.have.property('birthtime');
+
+        expect(stats.isDirectory).to.be.instanceof(Function);
+        expect(stats.isFile).to.be.instanceof(Function);
+        expect(stats.isBlockDevice).to.be.instanceof(Function);
+        expect(stats.isCharacterDevice).to.be.instanceof(Function);
+        expect(stats.isSymbolicLink).to.be.instanceof(Function);
+        expect(stats.isFIFO).to.be.instanceof(Function);
+        expect(stats.isSocket).to.be.instanceof(Function);
 
     });
 
     it('dev', function(){
 
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = file.getStats();;
 
-        expect(statsDefault.dev).to.be.not.undefined;
-        expect(stats.dev).to.be.equal(statsDefault.dev);
+        expect(stats.dev).to.be.equal(options.getStatsDev());
+
+        expect(stats.dev).to.be.not.equal(1);
+        stats.dev = 1;
+        expect(stats.dev).to.be.equal(1);
 
     });
 
     it('rdev', function(){
 
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = file.getStats();;
 
-        expect(statsDefault.rdev).to.be.not.undefined;
-        expect(stats.rdev).to.be.equal(statsDefault.rdev);
+        expect(stats.rdev).to.be.equal(options.getStatsRdev());
+
+        expect(stats.rdev).to.be.not.equal(1);
+        stats.rdev = 1;
+        expect(stats.rdev).to.be.equal(1);
+
     });
 
-    it('mode', function(){
+    it.skip('mode', function(){
 
-        var statsProperties = extend({ mode: '0755' }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.mode).to.be.equal('0644');
+        //should pass permission & file
 
     });
 
     it('nlink', function(){
 
-        var statsProperties = extend({ nlink: 1 }, statsDefault);
+        var stats = file.getStats();;
 
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
+        expect(stats.nlink).to.be.equal(1);
 
-        expect(statsProperties.nlink).to.be.not.undefined;
-        expect(stats.nlink).to.be.equal(statsProperties.nlink);
-
-
-    });
-
-    it('uid', function(){
-
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(statsDefault.uid).to.be.not.undefined;
-        expect(stats.uid).to.be.equal(statsDefault.uid);
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.nlink = 2;
+        expect(stats.nlink).to.be.equal(2);
+        
 
     });
 
     it('uid', function(){
 
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = file.getStats();;
 
-        expect(statsDefault.uid).to.be.not.undefined;
-        expect(stats.uid).to.be.equal(statsDefault.uid);
+        expect(stats.uid).to.be.equal(options.getUser());
+
+        expect(stats.uid).to.be.not.equal(1);
+        stats.uid = 1;
+        expect(stats.uid).to.be.equal(1);
+
+    });
+
+    it('gid', function(){
+
+        var stats = file.getStats();;
+
+        expect(stats.gid).to.be.equal(options.getGroup());
+
+        expect(stats.gid).to.be.not.equal(1);
+        stats.gid = 1;
+        expect(stats.gid).to.be.equal(1);
 
     });
 
     it('blksize', function(){
 
-        var stats = new Stats(file, statsDefault);
-        expect(stats).to.be.instanceof(Stats);
+        var stats = file.getStats();;
 
-        expect(statsDefault.blksize).to.be.not.undefined;
-        expect(stats.blksize).to.be.equal(statsDefault.blksize);
+        expect(stats.blksize).to.be.equal(options.getStatsBlksize());
+
+        expect(stats.blksize).to.be.not.equal(2048);
+        stats.blksize = 2048;
+        expect(stats.blksize).to.be.equal(2048);
 
     });
 
     it('ino', function(){
 
-        var stats = new Stats(file);
-        expect(stats.ino).to.be.equal(file.getInodeNumber());
+        expect(file.getStats().ino).to.be.equal(2);
 
-        file = new File('test');
-
-        var stats = new Stats(file);
-        expect(stats.ino).to.be.equal(file.getInodeNumber());
+        expect(function(){
+            file.getStats().ino = 3;
+        }).to.throw();
 
     });
 
-    it('size', function(){
+    it.skip('size', function(){
 
-        var statsProperties = extend({ size: 1234 }, statsDefault);
+        var stats = file.getStats();;
+
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
+
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
+
+    });
+
+    it.skip('blocks', function(){
+
+        var stats = file.getStats();;
+
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
+
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
+
+    });
+
+    it.skip('atime', function(){
+
+        var stats = file.getStats();;
+
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
+
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
+
+    });
+
+    it.skip('mtime', function(){
+        expect(stats).to.be.instanceof(Stats);
 
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
-        expect(statsProperties.size).to.be.not.undefined;
-        expect(stats.size).to.be.equal(statsProperties.size);
+        var stats = file.getStats();;
+
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
+
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
 
     });
 
-    it('blocks', function(){
+    it.skip('ctime', function(){
 
-        var statsProperties = extend({ blocks: 1234 }, statsDefault);
+        var stats = file.getStats();;
 
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
-        expect(statsProperties.blocks).to.be.not.undefined;
-        expect(stats.blocks).to.be.equal(statsProperties.blocks);
-
-    });
-
-    it('atime', function(){
-
-        var statsProperties = extend({ atime: new Date() }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(statsProperties.atime).to.be.not.undefined;
-        expect(stats.atime).to.be.equal(statsProperties.atime);
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
 
     });
 
-    it('mtime', function(){
+    it.skip('birthtime', function(){
 
-        var statsProperties = extend({ mtime: new Date() }, statsDefault);
+        var stats = file.getStats();;
 
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
+        expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
-        expect(statsProperties.mtime).to.be.not.undefined;
-        expect(stats.mtime).to.be.equal(statsProperties.mtime);
-
-    });
-    it('ctime', function(){
-
-        var statsProperties = extend({ ctime: new Date() }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(statsProperties.ctime).to.be.not.undefined;
-        expect(stats.ctime).to.be.equal(statsProperties.ctime);
+        expect(stats.nlink).to.be.not.equal(2);
+        stats.rdev = 2;
+        expect(stats.rdev).to.be.equal(2);
 
     });
 
-    it('birthtime', function(){
+    it('isFile', function() {
 
-        var statsProperties = extend({ birthtime: new Date() }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(statsProperties.birthtime).to.be.not.undefined;
-        expect(stats.birthtime).to.be.equal(statsProperties.birthtime);
+        expect(file.getStats().isFile()).to.be.true;
+        expect(dir.getStats().isFile()).to.be.false;
 
     });
 
-    it('correct flags for file', function() {
+    it('isDirectory', function() {
 
-        var statsProperties = extend({ _isFile: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isFile()).to.be.true;
-
-    });
-
-    it('correct flags for dir', function() {
-
-        var statsProperties = extend({ _isDir: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isDirectory()).to.be.true;
+        expect(file.getStats().isDirectory()).to.be.false;
+        expect(dir.getStats().isDirectory()).to.be.true;
 
     });
 
     it('isBlockDevice', function(){
 
-        var statsProperties = extend({ _isBlockDevice: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isBlockDevice()).to.be.true;
+        expect(file.getStats().isBlockDevice()).to.be.false;
+        expect(dir.getStats().isBlockDevice()).to.be.false;
 
     });
 
     it('isCharacterDevice', function(){
 
-        var statsProperties = extend({ _isCharacterDevice: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isCharacterDevice()).to.be.true;
+        expect(file.getStats().isCharacterDevice()).to.be.false;
+        expect(dir.getStats().isCharacterDevice()).to.be.false;
 
     });
 
     it('isSymbolicLink', function(){
 
-        var statsProperties = extend({ _isSymbolicLink: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isSymbolicLink()).to.be.true;
+        expect(file.getStats().isSymbolicLink()).to.be.false;
+        expect(dir.getStats().isSymbolicLink()).to.be.false;
 
     });
 
     it('isFIFO', function(){
 
-        var statsProperties = extend({ _isFIFO: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isFIFO()).to.be.true;
+        expect(file.getStats().isFIFO()).to.be.false;
+        expect(dir.getStats().isFIFO()).to.be.false;
 
     });
 
     it('isSocket', function(){
 
-        var statsProperties = extend({ _isSocket: true }, statsDefault);
-
-        var stats = new Stats(file, statsProperties);
-        expect(stats).to.be.instanceof(Stats);
-
-        expect(stats.isSocket()).to.be.true;
+        expect(file.getStats().isSocket()).to.be.false;
+        expect(dir.getStats().isSocket()).to.be.false;
 
     });
 

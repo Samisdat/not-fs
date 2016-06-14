@@ -160,8 +160,8 @@ describe('tree', function() {
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar.txt')).to.be.true;
 
-        expect(tree.isDir('/foo')).to.be.true;
-        expect(tree.isDir('/foo/bar.txt')).to.be.false;
+        expect(tree.isDirectory('/foo')).to.be.true;
+        expect(tree.isDirectory('/foo/bar.txt')).to.be.false;
 
     });
 

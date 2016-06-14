@@ -7,6 +7,10 @@ var options = require('../../lib/unreal-filesystem/options');
 
 describe('options', function() {
 
+    after(function(){
+        options.setDefaults()
+    });
+
     it('has all getter and setter', function() {
 
         expect(options.getUser).to.be.instanceof(Function);

@@ -49,9 +49,9 @@ var mocha = {
             'test/lib/options.js'
         ]
     },
-    'statsCrock': {
+    'stats': {
         src: [
-            'test/lib/stats-crock.js'
+            'test/lib/stats.js'
         ]
     },
     'fs': {
