@@ -48,6 +48,11 @@ var mochaIstanbul = {
         src: [
             'test/lib/root.js'
         ]
+    },
+    stats: {
+        src: [
+            'test/lib/stats-crock.js'
+        ]
     }
 };
 
