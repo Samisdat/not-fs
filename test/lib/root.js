@@ -41,7 +41,7 @@ describe('root', function() {
 
     it('isDir is true', function() {
 
-        expect(root.isRoot()).to.be.true;
+        expect(root.isDirectory()).to.be.true;
 
     });
 
