@@ -22,7 +22,7 @@ describe('stats', function() {
 
     it('can be created', function() {
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats).to.have.property('dev');
         expect(stats).to.have.property('mode');
@@ -51,7 +51,7 @@ describe('stats', function() {
 
     it('dev', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.dev).to.be.equal(options.getStatsDev());
 
@@ -63,7 +63,7 @@ describe('stats', function() {
 
     it('rdev', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.rdev).to.be.equal(options.getStatsRdev());
 
@@ -73,15 +73,20 @@ describe('stats', function() {
 
     });
 
-    it.skip('mode', function(){
+    it('mode', function(){
 
-        //should pass permission & file
+        var stats = file.getStats();
+
+        expect(stats.mode).to.be.equal('0644');
+
+        file.setPermission('0755');
+        expect(stats.mode).to.be.equal('0755');
 
     });
 
     it('nlink', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(1);
 
@@ -94,7 +99,7 @@ describe('stats', function() {
 
     it('uid', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.uid).to.be.equal(options.getUser());
 
@@ -106,7 +111,7 @@ describe('stats', function() {
 
     it('gid', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.gid).to.be.equal(options.getGroup());
 
@@ -118,7 +123,7 @@ describe('stats', function() {
 
     it('blksize', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.blksize).to.be.equal(options.getStatsBlksize());
 
@@ -140,7 +145,7 @@ describe('stats', function() {
 
     it.skip('size', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
@@ -152,7 +157,7 @@ describe('stats', function() {
 
     it.skip('blocks', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
@@ -164,7 +169,7 @@ describe('stats', function() {
 
     it.skip('atime', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
@@ -180,7 +185,7 @@ describe('stats', function() {
         var stats = new Stats(file, statsProperties);
         expect(stats).to.be.instanceof(Stats);
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
@@ -192,7 +197,7 @@ describe('stats', function() {
 
     it.skip('ctime', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
@@ -204,7 +209,7 @@ describe('stats', function() {
 
     it.skip('birthtime', function(){
 
-        var stats = file.getStats();;
+        var stats = file.getStats();
 
         expect(stats.nlink).to.be.equal(options.getStatsNlink());
 
