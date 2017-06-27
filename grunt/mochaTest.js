@@ -80,8 +80,12 @@ var mocha = {
         src: [
             'test/real/readFile.js'            
         ]
-    }
-
+    },
+    'typescript': {
+        src: [
+            'typescript/dist/**/*.test.js'            
+        ]
+    }    
 };
 
 module.exports = mocha;

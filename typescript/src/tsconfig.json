@@ -1,0 +1,18 @@
+{
+    "compilerOptions":{
+        "rootDir": "./typescript/src/",
+        "outDir": "./typescript/dist/",
+        "module": "commonjs",
+        "target": "es6",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "removeComments": true
+    },
+    "include": [
+        "typescript/src"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}

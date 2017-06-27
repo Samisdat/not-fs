@@ -13,6 +13,8 @@
     "url": "git://github.com/samisdat/unreal-fs.git"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",    
     "caller-id": "^0.1.0",
     "chai": "^3.5.0",
     "grunt": "^0.4.5",
