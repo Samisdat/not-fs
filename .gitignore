@@ -3,3 +3,5 @@ node_modules/
 coverage
 results.txt
 .DS_Store
+typescript/dist/
+.tscache/
