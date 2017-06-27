@@ -8,6 +8,10 @@
   },
   "author": "samisdat",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/samisdat/unreal-fs.git"
+  },
   "devDependencies": {
     "caller-id": "^0.1.0",
     "chai": "^3.5.0",
