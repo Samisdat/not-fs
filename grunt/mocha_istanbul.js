@@ -51,6 +51,14 @@ var mochaIstanbul = {
         src: [
             'test/lib/stats.js'
         ]
+    },
+    typescript: {
+        options: {
+            excludes: ['**/*.test.js']
+        },        
+        src: [
+            'typescript/dist/**/*.test.js'
+        ]
     }
 };
 
