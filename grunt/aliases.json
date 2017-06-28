@@ -26,6 +26,13 @@
       "mocha_istanbul:coverage"
     ]
   },
+  "test-ts": {
+    "description": "run typescript tests",
+    "tasks": [
+      "ts:dist",
+      "mochaTest:typescript"
+    ]
+  },  
   "coverage-ts": {
     "description": "run tests and generate coverage report",
     "tasks": [
