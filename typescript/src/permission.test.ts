@@ -68,7 +68,6 @@ describe('permission', function() {
 
     });
 
-    /*
     it('set/get', function() {
 
         var permission = new Permission();
@@ -77,24 +76,10 @@ describe('permission', function() {
         permission.setMode('755');
         expect(permission.getMode()).to.be.equal('0755');
 
-        expect(permission._validate('a')).to.be.false;
-        try {
-            permission = new Permission('a');
-        }
-        catch (e){
-            expect(e.message).to.be.equal('a is not a valid permission');
-        }
+        expect(function () { 
+            permission.setMode('a');
+        }).to.throw('a is not a valid permission');
 
-    });
-
-    it('getPart', function() {
-
-        var permission = new Permission('0764');
-        expect(permission.getMode()).to.be.equal('0764');
-
-        expect(permission._getPart(true, false)).to.be.equal('7');
-        expect(permission._getPart(false, true)).to.be.equal('6');
-        expect(permission._getPart(false, false)).to.be.equal('4');
 
     });
 
@@ -340,8 +325,6 @@ describe('permission', function() {
         expect(permission.isExecutable(false, false)).to.be.false;
 
     });
-
-    */
 
 });
 
