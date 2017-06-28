@@ -1,7 +1,7 @@
 {
     "compilerOptions":{
-        "rootDir": "./typescript/src/",
-        "outDir": "./typescript/dist/",
+        "rootDir": "typescript/src/",
+        "outDir": "../dist/",
         "module": "commonjs",
         "target": "es6",
         "noImplicitAny": true,
