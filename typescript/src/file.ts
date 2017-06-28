@@ -44,10 +44,6 @@ export default class File extends Node {
 
     public setContent(content:string):void{
 
-        if ( undefined === content){
-            content = '';
-        }
-
         //this.getStats().atime = new Date();
         //this.getStats().mtime = new Date();
         //this.getStats().size = content.length;
