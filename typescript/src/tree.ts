@@ -306,15 +306,7 @@ export default class Tree {
 
     private isType(type:string, pathName:string):boolean {
 
-        let method:string;
-        if ('file' === type) {
-            method = 'isFile';
-        }
-        else if ('dir' === type) {
-            method = 'isDirectory';
-        }
-
-        if (undefined === method) {
+        if ('file' !== type && 'dir' !== type) {
             throw new Error('unkown type');
         }
 
@@ -326,12 +318,12 @@ export default class Tree {
 
         let node:Node = this.leafs[inodeNumber]; 
 
-        /*
-        let isType: any = node[method]();
-
-        let boolType:boolean = (true === isType) ? true : false; 
-        */
-        return true;
+        if ('file' === type) {
+            return node.isFile();
+        }        
+        else if ('dir' === type) {
+            return node.isDirectory();
+        }        
 
     };
 
