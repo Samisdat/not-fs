@@ -82,8 +82,8 @@ describe('tree', function() {
 
         var tree = new Tree();
 
-        expect(tree.tree).to.be.deep.equal({0: []});
-        expect(tree.parent).to.be.deep.equal({});
+        expect(tree.getTree()).to.be.deep.equal({0: []});
+        expect(tree.getParent()).to.be.deep.equal({});
         //@TODO test for leafs
 
         tree.addDir('/foo/bar', true);
@@ -97,8 +97,8 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar.txt')).to.be.true;
         expect(tree.exists('/foo/deeper/bar.txt')).to.be.true;
 
-        expect(tree.tree).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
-        expect(tree.parent).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
+        expect(tree.getTree()).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
+        expect(tree.getParent()).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
 
         tree.removeDir('/foo');
 
@@ -109,8 +109,8 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar.txt')).to.be.false;
         expect(tree.exists('/foo/deeper/bar.txt')).to.be.false;
 
-        expect(tree.tree).to.be.deep.equal({0: []});
-        expect(tree.parent).to.be.deep.equal({});
+        expect(tree.getTree()).to.be.deep.equal({0: []});
+        expect(tree.getParent()).to.be.deep.equal({});
 
 
     });
@@ -119,8 +119,8 @@ describe('tree', function() {
 
         var tree = new Tree();
 
-        expect(tree.tree).to.be.deep.equal({0: []});
-        expect(tree.parent).to.be.deep.equal({});
+        expect(tree.getTree()).to.be.deep.equal({0: []});
+        expect(tree.getParent()).to.be.deep.equal({});
         //@TODO test for leafs
 
         tree.addDir('/tmp/unreal-fs', true);
@@ -132,8 +132,8 @@ describe('tree', function() {
         expect(tree.exists('/tmp/unreal-fs/exist')).to.be.true;
         expect(tree.exists('/tmp/unreal-fs/message.txt')).to.be.true;
 
-//        expect(tree.tree).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
-//        expect(tree.parent).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
+//        expect(tree.getTree()).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
+//        expect(tree.getParent()).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
 
         tree.removeDir('/tmp/unreal-fs/exist');
 
@@ -143,8 +143,8 @@ describe('tree', function() {
 
         expect(tree.exists('/tmp/unreal-fs/message.txt')).to.be.true;
 
-        //expect(tree.tree).to.be.deep.equal({0: []});
-        //expect(tree.parent).to.be.deep.equal({});
+        //expect(tree.getTree()).to.be.deep.equal({0: []});
+        //expect(tree.getParent()).to.be.deep.equal({});
 
 
     });
@@ -205,6 +205,8 @@ describe('tree', function() {
 
         expect(tree.isFile('/foo')).to.be.false;
         expect(tree.isFile('/foo/bar.txt')).to.be.true;
+
+        //tree.log();
 
     });
 

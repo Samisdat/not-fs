@@ -28,6 +28,14 @@ export default class Tree {
 
     }
 
+    public getTree():any {
+        return this.tree;
+    }
+
+    public getParent():any {
+        return this.parent;
+    }
+
     private getInodeNumber(): number {
 
         this.lastInodeNumber = this.inodeNumber;
@@ -486,7 +494,7 @@ export default class Tree {
             if (undefined !== tree.hasChildren(inodeNumber)) {
 
                 let children = tree.getChildren(inodeNumber);
-
+                console.log(children)
                 for(let child of children){
                     climb(child, (depth + 1));                    
                 }
