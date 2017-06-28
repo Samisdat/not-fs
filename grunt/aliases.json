@@ -25,6 +25,15 @@
     "tasks": [
       "mocha_istanbul:coverage"
     ]
+  },
+  "coverage-ts": {
+    "description": "run tests and generate coverage report",
+    "tasks": [
+      "clean:coverage",
+      "mocha_istanbul:typescript",
+      "typescript-remap-reports",
+      "clean:coverage-unmapped"
+    ]
   }
 
 }
