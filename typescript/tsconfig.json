@@ -1,7 +1,6 @@
 {
     "compilerOptions":{
-        "rootDir": "typescript/src/",
-        "outDir": "../dist/",
+        "outDir": "./dist/",
         "module": "commonjs",
         "target": "es6",
         "noImplicitAny": true,
@@ -9,7 +8,7 @@
         "removeComments": true
     },
     "include": [
-        "typescript/src"
+        "src"
     ],
     "exclude": [
         "node_modules",

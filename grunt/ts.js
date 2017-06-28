@@ -4,7 +4,7 @@ module.exports = function () {
 
     var typescript = {
         dist: {
-            tsconfig: 'typescript/src/tsconfig.json',
+            tsconfig: 'typescript/tsconfig.json',
             src: ['typescript/src/**/*.ts'],
             outDir: 'typescript/dist',
         }

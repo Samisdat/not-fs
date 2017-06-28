@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         options: {
             reporter: 'spec',
             quiet: false, // Optionally suppress output to standard out (defaults to false)
-            clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+            clearRequireCache: true // Optionally clear the require cache before running tests (defaults to false)
         },
         'back': {
             src: [
@@ -88,12 +88,38 @@ module.exports = function (grunt) {
             src: [
                 'typescript/dist/**/*.test.js'
             ]
+        },
+        'watch': {
+            src: [
+                'typescript/dist/**/*.test.js'
+            ]
         }
+
     };
 
 
 
 
+    var getTestFile = function (filepath) {
+
+        if (grunt.file.isMatch(['**/*.test.js'], filepath)) {
+            return filepath;
+        }
+
+        return filepath.replace(/\.js$/, '.test.js');
+
+
+    };
+
+    grunt.event.on('watch', function (action, filepath) {
+
+        var test = getTestFile(filepath);
+
+        grunt.config.set('mochaTest.watch.src', [test]);
+
+
+
+    });
 
     return mocha;
 
