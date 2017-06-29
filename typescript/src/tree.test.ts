@@ -53,11 +53,11 @@ describe('tree', function() {
 
         expect(tree.getLastInodeNumber()).to.be.equal(0);
 
-        tree.addDir('/foo', true);
+        tree.addDir('/foo');
 
         expect(tree.getLastInodeNumber()).to.be.equal(1);
 
-        tree.addDir('/foo/bar', true);
+        tree.addDir('/foo/bar');
 
         expect(tree.getLastInodeNumber()).to.be.equal(2);
 
