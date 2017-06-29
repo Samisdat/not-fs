@@ -15,12 +15,16 @@ export default class Mount {
         let tree = new Tree(mountPath);
 
         for (let node of json.fs) {
+
+            let permission = (undefined !== node.permission) ? node.permission : undefined;
+            
             if ('dir' === node.type) {
-                tree.addDir(mountPath + '/' + node.path);
+                tree.addDir(mountPath + '/' + node.path, true, permission);
             }
             else if ('file' === node.type) {
                 let content = (undefined !== node.content) ? node.content : '';
-                tree.addFile(mountPath + '/' + node.path, content, true);
+
+                tree.addFile(mountPath + '/' + node.path, content, true, permission);
             }
         }
 
@@ -31,6 +35,7 @@ export default class Mount {
     public toJson(jsonPath: string, tree: Tree) {
 
         let mountPath = tree.getMountPath() + '/';
+
         var entries: any = [];
 
         for (let leaf of tree.getLeafs()) {
