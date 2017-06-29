@@ -10,11 +10,9 @@ export default class Mount {
         const raw = fs.readFileSync(jsonPath, { encoding: 'utf8' });
         const json = JSON.parse(raw);
 
-        let tree = new Tree();
+        const mountPath: string = (undefined !== json.options.mount) ? json.options.mount : '/';
 
-        const mountPath: string = (undefined !== json.options.mount) ? json.options.mount : '';
-
-        tree.addDir(mountPath, true);
+        let tree = new Tree(mountPath);
 
         for (let node of json.fs) {
             if ('dir' === node.type) {
@@ -32,13 +30,14 @@ export default class Mount {
 
     public toJson(jsonPath: string, tree: Tree) {
 
+        let mountPath = tree.getMountPath() + '/';
         var entries: any = [];
 
         for (let leaf of tree.getLeafs()) {
 
             var entry: any = {};
             entry.type = (leaf.isDirectory()) ? 'dir' : 'file';
-            entry.path = tree.getPathByInodeNumber(leaf.getInodeNumber());
+            entry.path = tree.getPathByInodeNumber(leaf.getInodeNumber()).replace(mountPath, '');
 
             if(true === leaf.isFile()){
                 entry.content = leaf.getContent();
@@ -51,7 +50,7 @@ export default class Mount {
 
         let json:any = {
             options:{
-                'mount':'/'
+                'mount':tree.getMountPath()
             },
             fs:entries
         };

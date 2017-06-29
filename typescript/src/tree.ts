@@ -19,16 +19,25 @@ export default class Tree {
     private inodeNumber: number = 0;
     private lastInodeNumber: number = 0;
 
-    public constructor() {
+    private mountPath: string;
 
-        let root = new Root();
+    public constructor(mountPath = '/') {
+
+        this.mountPath = this.resolveDir(mountPath);
+
+        let root = new Root(this.mountPath);
+
         this.getInodeNumber();
         this.tree[root.getInodeNumber()] = [];
         this.leafs[root.getInodeNumber()] = root;
 
     }
 
-    public getTree():any {
+    public getMountPath(): string {
+        return this.mountPath;
+    }
+
+    public getTree(): any {
         return this.tree;
     }
 
@@ -149,17 +158,16 @@ export default class Tree {
 
     };
 
-    public getInodeNumberByPath(pathName:string):number {
+    public getInodeNumberByPath(pathName: string): number {
 
-        let parsePath = path.parse(pathName);
-
-        if (parsePath.root === parsePath.dir && pathName === parsePath.dir) {
+        if (pathName === this.mountPath) {
             return 0;
         }
 
+        let parsePath = path.parse(pathName);
         let tree = this;
 
-        let inodeNumberByPath:number;
+        let inodeNumberByPath: number;
 
         let climb = function (inodeNumber:number) {
 
@@ -188,7 +196,13 @@ export default class Tree {
 
     public createMissingDirs(dirPath: string): void {
 
+        dirPath = dirPath.replace(this.mountPath, '');
+
         var parts = dirPath.split(path.sep);
+        parts = parts.filter(function (value) {
+            return '' !== value;
+        });
+
 
         for (var i = 0, x = parts.length; i <= x; i += 1) {
             var addMissingDir = parts.slice(0, i).join('/');
@@ -201,8 +215,10 @@ export default class Tree {
                 continue;
             }
 
-            if (false === this.exists(addMissingDir)) {
-                this.addDir(addMissingDir, false);
+            if (false === this.exists(this.mountPath + addMissingDir)) {
+
+                this.addDir(this.mountPath + '/' + addMissingDir, false);
+
             }
 
         }

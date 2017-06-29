@@ -15,6 +15,19 @@ describe('tree', function() {
 
         expect(tree).to.be.instanceof(Tree);
 
+        expect(tree.getMountPath()).to.be.equal('/');
+
+    });
+
+    it('can be created with mountPath', function() {
+
+        var tree = new Tree('/foo/bar/');
+
+        expect(tree).to.be.instanceof(Tree);
+
+        expect(tree.getMountPath()).to.be.equal('/foo/bar');
+        expect(tree.exists('/foo/bar')).to.be.true;
+
     });
 
     it('resolves dirs correct', function() {
@@ -186,6 +199,25 @@ describe('tree', function() {
 
         expect(tree.exists('/foo/baz.txt')).to.be.true;
         expect(tree.getNodeByPath('/foo/baz.txt').getPermission().getMode()).to.be.equal('0777');        
+
+    });
+
+    it('can add file with missing dir and mountpoint', function() {
+
+        var tree = new Tree('/mount/path');
+
+        expect(tree.exists('/mount/path')).to.be.true;
+        expect(tree.exists('/mount/path/bar')).to.be.false;
+
+        tree.addDir('/mount/path/bar', false);
+        expect(tree.exists('/mount/path/bar')).to.be.true;
+
+        expect(tree.exists('/mount/path/one/two/bar.txt')).to.be.false;
+
+        tree.addFile('/mount/path/one/two/bar.txt', 'foobar', true);
+
+        expect(tree.exists('/mount/path/one/two/bar.txt')).to.be.true;
+
     });
 
     it('can remove file', function() {
