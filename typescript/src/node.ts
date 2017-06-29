@@ -9,7 +9,7 @@ export default class Node {
 
     protected permission: Permission
 
-    constructor(inodeNumber: number, pathPart: string) {
+    constructor(inodeNumber: number, pathPart: string, mode = '0755') {
 
         this.inodeNumber = inodeNumber;
 
@@ -17,7 +17,7 @@ export default class Node {
 
         this.pathPart = pathPart;
 
-        this.permission = new Permission('0755');
+        this.permission = new Permission(mode);
 
     }
 

@@ -7,11 +7,9 @@ export default class File extends Node {
 
     private content:string = undefined;
 
-    constructor(inodeNumber:number, name:string, content = '') {
+    constructor(inodeNumber:number, name:string, content = '', mode = '0644') {
 
-        super(inodeNumber, name);
-
-        this.permission = new Permission('0644');
+        super(inodeNumber, name, mode);
 
         this.content = content;
 
