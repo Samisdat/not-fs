@@ -41,22 +41,22 @@ export default class Tree {
         return this.tree;
     }
 
-    public getParent():any {
+    public getParent(): any {
         return this.parent;
     }
 
-    public getLeafs():Node[] {
+    public getLeafs(): Node[] {
 
-        let leafs:Node[] = [];
+        let leafs: Node[] = [];
 
-        for(let leaf in this.leafs){
+        for (let leaf in this.leafs) {
 
-            const node:Node = this.leafs[leaf];
-            
-            if(true === node.isRoot()){
+            const node: Node = this.leafs[leaf];
+
+            if (true === node.isRoot()) {
                 continue;
             }
-            
+
             leafs.push(node);
         }
 
@@ -73,11 +73,11 @@ export default class Tree {
 
     public getPathByInodeNumber(checkInodeNumber: number): string {
 
-        var parts:any = [];
+        var parts: any = [];
 
         var tree = this;
 
-        var dive = function (inodeNumber:number) {
+        var dive = function (inodeNumber: number) {
 
             if (true === tree.leafs[inodeNumber].isRoot()) {
                 parts.push('');
@@ -124,7 +124,7 @@ export default class Tree {
 
     };
 
-    public getChildrenByPath (pathName:string) {
+    public getChildrenByPath(pathName: string) {
 
         pathName = this.resolveDir(pathName);
 
@@ -144,7 +144,7 @@ export default class Tree {
 
         for (var i = 0, x = childrenInodeNumbers.length; i < x; i += 1) {
 
-            var inodeNumber:number = childrenInodeNumbers[i];
+            var inodeNumber: number = childrenInodeNumbers[i];
 
             children.push(
                 this.leafs[inodeNumber]
@@ -169,7 +169,7 @@ export default class Tree {
 
         let inodeNumberByPath: number;
 
-        let climb = function (inodeNumber:number) {
+        let climb = function (inodeNumber: number) {
 
             if (pathName === tree.getPathByInodeNumber(inodeNumber)) {
                 inodeNumberByPath = inodeNumber;
@@ -293,7 +293,7 @@ export default class Tree {
 
     };
 
-    public removeChildNode(inodeNumber:number):void {
+    public removeChildNode(inodeNumber: number): void {
 
         if (true !== this.hasChildren(inodeNumber)) {
             return;
@@ -308,7 +308,7 @@ export default class Tree {
 
     };
 
-    public removeChildFromLimb(parentInodeNumber:number, childInodeNumber:number):void {
+    public removeChildFromLimb(parentInodeNumber: number, childInodeNumber: number): void {
 
         var children = [];
 
@@ -323,7 +323,7 @@ export default class Tree {
 
     };
 
-    public removeNode(inodeNumber:number):void {
+    public removeNode(inodeNumber: number): void {
 
         var node = this.leafs[inodeNumber];
 
@@ -351,7 +351,7 @@ export default class Tree {
         }
     };
 
-    private isType(type:string, pathName:string):boolean {
+    private isType(type: string, pathName: string): boolean {
 
         if ('file' !== type && 'dir' !== type) {
             throw new Error('unkown type');
@@ -361,26 +361,26 @@ export default class Tree {
             return undefined;
         }
 
-        let inodeNumber:number = this.getInodeNumberByPath(pathName);
+        let inodeNumber: number = this.getInodeNumberByPath(pathName);
 
-        let node:Node = this.leafs[inodeNumber]; 
+        let node: Node = this.leafs[inodeNumber];
 
         if ('file' === type) {
             return node.isFile();
-        }        
+        }
         else if ('dir' === type) {
             return node.isDirectory();
-        }        
+        }
 
     };
 
-    public isDirectory (pathName:string):boolean {
+    public isDirectory(pathName: string): boolean {
 
         return this.isType('dir', pathName);
 
     };
 
-    public isFile(pathName:string):boolean {
+    public isFile(pathName: string): boolean {
 
         return this.isType('file', pathName);
 
@@ -423,7 +423,7 @@ export default class Tree {
 
     };
 
-    public removeDir (dirPath:string):void {
+    public removeDir(dirPath: string): void {
 
         dirPath = this.resolveDir(dirPath);
 
@@ -437,7 +437,7 @@ export default class Tree {
 
     };
 
-    public removeFile(filePath:string):void {
+    public removeFile(filePath: string): void {
 
         if (false === this.exists(filePath)) {
             return;
@@ -447,7 +447,7 @@ export default class Tree {
         this.removeNode(inodeNumber);
     };
 
-    public remove(filePath:string):void {
+    public remove(filePath: string): void {
 
         if (false === this.exists(filePath)) {
             return;
@@ -458,7 +458,7 @@ export default class Tree {
 
     };
 
-    public rename(oldPath:string, newPath:string, addMissingDirs = false) {
+    public rename(oldPath: string, newPath: string, addMissingDirs = false) {
 
         addMissingDirs = true;
 
@@ -504,7 +504,7 @@ export default class Tree {
 
 
     /* istanbul ignore next */
-    public hasChildren(inodeNumber:number):boolean {
+    public hasChildren(inodeNumber: number): boolean {
 
         if (undefined !== this.tree[inodeNumber] && 0 < this.tree[inodeNumber].length) {
             return true;
@@ -512,17 +512,17 @@ export default class Tree {
         return false;
     };
 
-    public getChildren(inodeNumber:number):number[] {
+    public getChildren(inodeNumber: number): number[] {
         return this.tree[inodeNumber];
     };
 
 
     /* istanbul ignore next */
-    public log () {
+    public log() {
 
         let tree = this;
 
-        let climb = function (inodeNumber:number, depth:number) {
+        let climb = function (inodeNumber: number, depth: number) {
 
             let tab = Array(depth).join('   ');
 
