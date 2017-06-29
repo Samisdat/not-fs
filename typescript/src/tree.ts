@@ -546,9 +546,9 @@ export default class Tree {
 
                 let children = tree.getChildren(inodeNumber);
 
-                if(undefined  !== children){
-                    for(let child of children){
-                        climb(child, (depth + 1));                    
+                if (undefined !== children) {
+                    for (let child of children) {
+                        climb(child, (depth + 1));
                     }
 
                 }

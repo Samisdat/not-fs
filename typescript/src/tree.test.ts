@@ -66,7 +66,7 @@ describe('tree', function() {
     it('can add dir', function() {
 
         var tree = new Tree();
-
+        
         expect(tree.exists('/foo')).to.be.false;
         expect(tree.exists('/foo/bar')).to.be.false;
 
