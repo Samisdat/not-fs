@@ -61,6 +61,13 @@ describe('tree', function() {
 
         expect(tree.exists('/foo')).to.be.true;
         expect(tree.exists('/foo/bar')).to.be.true;
+        expect(tree.getNodeByPath('/foo/bar').getPermission().getMode()).to.be.equal('0755');
+
+        tree.addDir('/foo/bar/baz', true, '0777');
+
+        expect(tree.exists('/foo/bar/baz')).to.be.true;
+        expect(tree.getNodeByPath('/foo/bar/baz').getPermission().getMode()).to.be.equal('0777');
+        
 
     });
 
@@ -173,7 +180,12 @@ describe('tree', function() {
         tree.addFile('/foo/bar.txt', 'foobar');
 
         expect(tree.exists('/foo/bar.txt')).to.be.true;
+        expect(tree.getNodeByPath('/foo/bar.txt').getPermission().getMode()).to.be.equal('0644');        
 
+        tree.addFile('/foo/baz.txt', 'foobar', true, '0777');
+
+        expect(tree.exists('/foo/baz.txt')).to.be.true;
+        expect(tree.getNodeByPath('/foo/baz.txt').getPermission().getMode()).to.be.equal('0777');        
     });
 
     it('can remove file', function() {

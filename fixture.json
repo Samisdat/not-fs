@@ -5,7 +5,8 @@
     "fs": [
         {
             "type": "dir",
-            "path": "one"
+            "path": "one",
+            "permission": "0777"
         },
         {
             "type": "dir",

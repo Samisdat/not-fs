@@ -236,7 +236,7 @@ export default class Tree {
 
     };
 
-    public addDir(dirPath:string, addMissingDirs = false):void {
+    public addDir(dirPath: string, addMissingDirs = false, permission = '0755'): void {
 
         if ('' === dirPath.trim()) {
             throw new Error('dirPath may not be empty');
@@ -262,7 +262,8 @@ export default class Tree {
 
         var dir = new Dir(
             this.getInodeNumber(),
-            path.basename(dirPath)
+            path.basename(dirPath),
+            permission
         );
 
         this.tree[parentInodeNumber].push(dir.getInodeNumber());;
@@ -365,7 +366,7 @@ export default class Tree {
 
     };
 
-    public addFile(filePath:string, data = '', addMissingDirs = false):void {
+    public addFile(filePath: string, data = '', addMissingDirs = false, permission = '0644'): void {
 
         addMissingDirs = (undefined === addMissingDirs) ? false : addMissingDirs;
 
@@ -388,7 +389,8 @@ export default class Tree {
         let file = new File(
             this.getInodeNumber(),
             name,
-            data
+            data,
+            permission
         );
 
         this.tree[parentInodeNumber].push(file.getInodeNumber());;
