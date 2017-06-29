@@ -10,11 +10,11 @@ import File from './file';
 
 export default class Tree {
 
-    private tree: any = {}
+    private tree: { [index: number]: number[] } = {}
 
     private leafs: { [index: number]: Node } = {};
 
-    private parent: any = {}
+    private parent: { [index: number]: number } = {}
 
     private inodeNumber: number = 0;
     private lastInodeNumber: number = 0;
@@ -34,6 +34,24 @@ export default class Tree {
 
     public getParent():any {
         return this.parent;
+    }
+
+    public getLeafs():Node[] {
+
+        let leafs:Node[] = [];
+
+        for(let leaf in this.leafs){
+
+            const node:Node = this.leafs[leaf];
+            
+            if(true === node.isRoot()){
+                continue;
+            }
+            
+            leafs.push(node);
+        }
+
+        return leafs;
     }
 
     private getInodeNumber(): number {

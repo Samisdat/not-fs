@@ -5,7 +5,7 @@ import Permission from './permission';
 
 export default class File extends Node {
 
-    private content:string;
+    private content:string = undefined;
 
     constructor(inodeNumber:number, name:string, content = '') {
 

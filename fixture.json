@@ -1,0 +1,29 @@
+{
+    "options": {
+        "mount": "/home/vodafone/private/unreal-fs"
+    },
+    "fs": [
+        {
+            "type": "dir",
+            "path": "one"
+        },
+        {
+            "type": "dir",
+            "path": "two"
+        },
+        {
+            "type": "dir",
+            "path": "three"
+        },
+        {
+            "type": "file",
+            "path": "three/test.txt",
+            "content":"Hi node"
+        },
+        {
+            "type": "file",
+            "path": "one/test.txt",
+            "content":"Hallo"
+        }
+    ]
+}

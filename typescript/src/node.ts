@@ -33,6 +33,13 @@ export default class Node {
         this.name = name;
     }
 
+    public getContent():string{
+
+        return undefined;
+
+    };
+
+
     public getPermission():Permission{
 
         return this.permission;
