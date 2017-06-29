@@ -238,6 +238,10 @@ export default class Tree {
 
     public addDir(dirPath: string, addMissingDirs = false, permission = '0755'): void {
 
+        if(true === this.exists(dirPath)){
+            return;
+        }
+
         if ('' === dirPath.trim()) {
             throw new Error('dirPath may not be empty');
         }
@@ -367,6 +371,10 @@ export default class Tree {
     };
 
     public addFile(filePath: string, data = '', addMissingDirs = false, permission = '0644'): void {
+
+        if(true === this.exists(filePath)){
+            return;
+        }
 
         addMissingDirs = (undefined === addMissingDirs) ? false : addMissingDirs;
 
