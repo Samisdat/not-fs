@@ -1,5 +1,3 @@
-'use strict';
-
 export default class Permission {
 
     private mode: string;
@@ -23,10 +21,10 @@ export default class Permission {
          * 7 = r+w+x
          */
 
-        var regEx = /^0{0,1}[01234567]{3}$/;
+        let regEx = /^0{0,1}[01234567]{3}$/;
         return regEx.test(mode);
 
-    };
+    }
 
     private normalise(mode: string): string {
 
@@ -36,7 +34,7 @@ export default class Permission {
 
         return mode;
 
-    };
+    }
 
     public setMode(mode: string): void {
 
@@ -46,17 +44,16 @@ export default class Permission {
 
         this.mode = this.normalise(mode);
 
-    };
-
-
-    public getMode(): string {
-        return this.mode
     }
 
-    private getPart(isOwner = false, isOwnerGroupMember= false):string {
+    public getMode(): string {
+        return this.mode;
+    }
+
+    private getPart(isOwner = false, isOwnerGroupMember= false): string {
 
         // other part
-        var part = this.mode[3];
+        let part = this.mode[3];
         if (true === isOwner) {
             part = this.mode[1];
         }
@@ -65,11 +62,11 @@ export default class Permission {
         }
 
         return part;
-    };
+    }
 
-    public isReadable(isOwner = false, isOwnerGroupMember = false):boolean {
+    public isReadable(isOwner = false, isOwnerGroupMember = false): boolean {
 
-        var part = this.getPart(isOwner, isOwnerGroupMember);
+        let part = this.getPart(isOwner, isOwnerGroupMember);
 
         if ('7' === part) {
             return true;
@@ -88,12 +85,11 @@ export default class Permission {
         }
 
         return false;
-    };
+    }
 
+    public isWritable(isOwner = false, isOwnerGroupMember= false): boolean {
 
-    public isWritable(isOwner = false, isOwnerGroupMember= false):boolean {
-
-        var part = this.getPart(isOwner, isOwnerGroupMember);
+        let part = this.getPart(isOwner, isOwnerGroupMember);
 
         if ('7' === part) {
             return true;
@@ -112,11 +108,11 @@ export default class Permission {
         }
 
         return false;
-    };
+    }
 
-    public isExecutable(isOwner = false, isOwnerGroupMember= false):boolean {
+    public isExecutable(isOwner = false, isOwnerGroupMember= false): boolean {
 
-        var part = this.getPart(isOwner, isOwnerGroupMember);
+        let part = this.getPart(isOwner, isOwnerGroupMember);
 
         if ('7' === part) {
             return true;
@@ -135,8 +131,7 @@ export default class Permission {
         }
 
         return false;
-    };
 
+    }
 
 }
-

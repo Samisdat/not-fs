@@ -1,5 +1,3 @@
-'use strict';
-
 export default class Options {
 
     private user: number;
@@ -15,20 +13,21 @@ export default class Options {
         this.setDefaultOptions();
     }
 
-    private setDefaultOptions():void{
+    private setDefaultOptions(): void {
 
-        let userId:number = 85;
-        try{
+        let userId: number = 85;
+        try {
             userId = process.getuid();
         }
-        catch(e){
+        catch (e) {
 
         }
-        let groupId:number = 100;
-        try{
+
+        let groupId: number = 100;
+        try {
             groupId = process.getuid();
         }
-        catch(e){
+        catch (e) {
 
         }
 
@@ -40,43 +39,61 @@ export default class Options {
         this.setStatsUid(userId);
         this.setStatsGid(groupId);
         this.setStatsBlksize(4096);
-        
+
     }
 
     public getUser(): number {
+
         return this.user;
+
     }
 
     public setUser(user: number): void {
+
         this.user = user;
+
     }
 
     public getGroup(): number {
+
         return this.group;
+
     }
 
     public setGroup(group: number): void {
+
         this.group = group;
+
     }
 
     public getStatsDev(): number {
+
         return this.statsDev;
+
     }
 
     public setStatsDev(statsDev: number): void {
+
         this.statsDev = statsDev;
+
     }
 
     public getStatsRdev(): number {
+
         return this.statsRdev;
+
     }
 
     public setStatsRdev(statsRdev: number): void {
+
         this.statsRdev = statsRdev;
+
     }
 
     public getStatsUid(): number {
+
         return this.statsUid;
+
     }
 
     public setStatsUid(statsUid: number): void {
@@ -84,20 +101,27 @@ export default class Options {
     }
 
     public getStatsGid(): number {
+
         return this.statsGid;
+
     }
 
     public setStatsGid(statsGid: number): void {
+
         this.statsGid = statsGid;
+
     }
 
     public getStatsBlksize(): number {
+
         return this.statsBlksize;
+
     }
 
     public setStatsBlksize(statsBlksize: number): void {
+
         this.statsBlksize = statsBlksize;
+
     }
 
 }
-

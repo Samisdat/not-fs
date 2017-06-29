@@ -1,12 +1,10 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import File from './file';
 
 describe('dir', function() {
 
-    let file:File;
+    let file: File;
 
     beforeEach(function() {
         file = new File(1, 'test');

@@ -1,7 +1,4 @@
-'use strict';
-
 import * as path from 'path';
-
 
 import Node from './node';
 import Root from './root';
@@ -10,11 +7,11 @@ import File from './file';
 
 export default class Tree {
 
-    private tree: { [index: number]: number[] } = {}
+    private tree: { [index: number]: number[] } = {};
 
     private leafs: { [index: number]: Node } = {};
 
-    private parent: { [index: number]: number } = {}
+    private parent: { [index: number]: number } = {};
 
     private inodeNumber: number = 0;
     private lastInodeNumber: number = 0;
@@ -34,15 +31,21 @@ export default class Tree {
     }
 
     public getMountPath(): string {
+
         return this.mountPath;
+
     }
 
     public getTree(): any {
+
         return this.tree;
+
     }
 
     public getParent(): any {
+
         return this.parent;
+
     }
 
     public getLeafs(): Node[] {
@@ -69,15 +72,15 @@ export default class Tree {
         this.inodeNumber += 1;
         return this.lastInodeNumber;
 
-    };
+    }
 
     public getPathByInodeNumber(checkInodeNumber: number): string {
 
-        var parts: any = [];
+        let parts: any = [];
 
-        var tree = this;
+        let tree = this;
 
-        var dive = function (inodeNumber: number) {
+        let dive = function (inodeNumber: number) {
 
             if (true === tree.leafs[inodeNumber].isRoot()) {
                 parts.push('');
@@ -103,55 +106,62 @@ export default class Tree {
 
         return path;
 
-    };
+    }
 
     public getLastInodeNumber(): number {
 
         return this.lastInodeNumber;
 
-    };
+    }
 
     public exists(checkPath: string): boolean {
 
         checkPath = this.resolveDir(checkPath);
 
-        var inodeNumber = this.getInodeNumberByPath(checkPath);
+        let inodeNumber = this.getInodeNumberByPath(checkPath);
         return (undefined === inodeNumber) ? false : true;
+
     }
 
     public getNodeByPath(pathName: string): Node {
 
         if (false === this.exists(pathName)) {
+
             return;
+
         }
 
-        var inodeNumber = this.getInodeNumberByPath(pathName);
+        let inodeNumber = this.getInodeNumberByPath(pathName);
 
         return this.leafs[inodeNumber];
 
-    };
+    }
 
     public getChildrenByPath(pathName: string) {
 
         pathName = this.resolveDir(pathName);
 
         if (false === this.exists(pathName)) {
+
             return false;
+
         }
 
         if (false === this.isDirectory(pathName)) {
+
             return false;
+
         }
 
-        var inodeNumber = this.getInodeNumberByPath(pathName);
+        let inodeNumber = this.getInodeNumberByPath(pathName);
 
-        var childrenInodeNumbers = this.tree[inodeNumber];
+        let childrenInodeNumbers = this.tree[inodeNumber];
 
-        var children = [];
+        let children = [];
 
-        for (var i = 0, x = childrenInodeNumbers.length; i < x; i += 1) {
+        for (let i = 0, x = childrenInodeNumbers.length; i < x; i += 1) {
 
-            var inodeNumber: number = childrenInodeNumbers[i];
+            let inodeNumber: number = childrenInodeNumbers[i];
 
             children.push(
                 this.leafs[inodeNumber]
@@ -163,7 +173,7 @@ export default class Tree {
 
         return children;
 
-    };
+    }
 
     public getInodeNumberByPath(pathName: string): number {
 
@@ -179,15 +189,17 @@ export default class Tree {
         let climb = function (inodeNumber: number) {
 
             if (pathName === tree.getPathByInodeNumber(inodeNumber)) {
+
                 inodeNumberByPath = inodeNumber;
                 return;
+
             }
 
             if (false !== tree.hasChildren(inodeNumber)) {
 
-                var children = tree.getChildren(inodeNumber);
+                let children = tree.getChildren(inodeNumber);
 
-                //@TODO lastIndex SchnellTest
+                // @TODO lastIndex SchnellTest
                 children.forEach(function (child) {
                     climb(child);
                 });
@@ -199,20 +211,19 @@ export default class Tree {
 
         return inodeNumberByPath;
 
-    };
+    }
 
     public createMissingDirs(dirPath: string): void {
 
         dirPath = dirPath.replace(this.mountPath, '');
 
-        var parts = dirPath.split(path.sep);
+        let parts = dirPath.split(path.sep);
         parts = parts.filter(function (value) {
             return '' !== value;
         });
 
-
-        for (var i = 0, x = parts.length; i <= x; i += 1) {
-            var addMissingDir = parts.slice(0, i).join('/');
+        for (let i = 0, x = parts.length; i <= x; i += 1) {
+            let addMissingDir = parts.slice(0, i).join('/');
 
             if ('/' === addMissingDir) {
                 continue;
@@ -230,14 +241,15 @@ export default class Tree {
 
         }
 
-    };
-
+    }
 
     public resolveDir(pathName: string): string {
 
         if ('/' === pathName) {
+     
             return '/';
-        }
+     
+       }
 
         pathName = pathName.replace(/\/$/, '');
 
@@ -248,91 +260,105 @@ export default class Tree {
 
         if (false === path.isAbsolute(pathName)) {
 
-            //pathName = path.join(__dirname, pathName);
-
             throw new Error('Only absolute path supported');
-
 
         }
 
         return pathName;
 
-    };
+    }
 
     public addDir(dirPath: string, addMissingDirs = false, permission = '0755'): void {
 
-        if(true === this.exists(dirPath)){
+        if (true === this.exists(dirPath)) {
+    
             return;
+    
         }
 
         if ('' === dirPath.trim()) {
+
             throw new Error('dirPath may not be empty');
+
         }
 
         dirPath = this.resolveDir(dirPath);
 
         if (true === this.exists(dirPath)) {
+
             return;
+
         }
 
-        var parentDirPath = path.dirname(dirPath);
+        let parentDirPath = path.dirname(dirPath);
 
         if (false === this.exists(parentDirPath)) {
 
             if (true !== addMissingDirs) {
+
                 throw new Error('can not create ' + dirPath + ' while parent ' + parentDirPath + ' is not existing');
+
             }
+
             this.createMissingDirs(parentDirPath);
+
         }
 
-        var parentInodeNumber = this.getInodeNumberByPath(parentDirPath);
+        let parentInodeNumber = this.getInodeNumberByPath(parentDirPath);
 
-        var dir = new Dir(
+        let dir = new Dir(
             this.getInodeNumber(),
             path.basename(dirPath),
             permission
         );
 
-        this.tree[parentInodeNumber].push(dir.getInodeNumber());;
+        this.tree[parentInodeNumber].push(dir.getInodeNumber());
         this.tree[dir.getInodeNumber()] = [];
         this.leafs[dir.getInodeNumber()] = dir;
         this.parent[dir.getInodeNumber()] = parentInodeNumber;
 
-    };
+    }
 
     public removeChildNode(inodeNumber: number): void {
 
         if (true !== this.hasChildren(inodeNumber)) {
+
             return;
+
         }
 
-        var children = this.getChildren(inodeNumber);
+        let children = this.getChildren(inodeNumber);
 
-        var tree = this;
+        let tree = this;
         children.forEach(function (child) {
             tree.removeNode(child);
         });
 
-    };
+    }
 
     public removeChildFromLimb(parentInodeNumber: number, childInodeNumber: number): void {
 
-        var children = [];
+        let children = [];
 
-        for (var i = 0, x = this.tree[parentInodeNumber].length; i < x; i += 1) {
+        for (let i = 0, x = this.tree[parentInodeNumber].length; i < x; i += 1) {
+
             if (childInodeNumber === this.tree[parentInodeNumber][i]) {
+
                 continue;
+
             }
+
             children.push(this.tree[parentInodeNumber][i]);
+
         }
 
         this.tree[parentInodeNumber] = children;
 
-    };
+    }
 
     public removeNode(inodeNumber: number): void {
 
-        var node = this.leafs[inodeNumber];
+        let node = this.leafs[inodeNumber];
 
         if (true === node.isDirectory() && true === this.hasChildren(inodeNumber)) {
 
@@ -340,7 +366,7 @@ export default class Tree {
 
         }
 
-        var parentInodeNumber = this.parent[inodeNumber];
+        let parentInodeNumber = this.parent[inodeNumber];
 
         // remove node form parent
         if (true === this.hasChildren(parentInodeNumber)) {
@@ -354,18 +380,25 @@ export default class Tree {
         delete this.parent[inodeNumber];
 
         if (true === node.isDirectory()) {
+
             delete this.tree[inodeNumber];
+
         }
-    };
+
+    }
 
     private isType(type: string, pathName: string): boolean {
 
         if ('file' !== type && 'dir' !== type) {
+
             throw new Error('unkown type');
+
         }
 
         if (false === this.exists(pathName)) {
+
             return undefined;
+
         }
 
         let inodeNumber: number = this.getInodeNumberByPath(pathName);
@@ -373,30 +406,36 @@ export default class Tree {
         let node: Node = this.leafs[inodeNumber];
 
         if ('file' === type) {
+
             return node.isFile();
+
         }
         else if ('dir' === type) {
+
             return node.isDirectory();
+
         }
 
-    };
+    }
 
     public isDirectory(pathName: string): boolean {
 
         return this.isType('dir', pathName);
 
-    };
+    }
 
     public isFile(pathName: string): boolean {
 
         return this.isType('file', pathName);
 
-    };
+    }
 
     public addFile(filePath: string, data = '', addMissingDirs = false, permission = '0644'): void {
 
-        if(true === this.exists(filePath)){
+        if (true === this.exists(filePath)) {
+
             return;
+
         }
 
         addMissingDirs = (undefined === addMissingDirs) ? false : addMissingDirs;
@@ -408,9 +447,13 @@ export default class Tree {
         if (false === this.exists(parentDirPath)) {
 
             if (true !== addMissingDirs) {
+
                 throw new Error('can not create ' + filePath + ' while parent ' + parentDirPath + ' is not existing');
+
             }
+
             this.createMissingDirs(parentDirPath);
+
         }
 
         let parentInodeNumber = this.getInodeNumberByPath(parentDirPath);
@@ -424,57 +467,68 @@ export default class Tree {
             permission
         );
 
-        this.tree[parentInodeNumber].push(file.getInodeNumber());;
+        this.tree[parentInodeNumber].push(file.getInodeNumber());
         this.leafs[file.getInodeNumber()] = file;
         this.parent[file.getInodeNumber()] = parentInodeNumber;
 
-    };
+    }
 
     public removeDir(dirPath: string): void {
 
         dirPath = this.resolveDir(dirPath);
 
         if (false === this.exists(dirPath)) {
+
             return;
+
         }
 
         let inodeNumber = this.getInodeNumberByPath(dirPath);
 
         this.removeNode(inodeNumber);
 
-    };
+    }
 
     public removeFile(filePath: string): void {
 
         if (false === this.exists(filePath)) {
+
             return;
+
         }
 
         let inodeNumber = this.getInodeNumberByPath(filePath);
         this.removeNode(inodeNumber);
-    };
+
+    }
 
     public remove(filePath: string): void {
 
         if (false === this.exists(filePath)) {
+
             return;
+
         }
 
         let inodeNumber = this.getInodeNumberByPath(filePath);
         this.removeNode(inodeNumber);
 
-    };
+    }
 
     public rename(oldPath: string, newPath: string, addMissingDirs = false) {
 
         addMissingDirs = true;
 
         if (false === this.exists(oldPath)) {
+
             return;
+
         }
 
         if (true === this.exists(newPath)) {
+
             return;
+
         }
 
         let inodeNumber = this.getInodeNumberByPath(oldPath);
@@ -485,9 +539,13 @@ export default class Tree {
         if (false === this.exists(parentDirOfNewPath)) {
 
             if (true !== addMissingDirs) {
+
                 throw new Error('can not create ' + newPath + ' while parent ' + parentDirOfNewPath + ' is not existing');
+
             }
+
             this.createMissingDirs(parentDirOfNewPath);
+
         }
 
         let parentInodeNumverOfOldPath = this.parent[inodeNumber];
@@ -507,22 +565,26 @@ export default class Tree {
 
         node.setPathPart(name);
 
-    };
-
+    }
 
     /* istanbul ignore next */
     public hasChildren(inodeNumber: number): boolean {
 
         if (undefined !== this.tree[inodeNumber] && 0 < this.tree[inodeNumber].length) {
+
             return true;
+
         }
+
         return false;
-    };
+
+    }
 
     public getChildren(inodeNumber: number): number[] {
-        return this.tree[inodeNumber];
-    };
 
+        return this.tree[inodeNumber];
+
+    }
 
     /* istanbul ignore next */
     public log() {
@@ -534,8 +596,11 @@ export default class Tree {
             let tab = Array(depth).join('   ');
 
             let msg = '';
+
             if (0 < depth) {
+
                 msg += tab + '└── ';
+
             }
 
             msg += tree.leafs[inodeNumber].getPathPart();
@@ -547,8 +612,11 @@ export default class Tree {
                 let children = tree.getChildren(inodeNumber);
 
                 if (undefined !== children) {
+
                     for (let child of children) {
+
                         climb(child, (depth + 1));
+
                     }
 
                 }
@@ -558,8 +626,6 @@ export default class Tree {
         };
 
         climb(0, 0);
-    };
-
+    }
 
 }
-

@@ -1,15 +1,15 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import Root from './root';
 
 describe('root', function() {
 
-    let root:Root;
+    let root: Root;
 
     beforeEach(function() {
+
         root = new Root();
+
     });
 
     it('can be created', function() {
@@ -42,7 +42,6 @@ describe('root', function() {
             new Root('foobar');
         }).to.throw('root path must be absolute');
         
-
     });
 
     it('isRoot is true', function() {
@@ -63,6 +62,4 @@ describe('root', function() {
 
     });
 
-
 });
-

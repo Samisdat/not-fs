@@ -1,12 +1,10 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import Node from './node';
 
 describe('node', function() {
 
-    let node:Node;
+    let node: Node;
 
     beforeEach(function() {
     });
@@ -52,7 +50,7 @@ describe('node', function() {
 
     it('get content', function() {
 
-        expect(node.getContent()).to.be.undefined
+        expect(node.getContent()).to.be.undefined;
 
     });
 
@@ -64,7 +62,6 @@ describe('node', function() {
         expect(node.getPermission().getMode()).to.be.equal('0777');
 
     });
-
 
     it('isRoot is false', function() {
 
@@ -115,4 +112,3 @@ describe('node', function() {
     });
 
 });
-

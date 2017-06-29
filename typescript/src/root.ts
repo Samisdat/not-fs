@@ -1,5 +1,3 @@
-'use strict';
-
 import * as path from 'path';
 
 import Node from './node';
@@ -7,13 +5,14 @@ import Node from './node';
 export default class Root extends Node {
 
     public constructor(rootPath = '/') {
+
         super(0, rootPath);
 
     }
 
     protected validatePath(rootPath: string): void {
 
-        if(false === path.isAbsolute(rootPath)){
+        if (false === path.isAbsolute(rootPath)) {
             throw new Error('root path must be absolute');
         }
 
@@ -27,21 +26,21 @@ export default class Root extends Node {
 
     }
 
-    public isRoot():boolean{
+    public isRoot(): boolean {
 
         return true;
 
-    };
+    }
 
-    public isFile():boolean{
+    public isFile(): boolean {
 
         return false;
 
-    };
+    }
 
-    public isDirectory():boolean{
+    public isDirectory(): boolean {
 
         return true;
 
-    };}
-
+    }
+}

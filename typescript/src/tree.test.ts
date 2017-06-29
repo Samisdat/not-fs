@@ -1,5 +1,3 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import Tree from './tree';
@@ -11,7 +9,7 @@ describe('tree', function() {
 
     it('can be created', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree).to.be.instanceof(Tree);
 
@@ -21,7 +19,7 @@ describe('tree', function() {
 
     it('can be created with mountPath', function() {
 
-        var tree = new Tree('/foo/bar/');
+        let tree = new Tree('/foo/bar/');
 
         expect(tree).to.be.instanceof(Tree);
 
@@ -32,7 +30,7 @@ describe('tree', function() {
 
     it('resolves dirs correct', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree.resolveDir('/')).to.be.equal('/');
         expect(tree.resolveDir('/foo')).to.be.equal('/foo');
@@ -40,7 +38,7 @@ describe('tree', function() {
         expect(tree.resolveDir('/foo/bar')).to.be.equal('/foo/bar');
         expect(tree.resolveDir('/foo/bar/')).to.be.equal('/foo/bar');
 
-        //@TODO relative path
+        // @TODO relative path
         expect(function(){
             tree.resolveDir('./relative');
         }).to.throw('Only absolute path supported');
@@ -49,7 +47,7 @@ describe('tree', function() {
 
     it('has incrementing inodeNumber', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree.getLastInodeNumber()).to.be.equal(0);
 
@@ -65,7 +63,7 @@ describe('tree', function() {
 
     it('can add dir', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
         
         expect(tree.exists('/foo')).to.be.false;
         expect(tree.exists('/foo/bar')).to.be.false;
@@ -80,13 +78,12 @@ describe('tree', function() {
 
         expect(tree.exists('/foo/bar/baz')).to.be.true;
         expect(tree.getNodeByPath('/foo/bar/baz').getPermission().getMode()).to.be.equal('0777');
-        
 
     });
 
     it('can remove dir', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         tree.addDir('/foo/bar', true);
 
@@ -100,11 +97,11 @@ describe('tree', function() {
 
     it('can remove dir with its children', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree.getTree()).to.be.deep.equal({0: []});
         expect(tree.getParent()).to.be.deep.equal({});
-        //@TODO test for leafs
+        // @TODO test for leafs
 
         tree.addDir('/foo/bar', true);
         tree.addDir('/foo/deeper/bar', true);
@@ -132,16 +129,15 @@ describe('tree', function() {
         expect(tree.getTree()).to.be.deep.equal({0: []});
         expect(tree.getParent()).to.be.deep.equal({});
 
-
     });
 
-  it('can remove dir without its siblings', function() {
+    it('can remove dir without its siblings', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree.getTree()).to.be.deep.equal({0: []});
         expect(tree.getParent()).to.be.deep.equal({});
-        //@TODO test for leafs
+        // @TODO test for leafs
 
         tree.addDir('/tmp/unreal-fs', true);
         tree.addDir('/tmp/unreal-fs/exist');
@@ -152,8 +148,8 @@ describe('tree', function() {
         expect(tree.exists('/tmp/unreal-fs/exist')).to.be.true;
         expect(tree.exists('/tmp/unreal-fs/message.txt')).to.be.true;
 
-//        expect(tree.getTree()).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
-//        expect(tree.getParent()).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
+        // expect(tree.getTree()).to.be.deep.equal( {0: [ 1 ], 1: [ 2, 3, 5 ], 2: [], 3: [ 4, 6 ], 4: [] });
+        // expect(tree.getParent()).to.be.deep.equal( { 1: 0, 2: 1, 3: 1, 4: 3, 5: 1, 6: 3 });
 
         tree.removeDir('/tmp/unreal-fs/exist');
 
@@ -163,15 +159,14 @@ describe('tree', function() {
 
         expect(tree.exists('/tmp/unreal-fs/message.txt')).to.be.true;
 
-        //expect(tree.getTree()).to.be.deep.equal({0: []});
-        //expect(tree.getParent()).to.be.deep.equal({});
-
+        // expect(tree.getTree()).to.be.deep.equal({0: []});
+        // expect(tree.getParent()).to.be.deep.equal({});
 
     });
 
     it('is dir', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         tree.addDir('/foo', true);
         tree.addFile('/foo/bar.txt', '');
@@ -186,7 +181,7 @@ describe('tree', function() {
 
     it('can add file', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         expect(tree.exists('/foo/bar.txt')).to.be.false;
 
@@ -204,7 +199,7 @@ describe('tree', function() {
 
     it('can add file with missing dir and mountpoint', function() {
 
-        var tree = new Tree('/mount/path');
+        let tree = new Tree('/mount/path');
 
         expect(tree.exists('/mount/path')).to.be.true;
         expect(tree.exists('/mount/path/bar')).to.be.false;
@@ -222,7 +217,7 @@ describe('tree', function() {
 
     it('can remove file', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         tree.addFile('/foo/bar.txt', 'foobar');
         tree.addFile('/foo/baz.txt', 'foobar');
@@ -239,7 +234,7 @@ describe('tree', function() {
 
     it('is file', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         tree.addDir('/foo', true);
         tree.addFile('/foo/bar.txt', '');
@@ -250,13 +245,11 @@ describe('tree', function() {
         expect(tree.isFile('/foo')).to.be.false;
         expect(tree.isFile('/foo/bar.txt')).to.be.true;
 
-        //tree.log();
-
     });
 
     it.skip('log', function() {
 
-        var tree = new Tree();
+        let tree = new Tree();
 
         tree.addDir('//home/vodafone/private/unreal-fs', true);
         tree.addFile('/foo/bar.txt', '');
@@ -268,4 +261,3 @@ describe('tree', function() {
     });
 
 });
-

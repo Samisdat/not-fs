@@ -1,5 +1,3 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import Permission from './permission';
@@ -11,7 +9,7 @@ describe('permission', function() {
 
     it('can be created', function() {
 
-        var permission = new Permission();
+        let permission = new Permission();
 
         expect(permission).to.be.instanceof(Permission);
         expect(permission.getMode()).to.be.equal('0000');
@@ -70,7 +68,7 @@ describe('permission', function() {
 
     it('set/get', function() {
 
-        var permission = new Permission();
+        let permission = new Permission();
         expect(permission.getMode()).to.be.equal('0000');
 
         permission.setMode('755');
@@ -85,7 +83,7 @@ describe('permission', function() {
 
     it('isReadable', function() {
 
-        var permission = new Permission();
+        let permission = new Permission();
 
         // user
         permission.setMode('0700');
@@ -166,7 +164,7 @@ describe('permission', function() {
 
     it('isWriteable', function() {
 
-        var permission = new Permission();
+        let permission = new Permission();
 
         // user
         permission.setMode('0700');
@@ -247,7 +245,7 @@ describe('permission', function() {
 
     it('isExecuteable', function() {
 
-        var permission = new Permission();
+        let permission = new Permission();
 
         // user
         permission.setMode('0700');
@@ -327,4 +325,3 @@ describe('permission', function() {
     });
 
 });
-

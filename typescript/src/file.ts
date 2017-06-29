@@ -5,9 +5,9 @@ import Permission from './permission';
 
 export default class File extends Node {
 
-    private content:string = undefined;
+    private content: string = undefined;
 
-    constructor(inodeNumber:number, name:string, content = '', mode = '0644') {
+    constructor(inodeNumber: number, name: string, content = '', mode = '0644') {
 
         super(inodeNumber, name, mode);
 
@@ -15,40 +15,39 @@ export default class File extends Node {
 
     }
 
-    public isRoot():boolean{
+    public isRoot(): boolean {
 
         return false;
 
-    };
+    }
 
-    public isFile():boolean{
+    public isFile(): boolean {
 
         return true;
 
-    };
+    }
 
-    public isDirectory():boolean{
+    public isDirectory(): boolean {
 
         return false;
 
-    };
+    }
 
-    public getContent():string{
+    public getContent(): string {
 
-        //this.getStats().atime = new Date();
+        // this.getStats().atime = new Date();
         return this.content;
 
-    };
+    }
 
-    public setContent(content:string):void{
+    public setContent(content: string): void {
 
-        //this.getStats().atime = new Date();
-        //this.getStats().mtime = new Date();
-        //this.getStats().size = content.length;
+        // this.getStats().atime = new Date();
+        // this.getStats().mtime = new Date();
+        // this.getStats().size = content.length;
 
         this.content = content;
 
-    };
-    
-}
+    }
 
+}

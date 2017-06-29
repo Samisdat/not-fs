@@ -1,15 +1,15 @@
-'use strict';
-
 import { expect } from 'chai';
 
 import Dir from './dir';
 
 describe('dir', function() {
 
-    let dir:Dir;
+    let dir: Dir;
 
     beforeEach(function() {
+
         dir = new Dir(1, 'test');
+
     });
 
     it('can be created', function() {
@@ -30,7 +30,6 @@ describe('dir', function() {
 
         dir.setPathPart('foobar');
         expect(dir.getPathPart()).to.be.equal('foobar');
-
         
     });
 
@@ -62,4 +61,3 @@ describe('dir', function() {
     });
 
 });
-

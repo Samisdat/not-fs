@@ -1,14 +1,10 @@
-'use strict';
-
 const fs = require('fs');
 
 import Tree from './tree';
 
 export default class Mount {
 
-    public fromJson(jsonPath: string): Tree {
-        const raw = fs.readFileSync(jsonPath, { encoding: 'utf8' });
-        const json = JSON.parse(raw);
+    public fromJson(json: any): Tree {
 
         const mountPath: string = (undefined !== json.options.mount) ? json.options.mount : '/';
 
@@ -17,7 +13,7 @@ export default class Mount {
         for (let node of json.fs) {
 
             let permission = (undefined !== node.permission) ? node.permission : undefined;
-            
+
             if ('dir' === node.type) {
                 tree.addDir(mountPath + '/' + node.path, true, permission);
             }
@@ -32,19 +28,28 @@ export default class Mount {
 
     }
 
+    public fromJsonFile(jsonPath: string): Tree {
+
+        const raw = fs.readFileSync(jsonPath, { encoding: 'utf8' });
+        const json = JSON.parse(raw);
+
+        return this.fromJson(json);
+
+    }
+
     public toJson(jsonPath: string, tree: Tree) {
 
         let mountPath = tree.getMountPath() + '/';
 
-        var entries: any = [];
+        let entries: any = [];
 
         for (let leaf of tree.getLeafs()) {
 
-            var entry: any = {};
+            let entry: any = {};
             entry.type = (leaf.isDirectory()) ? 'dir' : 'file';
             entry.path = tree.getPathByInodeNumber(leaf.getInodeNumber()).replace(mountPath, '');
 
-            if(true === leaf.isFile()){
+            if (true === leaf.isFile()) {
                 entry.content = leaf.getContent();
             }
 
@@ -53,18 +58,15 @@ export default class Mount {
             entries.push(entry);
         }
 
-        let json:any = {
-            options:{
-                'mount':tree.getMountPath()
+        let json: any = {
+            options: {
+                'mount': tree.getMountPath()
             },
-            fs:entries
+            fs: entries
         };
 
-        fs.writeFileSync(jsonPath, JSON.stringify(json, null, 4), {encoding:'utf-8'});
-
-        //getPathByInodeNumber
+        fs.writeFileSync(jsonPath, JSON.stringify(json, null, 4), { encoding: 'utf-8' });
 
     }
 
 }
-
