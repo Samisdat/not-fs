@@ -94,7 +94,14 @@ export default class Tree {
 
         dive(checkInodeNumber);
 
-        return parts.reverse().join('/');
+        let path = parts.reverse().join('/');
+
+
+        if ('/' !== this.mountPath) {
+            path = this.mountPath + path;
+        }
+
+        return path;
 
     };
 
