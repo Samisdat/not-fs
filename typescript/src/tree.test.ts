@@ -210,5 +210,18 @@ describe('tree', function() {
 
     });
 
+    it.skip('log', function() {
+
+        var tree = new Tree();
+
+        tree.addDir('//home/vodafone/private/unreal-fs', true);
+        tree.addFile('/foo/bar.txt', '');
+        tree.addFile('/foo/foo.txt', '');
+        tree.addFile('/foo/foobar.txt', '');
+        tree.addFile('/foo/bar/bar.txt', '');
+
+        tree.log();
+    });
+
 });
 
