@@ -4,97 +4,109 @@ import Permission from './permission';
 
 export default class Node {
 
-    private inodeNumber:number;
-    private path:string;
+    private inodeNumber: number;
+    private pathPart: string;
 
-    protected permission:Permission
+    protected permission: Permission
 
-    constructor(inodeNumber:number, path:string) {
-        
+    constructor(inodeNumber: number, pathPart: string) {
+
         this.inodeNumber = inodeNumber;
-        this.path = path;
+
+        this.validatePath(pathPart);
+
+        this.pathPart = pathPart;
 
         this.permission = new Permission('0755');
 
     }
 
-    public getInodeNumber():number{
+    protected validatePath(pathPart: string): void{
+
+        if(true === /[\/|\\]+/.test(pathPart)){
+            throw new Error('pathPart may not contain path seperator');
+        }
+        
+    }
+
+    public getInodeNumber(): number {
 
         return this.inodeNumber;
     }
 
-    public getPath():string{
+    public getPathPart(): string {
 
-        return this.path;
+        return this.pathPart;
     }
 
-    public setPath(path:string):void{
+    public setPathPart(pathPart: string): void {
 
-        this.path = path;
+        this.validatePath(pathPart);
+        
+        this.pathPart = pathPart;
     }
 
-    public getContent():string{
+    public getContent(): string {
 
         return undefined;
 
     };
 
-
-    public getPermission():Permission{
+    public getPermission(): Permission {
 
         return this.permission;
 
     };
 
-    public setPermission = function(permission:string){
+    public setPermission = function (permission: string) {
 
         this.permission.setMode(permission);
 
     };
 
-    public isRoot():boolean{
+    public isRoot(): boolean {
 
         return false;
 
     };
 
-    public isFile():boolean{
+    public isFile(): boolean {
 
         return undefined;
 
     };
 
-    public isDirectory():boolean{
+    public isDirectory(): boolean {
 
         return undefined;
 
     };
 
-    public isBlockDevice():boolean{
+    public isBlockDevice(): boolean {
 
         return false;
 
     };
 
-    public isCharacterDevice():boolean{
+    public isCharacterDevice(): boolean {
 
         return false;
 
     };
 
-    public isSymbolicLink():boolean{
+    public isSymbolicLink(): boolean {
 
         return false;
 
     };
 
-    public isFIFO():boolean{
+    public isFIFO(): boolean {
 
         return false;
 
     };
 
-    public isSocket():boolean{
+    public isSocket(): boolean {
 
         return false;
 

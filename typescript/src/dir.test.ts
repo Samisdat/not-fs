@@ -24,13 +24,14 @@ describe('dir', function() {
 
     });
 
-    it('get/set it\'s path', function() {
+    it('get/set it\'s pathPart', function() {
 
-        expect(dir.getPath()).to.be.equal('test');
+        expect(dir.getPathPart()).to.be.equal('test');
 
-        dir.setPath('foobar');
-        expect(dir.getPath()).to.be.equal('foobar');
+        dir.setPathPart('foobar');
+        expect(dir.getPathPart()).to.be.equal('foobar');
 
+        
     });
 
     it('get/set permission', function() {

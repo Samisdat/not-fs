@@ -1,25 +1,47 @@
 'use strict';
 
-import Dir from './dir';
+import * as path from 'path';
 
-export default class Root extends Dir {
+import Node from './node';
 
-    public constructor(path = '/') {
-        super(0, path);
+export default class Root extends Node {
+
+    public constructor(rootPath = '/') {
+        super(0, rootPath);
+
+    }
+
+    protected validatePath(rootPath: string): void {
+
+        if(false === path.isAbsolute(rootPath)){
+            throw new Error('root path must be absolute');
+        }
+
     }
 
     /**
      * Root's path is immutable  
-     * @param name 
+     * @param rootPath 
      */
-    public setPath(name: string): void {
+    public setPathPart(rootPath: string): void {
 
     }
 
-    public isRoot(): boolean {
+    public isRoot():boolean{
 
         return true;
 
     };
-}
+
+    public isFile():boolean{
+
+        return false;
+
+    };
+
+    public isDirectory():boolean{
+
+        return true;
+
+    };}
 

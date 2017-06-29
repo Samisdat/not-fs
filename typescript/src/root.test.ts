@@ -26,10 +26,22 @@ describe('root', function() {
 
     it('get/set it\'s path', function() {
 
-        expect(root.getPath()).to.be.equal('/');
+        expect(root.getPathPart()).to.be.equal('/');
 
-        root.setPath('foobar');
-        expect(root.getPath()).to.be.equal('/');
+        // mmutable 
+        root.setPathPart('foobar');
+        expect(root.getPathPart()).to.be.equal('/');
+
+        const onOtherRoot = new Root('/foo/bar');
+        expect(onOtherRoot.getPathPart()).to.be.equal('/foo/bar');
+
+        onOtherRoot.setPathPart('/foo');
+        expect(onOtherRoot.getPathPart()).to.be.equal('/foo/bar');
+
+        expect(function () { 
+            new Root('foobar');
+        }).to.throw('root path must be absolute');
+        
 
     });
 

@@ -33,12 +33,12 @@ describe('dir', function() {
 
     });
 
-    it('get/set it\'s path', function() {
+    it('get/set it\'s pathPart', function() {
 
-        expect(file.getPath()).to.be.equal('test');
+        expect(file.getPathPart()).to.be.equal('test');
 
-        file.setPath('foobar');
-        expect(file.getPath()).to.be.equal('foobar');
+        file.setPathPart('foobar');
+        expect(file.getPathPart()).to.be.equal('foobar');
 
     });
 

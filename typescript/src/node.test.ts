@@ -17,6 +17,14 @@ describe('node', function() {
 
         expect(node).to.be.instanceof(Node);
 
+        expect(function () { 
+            new Node(1, '/foobar');
+        }).to.throw('pathPart may not contain path seperator');
+
+        expect(function () { 
+            new Node(1, 'foo/bar');
+        }).to.throw('pathPart may not contain path seperator');
+
     });
 
     it('get it\'s inodenumber', function() {
@@ -25,14 +33,28 @@ describe('node', function() {
 
     });
 
-    it('get it\'s path', function() {
+    it('get it\'s pathPart', function() {
 
-        expect(node.getPath()).to.be.equal('test');
+        expect(node.getPathPart()).to.be.equal('test');
 
-        node.setPath('foobar');
-        expect(node.getPath()).to.be.equal('foobar');
+        node.setPathPart('foobar');
+        expect(node.getPathPart()).to.be.equal('foobar');
+
+        expect(function () { 
+            node.setPathPart('/foobar');
+        }).to.throw('pathPart may not contain path seperator');
+        
+        expect(function () { 
+            node.setPathPart('foo/bar');
+        }).to.throw('pathPart may not contain path seperator');        
 
     });    
+
+    it('get content', function() {
+
+        expect(node.getContent()).to.be.undefined
+
+    });
 
     it('get/set permission', function() {
 
