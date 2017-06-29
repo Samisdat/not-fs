@@ -24,12 +24,12 @@ describe('dir', function() {
 
     });
 
-    it('get/set it\'s name', function() {
+    it('get/set it\'s path', function() {
 
-        expect(dir.getName()).to.be.equal('test');
+        expect(dir.getPath()).to.be.equal('test');
 
-        dir.setName('foobar');
-        expect(dir.getName()).to.be.equal('foobar');
+        dir.setPath('foobar');
+        expect(dir.getPath()).to.be.equal('foobar');
 
     });
 

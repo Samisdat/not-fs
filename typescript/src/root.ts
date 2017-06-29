@@ -4,19 +4,19 @@ import Dir from './dir';
 
 export default class Root extends Dir {
 
-    public constructor() {
-        super(0, '/');        
+    public constructor(path = '/') {
+        super(0, path);
     }
 
-    public getName():string {
-        return '/';
+    /**
+     * Root's path is immutable  
+     * @param name 
+     */
+    public setPath(name: string): void {
+
     }
 
-    public setName(name:string):void {
-        
-    }
-
-    public isRoot():boolean{
+    public isRoot(): boolean {
 
         return true;
 

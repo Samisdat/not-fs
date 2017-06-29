@@ -74,7 +74,7 @@ export default class Tree {
                 parts.push('');
             }
             else {
-                parts.push(tree.leafs[inodeNumber].getName());
+                parts.push(tree.leafs[inodeNumber].getPath());
 
                 if (undefined !== tree.parent[inodeNumber]) {
                     dive(tree.parent[inodeNumber]);
@@ -141,7 +141,7 @@ export default class Tree {
                 this.leafs[inodeNumber]
             );
 
-            this.leafs[inodeNumber].getName();
+            this.leafs[inodeNumber].getPath();
 
         }
 
@@ -472,7 +472,7 @@ export default class Tree {
 
         let name = newPath.replace(parentDirOfNewPath, '').replace(/^\//, '');
 
-        node.setName(name);
+        node.setPath(name);
 
     };
 
@@ -505,7 +505,7 @@ export default class Tree {
                 msg += tab + '└── ';
             }
 
-            msg += tree.leafs[inodeNumber].getName();
+            msg += tree.leafs[inodeNumber].getPath();
 
             console.log(msg);
 

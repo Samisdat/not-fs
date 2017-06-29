@@ -25,12 +25,12 @@ describe('node', function() {
 
     });
 
-    it('get it\'s name', function() {
+    it('get it\'s path', function() {
 
-        expect(node.getName()).to.be.equal('test');
+        expect(node.getPath()).to.be.equal('test');
 
-        node.setName('foobar');
-        expect(node.getName()).to.be.equal('foobar');
+        node.setPath('foobar');
+        expect(node.getPath()).to.be.equal('foobar');
 
     });    
 

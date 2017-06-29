@@ -5,14 +5,14 @@ import Permission from './permission';
 export default class Node {
 
     private inodeNumber:number;
-    private name:string;
+    private path:string;
 
     protected permission:Permission
 
-    constructor(inodeNumber:number, name:string) {
+    constructor(inodeNumber:number, path:string) {
         
         this.inodeNumber = inodeNumber;
-        this.name = name;
+        this.path = path;
 
         this.permission = new Permission('0755');
 
@@ -23,14 +23,14 @@ export default class Node {
         return this.inodeNumber;
     }
 
-    public getName():string{
+    public getPath():string{
 
-        return this.name;
+        return this.path;
     }
 
-    public setName(name:string):void{
+    public setPath(path:string):void{
 
-        this.name = name;
+        this.path = path;
     }
 
     public getContent():string{
