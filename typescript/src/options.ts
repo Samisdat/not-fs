@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-export interface OptionsInterface {
+export interface StatsInterface {
     dev?: number;
     userId?: number;
     groupId?: number;
@@ -13,23 +13,38 @@ export interface OptionsInterface {
     birthtime?: moment.Moment;
 }
 
-export default class Options {
+export interface PermissionsInterface {
+    dir?: string;
+    file?: string;
+}
 
-    private options: OptionsInterface = {};
+export interface OptionsInterface {
+    stats?:StatsInterface;
+    permissions?:PermissionsInterface
+}
 
-    private user: number;
-    private group: number;
+export default class Options implements OptionsInterface{
 
-    private statsDev: number;
-    private statsRdev: number;
-    private statsUid: number;
-    private statsGid: number;
-    private statsBlksize: number;
+    private options: OptionsInterface = {
+        stats:{},
+        permissions:{}
+    };
 
     constructor(options?: OptionsInterface) {
 
         if (undefined !== options) {
             this.options = options;
+        }
+
+        this.setStat();
+        this.setPermissions();
+
+    }
+
+    private setStat(){
+
+        if(undefined === this.options.stats){
+            this.options.stats = {};
         }
 
         this.setDev();
@@ -43,53 +58,68 @@ export default class Options {
         this.setChangeTime();
         this.setBirthtime();
 
+    }
+
+    private setPermissions():void{
+
+        if(undefined === this.options.permissions){
+            this.options.permissions = {};
+        }
+
+        if (undefined === this.options.permissions.dir) {
+            this.options.permissions.dir = '0755';
+        }
+
+        if (undefined === this.options.permissions.file) {
+            this.options.permissions.file = '0644';
+        }
 
     }
 
     private setDev(): void {
 
-        if (undefined === this.options.dev) {
-            this.options.dev = 2114;
+        if (undefined === this.options.stats.dev) {
+            this.options.stats.dev = 2114;
         }
 
     }
 
     private setUserId(): void {
 
-        if (undefined === this.options.userId) {
-            this.options.userId = process.getuid();
+        if (undefined === this.options.stats.userId) {
+            this.options.stats.userId = process.getuid();
         }
 
     }
 
     private setGroupId(): void {
 
-        if (undefined === this.options.groupId) {
-            this.options.groupId = process.getgid();
+        if (undefined === this.options.stats.groupId) {
+            this.options.stats.groupId = process.getgid();
         }
 
     }
 
     private setRdev(): void {
 
-        if (undefined === this.options.rdev) {
-            this.options.rdev = 0;
+        if (undefined === this.options.stats.rdev) {
+            this.options.stats.rdev = 0;
         }
 
     }
 
     private setBlockSize(): void {
 
-        if (undefined === this.options.blockSize) {
-            this.options.blockSize = 4096;
+        if (undefined === this.options.stats.blockSize) {
+            this.options.stats.blockSize = 4096;
         }
 
     }
 
     private setBlocks(): void {
 
-        if (undefined === this.options.blocks) {
-            this.options.blocks = 8;
+        if (undefined === this.options.stats.blocks) {
+            this.options.stats.blocks = 8;
         }
 
 
@@ -97,94 +127,45 @@ export default class Options {
 
     private setAccessTime(): void {toString
 
-        if (undefined === this.options.accessTime) {
-            this.options.accessTime = moment('2017-01-15T14:00:00+01:00');
+        if (undefined === this.options.stats.accessTime) {
+            this.options.stats.accessTime = moment('2017-01-15T14:00:00+01:00');
         }
 
     }
 
     private setModifyTime(): void {
 
-        if (undefined === this.options.modifyTime) {
-            this.options.modifyTime = moment('2017-01-14T14:00:00+01:00');
+        if (undefined === this.options.stats.modifyTime) {
+            this.options.stats.modifyTime = moment('2017-01-14T14:00:00+01:00');
         }
 
     }
 
     private setChangeTime(): void {
 
-        if (undefined === this.options.changeTime) {
-            this.options.changeTime = moment('2017-01-14T16:00:00+01:00');
+        if (undefined === this.options.stats.changeTime) {
+            this.options.stats.changeTime = moment('2017-01-14T16:00:00+01:00');
         }
 
     }
 
     private setBirthtime(): void {
 
-        if (undefined === this.options.birthtime) {
-            this.options.birthtime = moment('2017-01-13T13:00:00+01:00');
+        if (undefined === this.options.stats.birthtime) {
+            this.options.stats.birthtime = moment('2017-01-13T13:00:00+01:00');
         }
 
     }
 
-    get dev(): number {
+    get stats(): StatsInterface {
 
-        return this.options.dev;
-
-    }
-
-    get userId(): number {
-
-        return this.options.userId;
+        return this.options.stats;
 
     }
 
+    get permissions(): PermissionsInterface {
 
-    get groupId(): number {
-
-        return this.options.groupId;
-
-    }
-
-    get rdev(): number {
-
-        return this.options.rdev;
-
-    }
-
-    get blockSize(): number {
-
-        return this.options.blockSize;
-
-    }
-
-    get blocks(): number {
-
-        return this.options.blocks;
-
-    }
-
-    get accessTime(): moment.Moment {
-
-        return this.options.accessTime;
-
-    }
-
-    get modifyTime(): moment.Moment {
-
-        return this.options.modifyTime;
-
-    }
-
-    get changeTime(): moment.Moment {
-
-        return this.options.changeTime;
-
-    }
-
-    get birthtime(): moment.Moment {
-
-        return this.options.birthtime;
+        return this.options.permissions;
 
     }
 

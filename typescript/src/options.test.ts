@@ -23,123 +23,147 @@ describe('options', function() {
 
         let options = new Options();
 
-        expect(options.dev).to.be.equals(2114);
+        expect(options.stats.dev).to.be.equals(2114);
 
         const userId = process.getuid();
-        expect(options.userId).to.be.equals(userId);
+        expect(options.stats.userId).to.be.equals(userId);
 
         const groupId = process.getgid();
-        expect(options.groupId).to.be.equals(groupId);
+        expect(options.stats.groupId).to.be.equals(groupId);
 
-        expect(options.rdev).to.be.equals(0);
-        expect(options.blockSize).to.be.equals(4096);
-        expect(options.blocks).to.be.equals(8);
+        expect(options.stats.rdev).to.be.equals(0);
+        expect(options.stats.blockSize).to.be.equals(4096);
+        expect(options.stats.blocks).to.be.equals(8);
 
-        expect(options.accessTime.format()).to.be.equals('2017-01-15T14:00:00+01:00');
-        expect(options.modifyTime.format()).to.be.equals('2017-01-14T14:00:00+01:00');
-        expect(options.changeTime.format()).to.be.equals('2017-01-14T16:00:00+01:00');
-        expect(options.birthtime.format()).to.be.equals('2017-01-13T13:00:00+01:00');
+        expect(options.stats.accessTime.format()).to.be.equals('2017-01-15T14:00:00+01:00');
+        expect(options.stats.modifyTime.format()).to.be.equals('2017-01-14T14:00:00+01:00');
+        expect(options.stats.changeTime.format()).to.be.equals('2017-01-14T16:00:00+01:00');
+        expect(options.stats.birthtime.format()).to.be.equals('2017-01-13T13:00:00+01:00');
+
+        expect(options.permissions.dir).to.be.equals('0755');
+        expect(options.permissions.file).to.be.equals('0644');
 
     });
 
     it('check dev', function() {
 
-        const optionsParam:OptionsInterface = {dev:50};
+        const optionsParam:OptionsInterface = {stats:{dev:50}};
 
         let options = new Options(optionsParam);
 
-        expect(options.dev).to.be.equals(50);
+        expect(options.stats.dev).to.be.equals(50);
 
     });
 
     it('check userId', function() {
 
-        const optionsParam:OptionsInterface = {userId:8};
+        const optionsParam:OptionsInterface = {stats:{userId:8}};
 
         let options = new Options(optionsParam);
 
-        expect(options.userId).to.be.equals(8);
+        expect(options.stats.userId).to.be.equals(8);
 
     });
 
     it('check groupId', function() {
 
-        const optionsParam:OptionsInterface = {groupId:9};
+        const optionsParam:OptionsInterface = {stats:{groupId:9}};
 
         let options = new Options(optionsParam);
 
-        expect(options.groupId).to.be.equals(9);
+        expect(options.stats.groupId).to.be.equals(9);
 
     });
 
     it('check rdev', function() {
 
-        const optionsParam:OptionsInterface = {rdev:1};
+        const optionsParam:OptionsInterface = {stats:{rdev:1}};
 
         let options = new Options(optionsParam);
 
-        expect(options.rdev).to.be.equals(1);
+        expect(options.stats.rdev).to.be.equals(1);
 
     });
 
     it('check blockSize', function() {
 
-        const optionsParam:OptionsInterface = {blockSize:2048};
+        const optionsParam:OptionsInterface = {stats:{blockSize:2048}};
 
         let options = new Options(optionsParam);
 
-        expect(options.blockSize).to.be.equals(2048);
+        expect(options.stats.blockSize).to.be.equals(2048);
 
     });
 
     it('check blocks', function() {
 
-        const optionsParam:OptionsInterface = {blocks:4};
+        const optionsParam:OptionsInterface = {stats:{blocks:4}};
 
         let options = new Options(optionsParam);
 
-        expect(options.blocks).to.be.equals(4);
+        expect(options.stats.blocks).to.be.equals(4);
 
     });
 
     it('check accessTime', function() {
 
-        const optionsParam:OptionsInterface = {accessTime:moment('2016-01-15T14:00:00+01:00')};
+        const optionsParam:OptionsInterface = {stats:{accessTime:moment('2016-01-15T14:00:00+01:00')}};
 
         let options = new Options(optionsParam);
 
-        expect(options.accessTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+        expect(options.stats.accessTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
 
     });
 
     it('check modifyTime', function() {
 
-        const optionsParam:OptionsInterface = {modifyTime:moment('2016-01-15T14:00:00+01:00')};
+        const optionsParam:OptionsInterface = {stats:{modifyTime:moment('2016-01-15T14:00:00+01:00')}};
 
         let options = new Options(optionsParam);
 
-        expect(options.modifyTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+        expect(options.stats.modifyTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
 
     });
 
     it('check changeTime', function() {
 
-        const optionsParam:OptionsInterface = {changeTime:moment('2016-01-15T14:00:00+01:00')};
+        const optionsParam:OptionsInterface = {stats:{changeTime:moment('2016-01-15T14:00:00+01:00')}};
 
         let options = new Options(optionsParam);
 
-        expect(options.changeTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+        expect(options.stats.changeTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
 
     });
 
     it('check birthtime', function() {
 
-        const optionsParam:OptionsInterface = {birthtime:moment('2016-01-15T14:00:00+01:00')};
+        const optionsParam:OptionsInterface = {stats:{birthtime:moment('2016-01-15T14:00:00+01:00')}};
 
         let options = new Options(optionsParam);
 
-        expect(options.birthtime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+        expect(options.stats.birthtime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
 
     });
+
+    it('check dir permission', function() {
+
+        const optionsParam:OptionsInterface = {permissions:{dir:'0777'}};
+
+        let options = new Options(optionsParam);
+
+        expect(options.permissions.dir).to.be.equals('0777');
+
+    });
+
+    it('check file permission', function() {
+
+        const optionsParam:OptionsInterface = {permissions:{file:'0777'}};
+
+        let options = new Options(optionsParam);
+
+        expect(options.permissions.file).to.be.equals('0777');
+
+    });
+
 
 });
