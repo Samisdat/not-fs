@@ -1,4 +1,21 @@
+import * as moment from 'moment';
+
+export interface OptionsInterface {
+    dev?: number;
+    userId?: number;
+    groupId?: number;
+    rdev?: number;
+    blockSize?: number;
+    blocks?: number;
+    accessTime?: moment.Moment;
+    modifyTime?: moment.Moment;
+    changeTime?: moment.Moment;
+    birthtime?: moment.Moment;
+}
+
 export default class Options {
+
+    private options: OptionsInterface = {};
 
     private user: number;
     private group: number;
@@ -9,118 +26,165 @@ export default class Options {
     private statsGid: number;
     private statsBlksize: number;
 
-    constructor() {
-        this.setDefaultOptions();
-    }
+    constructor(options?: OptionsInterface) {
 
-    private setDefaultOptions(): void {
-
-        let userId: number = 85;
-        try {
-            userId = process.getuid();
-        }
-        catch (e) {
-
+        if (undefined !== options) {
+            this.options = options;
         }
 
-        let groupId: number = 100;
-        try {
-            groupId = process.getuid();
+        this.setDev();
+        this.setUserId();
+        this.setGroupId();
+        this.setRdev();
+        this.setBlockSize();
+        this.setBlocks();
+        this.setAccessTime();
+        this.setModifyTime();
+        this.setChangeTime();
+        this.setBirthtime();
+
+
+    }
+
+    private setDev(): void {
+
+        if (undefined === this.options.dev) {
+            this.options.dev = 2114;
         }
-        catch (e) {
 
+    }
+
+    private setUserId(): void {
+
+        if (undefined === this.options.userId) {
+            this.options.userId = process.getuid();
         }
 
-        this.setUser(userId);
-        this.setGroup(groupId);
+    }
 
-        this.setStatsDev(51);
-        this.setStatsRdev(0);
-        this.setStatsUid(userId);
-        this.setStatsGid(groupId);
-        this.setStatsBlksize(4096);
+    private setGroupId(): void {
+
+        if (undefined === this.options.groupId) {
+            this.options.groupId = process.getgid();
+        }
 
     }
 
-    public getUser(): number {
+    private setRdev(): void {
 
-        return this.user;
-
-    }
-
-    public setUser(user: number): void {
-
-        this.user = user;
+        if (undefined === this.options.rdev) {
+            this.options.rdev = 0;
+        }
 
     }
 
-    public getGroup(): number {
+    private setBlockSize(): void {
 
-        return this.group;
-
-    }
-
-    public setGroup(group: number): void {
-
-        this.group = group;
+        if (undefined === this.options.blockSize) {
+            this.options.blockSize = 4096;
+        }
 
     }
 
-    public getStatsDev(): number {
+    private setBlocks(): void {
 
-        return this.statsDev;
+        if (undefined === this.options.blocks) {
+            this.options.blocks = 8;
+        }
 
-    }
-
-    public setStatsDev(statsDev: number): void {
-
-        this.statsDev = statsDev;
 
     }
 
-    public getStatsRdev(): number {
+    private setAccessTime(): void {toString
 
-        return this.statsRdev;
-
-    }
-
-    public setStatsRdev(statsRdev: number): void {
-
-        this.statsRdev = statsRdev;
+        if (undefined === this.options.accessTime) {
+            this.options.accessTime = moment('2017-01-15T14:00:00+01:00');
+        }
 
     }
 
-    public getStatsUid(): number {
+    private setModifyTime(): void {
 
-        return this.statsUid;
-
-    }
-
-    public setStatsUid(statsUid: number): void {
-        this.statsUid = statsUid;
-    }
-
-    public getStatsGid(): number {
-
-        return this.statsGid;
+        if (undefined === this.options.modifyTime) {
+            this.options.modifyTime = moment('2017-01-14T14:00:00+01:00');
+        }
 
     }
 
-    public setStatsGid(statsGid: number): void {
+    private setChangeTime(): void {
 
-        this.statsGid = statsGid;
-
-    }
-
-    public getStatsBlksize(): number {
-
-        return this.statsBlksize;
+        if (undefined === this.options.changeTime) {
+            this.options.changeTime = moment('2017-01-14T16:00:00+01:00');
+        }
 
     }
 
-    public setStatsBlksize(statsBlksize: number): void {
+    private setBirthtime(): void {
 
-        this.statsBlksize = statsBlksize;
+        if (undefined === this.options.birthtime) {
+            this.options.birthtime = moment('2017-01-13T13:00:00+01:00');
+        }
+
+    }
+
+    get dev(): number {
+
+        return this.options.dev;
+
+    }
+
+    get userId(): number {
+
+        return this.options.userId;
+
+    }
+
+
+    get groupId(): number {
+
+        return this.options.groupId;
+
+    }
+
+    get rdev(): number {
+
+        return this.options.rdev;
+
+    }
+
+    get blockSize(): number {
+
+        return this.options.blockSize;
+
+    }
+
+    get blocks(): number {
+
+        return this.options.blocks;
+
+    }
+
+    get accessTime(): moment.Moment {
+
+        return this.options.accessTime;
+
+    }
+
+    get modifyTime(): moment.Moment {
+
+        return this.options.modifyTime;
+
+    }
+
+    get changeTime(): moment.Moment {
+
+        return this.options.changeTime;
+
+    }
+
+    get birthtime(): moment.Moment {
+
+        return this.options.birthtime;
 
     }
 

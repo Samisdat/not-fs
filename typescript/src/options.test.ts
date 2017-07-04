@@ -1,5 +1,9 @@
 import { expect } from 'chai';
 
+import * as moment from 'moment';
+
+import {OptionsInterface} from './options';
+
 import Options from './options';
 
 describe('options', function() {
@@ -15,64 +19,126 @@ describe('options', function() {
 
     });
 
-    describe('defaults', function() {
+    it('check default', function() {
 
-        const options = new Options();
+        let options = new Options();
 
-        it('uid', function(){
+        expect(options.dev).to.be.equals(2114);
 
-            // expect(options.getUser()).to.be.equal(process.getuid());
-            options.setUser(123);
-            expect(options.getUser()).to.be.equal(123);
+        const userId = process.getuid();
+        expect(options.userId).to.be.equals(userId);
 
-        });
+        const groupId = process.getgid();
+        expect(options.groupId).to.be.equals(groupId);
 
-        it('gid', function(){
-            
-            // expect(options.getGroup()).to.be.equal(process.getuid());
-            options.setGroup(1234);
-            expect(options.getGroup()).to.be.equal(1234);
+        expect(options.rdev).to.be.equals(0);
+        expect(options.blockSize).to.be.equals(4096);
+        expect(options.blocks).to.be.equals(8);
 
-        });
+        expect(options.accessTime.format()).to.be.equals('2017-01-15T14:00:00+01:00');
+        expect(options.modifyTime.format()).to.be.equals('2017-01-14T14:00:00+01:00');
+        expect(options.changeTime.format()).to.be.equals('2017-01-14T16:00:00+01:00');
+        expect(options.birthtime.format()).to.be.equals('2017-01-13T13:00:00+01:00');
 
-        it('getStatsDev', function(){
-            
-            expect(options.getStatsDev()).to.be.equal(51);
-            options.setStatsDev(55);
-            expect(options.getStatsDev()).to.be.equal(55);
+    });
 
-        });
+    it('check dev', function() {
 
-        it('getStatsRdev', function(){
-            
-            expect(options.getStatsRdev()).to.be.equal(0);
-            options.setStatsRdev(55);
-            expect(options.getStatsRdev()).to.be.equal(55);
+        const optionsParam:OptionsInterface = {dev:50};
 
-        });
+        let options = new Options(optionsParam);
 
-        it('statsUid', function(){
-            
-            // expect(options.getStatsUid()).to.be.equal(process.getuid());
-            options.setStatsUid(1234);
-            expect(options.getStatsUid()).to.be.equal(1234);
+        expect(options.dev).to.be.equals(50);
 
-        });
+    });
 
-        it('statsGid', function(){  
-            // expect(options.getStatsGid()).to.be.equal(process.getgid());
-            options.setStatsGid(1234);
-            expect(options.getStatsGid()).to.be.equal(1234);
+    it('check userId', function() {
 
-        });
+        const optionsParam:OptionsInterface = {userId:8};
 
-        it('statsBlksize', function(){
-            
-            expect(options.getStatsBlksize()).to.be.equal(4096);
-            options.setStatsBlksize(1024);
-            expect(options.getStatsBlksize()).to.be.equal(1024);
+        let options = new Options(optionsParam);
 
-        });
+        expect(options.userId).to.be.equals(8);
+
+    });
+
+    it('check groupId', function() {
+
+        const optionsParam:OptionsInterface = {groupId:9};
+
+        let options = new Options(optionsParam);
+
+        expect(options.groupId).to.be.equals(9);
+
+    });
+
+    it('check rdev', function() {
+
+        const optionsParam:OptionsInterface = {rdev:1};
+
+        let options = new Options(optionsParam);
+
+        expect(options.rdev).to.be.equals(1);
+
+    });
+
+    it('check blockSize', function() {
+
+        const optionsParam:OptionsInterface = {blockSize:2048};
+
+        let options = new Options(optionsParam);
+
+        expect(options.blockSize).to.be.equals(2048);
+
+    });
+
+    it('check blocks', function() {
+
+        const optionsParam:OptionsInterface = {blocks:4};
+
+        let options = new Options(optionsParam);
+
+        expect(options.blocks).to.be.equals(4);
+
+    });
+
+    it('check accessTime', function() {
+
+        const optionsParam:OptionsInterface = {accessTime:moment('2016-01-15T14:00:00+01:00')};
+
+        let options = new Options(optionsParam);
+
+        expect(options.accessTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+
+    });
+
+    it('check modifyTime', function() {
+
+        const optionsParam:OptionsInterface = {modifyTime:moment('2016-01-15T14:00:00+01:00')};
+
+        let options = new Options(optionsParam);
+
+        expect(options.modifyTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+
+    });
+
+    it('check changeTime', function() {
+
+        const optionsParam:OptionsInterface = {changeTime:moment('2016-01-15T14:00:00+01:00')};
+
+        let options = new Options(optionsParam);
+
+        expect(options.changeTime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
+
+    });
+
+    it('check birthtime', function() {
+
+        const optionsParam:OptionsInterface = {birthtime:moment('2016-01-15T14:00:00+01:00')};
+
+        let options = new Options(optionsParam);
+
+        expect(options.birthtime.format()).to.be.equals('2016-01-15T14:00:00+01:00');
 
     });
 
