@@ -1,12 +1,13 @@
 import * as path from 'path';
 
+import Options from './options';
 import Node from './node';
 
 export default class Root extends Node {
 
-    public constructor(rootPath = '/') {
+    public constructor(rootPath:string, options:Options) {
 
-        super(0, rootPath);
+        super(0, rootPath, options);
 
     }
 

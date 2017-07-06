@@ -23,6 +23,13 @@ export interface OptionsInterface {
     permissions?:PermissionsInterface
 }
 
+export interface JsonTreeInterface {
+    mount?:string;
+    options?:OptionsInterface;
+    fs:any[];
+}
+
+
 export default class Options implements OptionsInterface{
 
     private options: OptionsInterface = {

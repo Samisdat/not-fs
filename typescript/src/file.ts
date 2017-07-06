@@ -1,17 +1,21 @@
 'use strict';
 
-import Node from './node';
+import Options from './options';
 import Permission from './permission';
+
+import Node from './node';
 
 export default class File extends Node {
 
     private content: string = undefined;
 
-    constructor(inodeNumber: number, name: string, content = '', mode = '0644') {
+    constructor(inodeNumber: number, name: string, content:string, options: Options) {
 
-        super(inodeNumber, name, mode);
+        super(inodeNumber, name, options);
 
         this.content = content;
+
+        this.permission = new Permission(options.permissions.file);        
 
     }
 

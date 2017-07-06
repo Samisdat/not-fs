@@ -1,5 +1,8 @@
 import { expect } from 'chai';
 
+import {OptionsInterface} from './options';
+import Options from './options';
+
 import Tree from './tree';
 
 describe('tree', function() {
@@ -74,7 +77,10 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar')).to.be.true;
         expect(tree.getNodeByPath('/foo/bar').getPermission().getMode()).to.be.equal('0755');
 
-        tree.addDir('/foo/bar/baz', true, '0777');
+        const optionsParam:OptionsInterface = {permissions:{dir:'0777'}};
+        let dirOptions = new Options(optionsParam);
+
+        tree.addDir('/foo/bar/baz', true, dirOptions);
 
         expect(tree.exists('/foo/bar/baz')).to.be.true;
         expect(tree.getNodeByPath('/foo/bar/baz').getPermission().getMode()).to.be.equal('0777');
@@ -190,7 +196,10 @@ describe('tree', function() {
         expect(tree.exists('/foo/bar.txt')).to.be.true;
         expect(tree.getNodeByPath('/foo/bar.txt').getPermission().getMode()).to.be.equal('0644');        
 
-        tree.addFile('/foo/baz.txt', 'foobar', true, '0777');
+        const optionsParam:OptionsInterface = {permissions:{file:'0777'}};
+        let fileOptions = new Options(optionsParam);
+
+        tree.addFile('/foo/baz.txt', 'foobarr', true, fileOptions);
 
         expect(tree.exists('/foo/baz.txt')).to.be.true;
         expect(tree.getNodeByPath('/foo/baz.txt').getPermission().getMode()).to.be.equal('0777');        

@@ -1,13 +1,16 @@
 import { expect } from 'chai';
 
+import Options from './options';
+
 import File from './file';
 
-describe('dir', function() {
+describe('file', function() {
 
-    let file: File;
+    let options = new Options();
+    let file:File;
 
     beforeEach(function() {
-        file = new File(1, 'test');
+        file = new File(1, 'test', '', options);
     });
 
     it('can be created', function() {

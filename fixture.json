@@ -1,16 +1,24 @@
 {
+    "mount": "/home/vodafone/private/unreal-fs",
     "options": {
-        "mount": "/home/vodafone/private/unreal-fs"
+        "permissions": {
+            "dir":"0555",            
+            "file":"0575"            
+        }   
     },
     "fs": [
         {
             "type": "dir",
-            "path": "one",
-            "permission": "0777"
+            "path": "one"
         },
         {
             "type": "dir",
-            "path": "two"
+            "path": "two",
+            "options":{
+                "permissions": {
+                    "dir":"0777"            
+                }   
+            }            
         },
         {
             "type": "dir",
@@ -18,12 +26,18 @@
         },
         {
             "type": "file",
-            "path": "three/test.txt",
-            "content":"Hi node"
+            "path": "one/one.txt",
+            "content":"Hi node",
+            "options":{
+                "permissions": {
+                    "file":"0444"            
+                }   
+            }
+            
         },
         {
             "type": "file",
-            "path": "one/test.txt",
+            "path": "one/two.txt",
             "content":"Hallo"
         }
     ]

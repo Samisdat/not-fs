@@ -1,13 +1,16 @@
+import Options from './options';
 import Permission from './permission';
 
 export default class Node {
+
+    protected options:Options;
 
     private inodeNumber: number;
     private pathPart: string;
 
     protected permission: Permission;
 
-    constructor(inodeNumber: number, pathPart: string, mode = '0755') {
+    constructor(inodeNumber: number, pathPart: string, options:Options) {
 
         this.inodeNumber = inodeNumber;
 
@@ -15,7 +18,9 @@ export default class Node {
 
         this.pathPart = pathPart;
 
-        this.permission = new Permission(mode);
+        this.options = options;
+
+        this.permission = new Permission(options.permissions.dir);
 
     }
 
@@ -36,6 +41,12 @@ export default class Node {
     public getPathPart(): string {
 
         return this.pathPart;
+
+    }
+
+    public getOptions(): Options {
+
+        return this.options;
 
     }
 
@@ -63,7 +74,7 @@ export default class Node {
 
         this.permission.setMode(permission);
 
-    }
+    };
 
     public isRoot(): boolean {
 
@@ -83,35 +94,6 @@ export default class Node {
 
     }
 
-    public isBlockDevice(): boolean {
-
-        return false;
-
-    }
-
-    public isCharacterDevice(): boolean {
-
-        return false;
-
-    }
-
-    public isSymbolicLink(): boolean {
-
-        return false;
-
-    }
-
-    public isFIFO(): boolean {
-
-        return false;
-
-    }
-
-    public isSocket(): boolean {
-
-        return false;
-
-    }
 
 }
 

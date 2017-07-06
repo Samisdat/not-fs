@@ -1,14 +1,17 @@
 import { expect } from 'chai';
 
+import Options from './options';
+
 import Dir from './dir';
 
 describe('dir', function() {
 
+    let options = new Options();
     let dir: Dir;
 
     beforeEach(function() {
 
-        dir = new Dir(1, 'test');
+        dir = new Dir(1, 'test', options);
 
     });
 

@@ -1,11 +1,15 @@
 import * as path from 'path';
 
+import Options from './options';
+
 import Node from './node';
 import Root from './root';
 import Dir from './dir';
 import File from './file';
 
 export default class Tree {
+
+    private options:Options;
 
     private tree: { [index: number]: number[] } = {};
 
@@ -18,11 +22,17 @@ export default class Tree {
 
     private mountPath: string;
 
-    public constructor(mountPath = '/') {
+    public constructor(mountPath = '/', options?: Options) {
 
         this.mountPath = this.resolveDir(mountPath);
 
-        let root = new Root(this.mountPath);
+        if(undefined === options){
+            options = new Options();
+        }
+
+        this.options = options;
+
+        let root = new Root(this.mountPath, this.options);
 
         this.getInodeNumber();
         this.tree[root.getInodeNumber()] = [];
@@ -34,6 +44,10 @@ export default class Tree {
 
         return this.mountPath;
 
+    }
+
+    public getOptions():Options{
+        return this.options;
     }
 
     public getTree(): any {
@@ -268,7 +282,7 @@ export default class Tree {
 
     }
 
-    public addDir(dirPath: string, addMissingDirs = false, permission = '0755'): void {
+    public addDir(dirPath: string, addMissingDirs = false, options?:Options): void {
 
         if (true === this.exists(dirPath)) {
     
@@ -306,10 +320,12 @@ export default class Tree {
 
         let parentInodeNumber = this.getInodeNumberByPath(parentDirPath);
 
+        options = (undefined === options) ? this.options : options;
+
         let dir = new Dir(
             this.getInodeNumber(),
             path.basename(dirPath),
-            permission
+            options
         );
 
         this.tree[parentInodeNumber].push(dir.getInodeNumber());
@@ -430,7 +446,7 @@ export default class Tree {
 
     }
 
-    public addFile(filePath: string, data = '', addMissingDirs = false, permission = '0644'): void {
+    public addFile(filePath: string, data = '', addMissingDirs = false, options?: Options): void {
 
         if (true === this.exists(filePath)) {
 
@@ -460,11 +476,13 @@ export default class Tree {
 
         let name = filePath.replace(parentDirPath + '/', '');
 
+        options = (undefined === options) ? this.options : options;
+
         let file = new File(
             this.getInodeNumber(),
             name,
             data,
-            permission
+            options
         );
 
         this.tree[parentInodeNumber].push(file.getInodeNumber());

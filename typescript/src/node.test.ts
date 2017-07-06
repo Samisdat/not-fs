@@ -1,26 +1,28 @@
 import { expect } from 'chai';
 
+import Options from './options';
+
 import Node from './node';
 
 describe('node', function() {
 
+    let options = new Options();
     let node: Node;
 
     beforeEach(function() {
+        node = new Node(1, 'test', options);
     });
 
     it('can be created', function() {
 
-        node = new Node(1, 'test');
-
         expect(node).to.be.instanceof(Node);
 
         expect(function () { 
-            new Node(1, '/foobar');
+            new Node(1, '/foobar', options);
         }).to.throw('pathPart may not contain path seperator');
 
         expect(function () { 
-            new Node(1, 'foo/bar');
+            new Node(1, 'foo/bar', options);
         }).to.throw('pathPart may not contain path seperator');
 
     });

@@ -2,7 +2,9 @@ import * as moment from 'moment';
 
 import Node from './node';
 
-export default class Stats {
+export default class Stats{
+
+    private node:Node;
 
     private _dev: number; //  2114,
     private _ino: number; //  48064969,
@@ -14,25 +16,39 @@ export default class Stats {
     private _size: number; //  527,
     private _blksize: number; //  4096,
     private _blocks: number; //  8,
-    private _atimeMs: number; //  1318289051000.1,
-    private _mtimeMs: number; //  1318289051000.1,
-    private _ctimeMs: number; //  1318289051000.1,
-    private _birthtimeMs: number; //  1318289051000.1,
-    private _atime: number; //  Mon, 10 Oct 2011 23:24:11 GMT,
-    private _mtime: number; //  Mon, 10 Oct 2011 23:24:11 GMT,
-    private _ctime: number; //  Mon, 10 Oct 2011 23:24:11 GMT,
-    private _birthtime: number; //  Mon, 10 Oct 2011 23:24:11 GMT }        
+    private _atime: moment.Moment; //  Mon, 10 Oct 2011 23:24:11 GMT,
+    private _mtime: moment.Moment; //  Mon, 10 Oct 2011 23:24:11 GMT,
+    private _ctime: moment.Moment; //  Mon, 10 Oct 2011 23:24:11 GMT,
+    private _birthtime: moment.Moment; //  Mon, 10 Oct 2011 23:24:11 GMT }        
 
     constructor(node:Node) {
+
+        this.node = node;
+
+        this._dev = this.node.getOptions().stats.dev;
         this._ino = node.getInodeNumber();
+        //this._mode: number; //  33188,
+        this._nlink = 1; //  1,
+        this._uid = this.node.getOptions().stats.userId;
+        this._gid = this.node.getOptions().stats.groupId;
+        this._rdev = this.node.getOptions().stats.rdev,
+        //this._size: number; //  527,
+        this._blksize = this.node.getOptions().stats.blockSize;
+        this._blocks = this.node.getOptions().stats.blocks
+
+        this._atime = this.node.getOptions().stats.accessTime;
+        this._mtime = this.node.getOptions().stats.modifyTime;
+        this._ctime = this.node.getOptions().stats.changeTime;
+        this._birthtime = this.node.getOptions().stats.birthtime;
+        
     }
 
     get dev():number{
-        return 4;;
+        return this._dev;
     };
     
     get ino():number{
-        return 4;
+        return this._ino;
     };
     
     get mode():number{
@@ -40,75 +56,77 @@ export default class Stats {
     };
     
     get nlink():number{
-        return 4;
+        return this._nlink;
     };
     
     get uid():number{
-        return 4;
+        return this._uid;
     };
     
     get gid():number{
-        return 4;
+        return this._gid;
     };
     
     get rdev():number{
-        return 4;
+        return this._rdev;
     };
     
     get size():number{
-        return 4;
+        
+        return this.node.getContent().length;
     };
     
     get blksize():number{
-        return 4;
+        return this._blksize;
     };
 
     get blocks():number{
-        return 4;
+        return this._blocks;
     };
 
     get atimeMs():number{
-        return 4;
+        return this._atime.valueOf();
     };
 
     get mtimeMs():number{
-        return 4;
+        return this._mtime.valueOf();
     };
 
     get ctimeMs():number{
-        return 4;
+        return this._ctime.valueOf();
     };
 
     get birthtimeMs():number{
-        return 4;
+        return this._birthtime.valueOf();
     };
 
-    get atime():number{
-        return 4;
+    get atime():string{
+        return this._atime.toString();
     };
     
-    get mtime():number{
-        return 4;
+    get mtime():string{
+        return this._mtime.toString();
     };
     
-    get ctime():number{
-        return 4;
+    get ctime():string{
+        return this._ctime.toString();
     };
     
-    get birthtime():number{
-        return 4;
+    get birthtime():string{
+        return this._birthtime.toString();
     };
 
     public isFile():boolean{
-        return false;
+        return this.node.isFile();
     };
 
     public isDirectory():boolean{
-        return false;
+        return this.node.isDirectory();
     };
 
     public isBlockDevice():boolean{
         return false;
+
     };
 
     public isCharacterDevice():boolean{
@@ -125,16 +143,5 @@ export default class Stats {
     public isSocket():boolean{
         return false;
     };
-
-}
-
-export class TreeStats {
-
-
-    constructor() {
-
-
-    }
-
 
 }
