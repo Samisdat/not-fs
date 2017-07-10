@@ -27,6 +27,12 @@ export default class Root extends Node {
 
     }
 
+    public getContent(): string{
+
+        return undefined;
+
+    }
+
     public isRoot(): boolean {
 
         return true;

@@ -1,7 +1,7 @@
 import Options from './options';
 import Permission from './permission';
 
-export default class Node {
+export default abstract class Node {
 
     protected options:Options;
 
@@ -58,11 +58,7 @@ export default class Node {
 
     }
 
-    public getContent(): string {
-
-        return undefined;
-
-    }
+    public abstract getContent(): string;
 
     public getPermission(): Permission {
 
@@ -76,24 +72,11 @@ export default class Node {
 
     };
 
-    public isRoot(): boolean {
+    public abstract isRoot(): boolean;
 
-        return false;
+    public abstract isFile(): boolean;
 
-    }
-
-    public isFile(): boolean {
-
-        return undefined;
-
-    }
-
-    public isDirectory(): boolean {
-
-        return undefined;
-
-    }
-
+    public abstract isDirectory(): boolean;
 
 }
 
